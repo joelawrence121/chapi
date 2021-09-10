@@ -1,1 +1,1 @@
-# chapi
+# CHessAPI
