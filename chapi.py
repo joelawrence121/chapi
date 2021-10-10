@@ -1,3 +1,6 @@
+import logging
+import random
+
 import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
@@ -20,10 +23,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+FORMAT = '%(asctime)-15s %(message)s'
+logging.basicConfig(format=FORMAT)
+logger = logging.getLogger('chapi')
+
 @app.get("/single_move/{type_name}")
-async def get_single_moves_by_type(type_name):
-    # TODO: add validation and exception handling
-    return respository.query_single_move_by_type(type_name)[0]
+async def get_random_single_move_puzzle(type_name):
+    try:
+        single_move_puzzles = respository.query_single_move_by_type(type_name)
+        return random.choice(single_move_puzzles)
+    except RuntimeError as e:
+        logger.warning(e)
 
 
 if __name__ == "__main__":
