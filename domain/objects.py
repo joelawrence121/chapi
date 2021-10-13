@@ -1,5 +1,5 @@
-from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, Float, String
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
@@ -26,6 +26,7 @@ class SingleMove(Base):
     type = Column(String)
     move = Column(String)
     to_move = Column(String)
+    follow_move = Column(String)
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
