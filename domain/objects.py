@@ -44,3 +44,19 @@ class MateInN(Base):
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+class Opening(Base):
+    __tablename__ = 'opening'
+
+    eco_classification = Column(String, primary_key=True)
+    name = Column(String)
+    move_stack = Column(String)
+    epd = Column(String)
+
+    def __init__(self, eco, name, move_stack, epd):
+        self.eco_classification = eco
+        self.name = name
+        self.move_stack = move_stack
+        self.epd = epd
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
