@@ -44,6 +44,7 @@ class MateInN(Base):
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+
 class Opening(Base):
     __tablename__ = 'opening'
 
