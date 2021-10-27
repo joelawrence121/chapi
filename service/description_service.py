@@ -47,7 +47,7 @@ class DescriptionService(object):
     def get_description(self, request: OpeningRequest) -> str:
 
         grammar = CFG.fromstring(self.DEFAULT_G.format(user=request.user, move=request.move))
-        opening = self.repository.query_opening_by_fen(request.fen)
+        opening = self.repository.query_opening_by_move_stack(request.moveStack)
         move = get_move(request.move, opening)
 
         if request.user == self.HUMAN:
@@ -55,7 +55,7 @@ class DescriptionService(object):
             if len(request.moveStack) == 1:
                 grammar = CFG.fromstring(self.OPENING_G.format(move=move))
             else:
-                previous_move = get_move(request.moveStack[len(request.moveStack) - 1],
+                previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
                 grammar = CFG.fromstring(self.USER_G.format(previous_move=previous_move, move=move))
 

@@ -24,10 +24,6 @@ class Repository(object):
         single_moves = self.session.query(SingleMove).filter(SingleMove.type == type_name)
         return [ob.as_dict() for ob in single_moves]
 
-    def query_opening_by_fen(self, fen: str):
-        openings = self.session.query(Opening).filter(Opening.epd == fen)
-        return [opening.as_dict() for opening in openings]
-
     def query_opening_by_move_stack(self, move_stack: list):
         openings = self.session.query(Opening).filter(Opening.move_stack == ' '.join(move_stack))
         return [opening.as_dict() for opening in openings]
