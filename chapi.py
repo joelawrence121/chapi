@@ -39,7 +39,7 @@ async def get_random_single_move_puzzle(type_name):
 
 
 @app.post("/description")
-async def get_random_single_move_puzzle(request: OpeningRequest):
+async def get_move_description(request: OpeningRequest):
     try:
         return description_service.get_description(request)
     except RuntimeError as e:
