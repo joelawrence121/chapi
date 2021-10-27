@@ -3,28 +3,26 @@ import random
 from nltk import CFG
 from nltk.parse.generate import generate
 
-from client.json import OpeningRequest
+from client.client_json import OpeningRequest
 from domain.repository import Repository
 
 
 class DescriptionService(object):
+
     HUMAN = "human"
     STOCKFISH = "stockfish"
-
     DEFAULT_G = """
         S -> U A M 
         U -> "{user}"
         A -> 'plays' | 'moves'
         M -> "{move}"
     """
-
     OPENING_G = """
         S -> P A 'with' M
         P -> 'You'
         A -> 'open' | 'begin' | 'start off' 
         M -> "{move}."
     """
-
     USER_G = """
         S -> P A M | P AC 'with' M 
         P -> 'You' 
@@ -32,7 +30,6 @@ class DescriptionService(object):
         A -> 'respond with' | 'counter with' | 'play'
         M -> "{move}."
     """
-
     STOCKFISH_G = """
         S -> P A 'with' M | P AC 'with' M 
         P -> 'Stockfish' | 'Your opponent' | 'Black'
