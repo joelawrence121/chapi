@@ -4,13 +4,15 @@ import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from client.client_json import OpeningRequest
+from client.client_json import OpeningRequest, PlayRequest
 from service.description_service import DescriptionService
 from service.puzzle_service import PuzzleService
+from service.stockfish_service import StockfishService
 
 app = FastAPI()
 puzzle_service = PuzzleService()
 description_service = DescriptionService()
+stockfish_service = StockfishService()
 
 origins = [
     "http://localhost",
@@ -47,9 +49,9 @@ async def get_move_description(request: OpeningRequest):
 
 
 @app.post("/play")
-async def play_stockfish(request: OpeningRequest):
+async def play_stockfish(request: PlayRequest):
     try:
-        return description_service.get_description(request)
+        return stockfish_service.get_move(request)
     except RuntimeError as e:
         logger.warning(e)
 

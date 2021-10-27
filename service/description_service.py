@@ -8,7 +8,6 @@ from domain.repository import Repository
 
 
 class DescriptionService(object):
-
     HUMAN = "human"
     STOCKFISH = "stockfish"
     DEFAULT_G = """
@@ -55,7 +54,6 @@ class DescriptionService(object):
                 previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
                 grammar = CFG.fromstring(self.USER_G.format(previous_move=previous_move, move=move))
-
 
         elif request.user == self.STOCKFISH:
             previous_move = get_move(request.moveStack[len(request.moveStack) - 1],

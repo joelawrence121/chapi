@@ -9,3 +9,7 @@ class OpeningRequest(BaseModel):
     move: str
     fen: str
 
+
+class PlayRequest(BaseModel):
+    fen: str
+    difficulty: int
