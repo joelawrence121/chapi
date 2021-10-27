@@ -1,14 +1,18 @@
 import logging
-import random
 
 import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from domain.repository import Repository
+from client.client_json import OpeningRequest, PlayRequest
+from service.description_service import DescriptionService
+from service.puzzle_service import PuzzleService
+from service.stockfish_service import StockfishService
 
 app = FastAPI()
-respository = Repository()
+puzzle_service = PuzzleService()
+description_service = DescriptionService()
+stockfish_service = StockfishService()
 
 origins = [
     "http://localhost",
@@ -27,11 +31,27 @@ FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
 logger = logging.getLogger('chapi')
 
+
 @app.get("/single_move/{type_name}")
 async def get_random_single_move_puzzle(type_name):
     try:
-        single_move_puzzles = respository.query_single_move_by_type(type_name)
-        return random.choice(single_move_puzzles)
+        return puzzle_service.get_single_move_puzzle(type_name)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/description")
+async def get_move_description(request: OpeningRequest):
+    try:
+        return description_service.get_description(request)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/play")
+async def play_stockfish(request: PlayRequest):
+    try:
+        return stockfish_service.get_move(request)
     except RuntimeError as e:
         logger.warning(e)
 

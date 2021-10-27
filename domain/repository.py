@@ -3,7 +3,7 @@ import configparser
 import sqlalchemy as db
 from sqlalchemy.orm import Session
 
-from domain.objects import SingleMove
+from domain.objects import SingleMove, Opening
 
 
 class Repository(object):
@@ -20,6 +20,11 @@ class Repository(object):
         )
         self.session = Session(bind=engine)
 
-    def query_single_move_by_type(self, type_name):
+    def query_single_move_by_type(self, type_name: str):
         single_moves = self.session.query(SingleMove).filter(SingleMove.type == type_name)
         return [ob.as_dict() for ob in single_moves]
+
+    def query_opening_by_move_stack(self, move_stack: list):
+        openings = self.session.query(Opening).filter(Opening.move_stack == ' '.join(move_stack))
+        return [opening.as_dict() for opening in openings]
+
