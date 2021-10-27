@@ -13,16 +13,16 @@ class DescriptionService(object):
 
     DEFAULT_G = """
         S -> U A M 
-        U -> {user}
+        U -> "{user}"
         A -> 'plays' | 'moves'
-        M -> {move}
+        M -> "{move}"
     """
 
     OPENING_G = """
         S -> P A 'with' M
         P -> 'You'
         A -> 'open' | 'begin' | 'start off' 
-        M -> '{move}.'
+        M -> "{move}."
     """
 
     USER_G = """
