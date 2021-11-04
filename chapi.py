@@ -40,6 +40,14 @@ async def get_random_single_move_puzzle(type_name):
         logger.warning(e)
 
 
+@app.get("/statistics")
+async def get_statistics():
+    try:
+        return puzzle_service.get_type_statistics()
+    except RuntimeError as e:
+        logger.warning(e)
+
+
 @app.post("/description")
 async def get_move_description(request: OpeningRequest):
     try:
