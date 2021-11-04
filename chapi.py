@@ -40,6 +40,14 @@ async def get_random_single_move_puzzle(type_name):
         logger.warning(e)
 
 
+@app.get("/mate_in/{n}")
+async def get_mate_in_n_puzzle(n):
+    try:
+        return puzzle_service.get_mate_in_n_puzzle(int(n))
+    except RuntimeError as e:
+        logger.warning(e)
+
+
 @app.get("/statistics")
 async def get_statistics():
     try:

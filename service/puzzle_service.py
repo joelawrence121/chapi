@@ -17,3 +17,7 @@ class PuzzleService(object):
         statistics = {'types': [row['type'] for row in type_statistics],
                       'counts': [row['count'] for row in type_statistics]}
         return statistics
+
+    def get_mate_in_n_puzzle(self, n: int):
+        mate_puzzles = self.repository.query_mate_in_n_by_n(n)
+        return random.choice(mate_puzzles)
