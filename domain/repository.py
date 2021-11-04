@@ -8,6 +8,7 @@ from domain.objects import SingleMove, Opening
 
 class Repository(object):
     connection_string = "mysql://{user}:{password}@{host}/chess_db"
+    get_statistics_query = "select type, count(*) as count from Single_Move group by type order by count asc;"
 
     def __init__(self):
         config = configparser.ConfigParser()
@@ -28,3 +29,6 @@ class Repository(object):
         openings = self.session.query(Opening).filter(Opening.move_stack == ' '.join(move_stack))
         return [opening.as_dict() for opening in openings]
 
+    def get_type_statistics(self):
+        statistics = self.session.execute(self.get_statistics_query)
+        return [statistic for statistic in statistics]
