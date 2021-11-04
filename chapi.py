@@ -59,7 +59,7 @@ async def get_move_description(request: DescriptionRequest):
 @app.post("/play")
 async def play_stockfish(request: PlayRequest):
     try:
-        return stockfish_service.get_move(request)
+        return stockfish_service.get_stockfish_result(request)
     except RuntimeError as e:
         logger.warning(e)
 

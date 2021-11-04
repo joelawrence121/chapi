@@ -18,7 +18,7 @@ class DescriptionService(object):
         self.repository = Repository()
         self.stockfish_service = StockfishService()
 
-    def get_description(self, request: DescriptionRequest) -> str:
+    def get_description(self, request: DescriptionRequest) -> []:
         '''
         :DescriptionRequest request :
         :str description:
@@ -30,7 +30,7 @@ class DescriptionService(object):
         descriptions.extend(self.get_opening_description(request))
         descriptions.extend(self.get_mate_description(request))
         descriptions.extend(self.get_end_description(request))
-        return ' '.join(descriptions)
+        return descriptions
 
     def get_opening_description(self, request: DescriptionRequest):
         '''
