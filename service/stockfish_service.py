@@ -32,3 +32,14 @@ class StockfishService(object):
         stockfish_result = StockfishResult(self.board.fen(), result.move.uci())
 
         return stockfish_result
+
+    def has_won(self, fen: str):
+        self.engine.reconfigure(20)
+        self.board.set_fen(fen)
+
+        if self.board.is_game_over():
+            if self.board.outcome().winner:
+                return 'white'
+            elif not self.board.outcome().winner:
+                return 'black'
+        return None
