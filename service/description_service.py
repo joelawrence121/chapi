@@ -38,7 +38,7 @@ class DescriptionService(object):
         :param request :
         :return description:
         Queries the database to determine if the board is in a particular opening scenario. Returns a relevant
-        generated description if so.
+        generated description with Wikipedia link if it exists.
         '''
 
         grammar = CFG.fromstring(DEFAULT_OPENING.format(user=request.user, move=request.move))
