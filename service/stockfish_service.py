@@ -3,14 +3,15 @@ from enum import Enum
 import chess
 import chess.engine
 
-from client.client_json import PlayRequest
+from client.client_json import PlayRequest, DescriptionRequest
 from domain.objects import StockfishResult
 from engine.stockfish import Engine
 
 
 class StockfishService(object):
     TIME_LIMIT = 0.5
-    MATE_LIMIT = 5
+    MATE_LOWER_BOUND = 1
+    MATE_UPPER_BOUND = 5
 
     def __init__(self):
         self.engine = Engine(10)
@@ -50,16 +51,16 @@ class StockfishService(object):
                 return Outcome.BLACK
         return None
 
-    def get_checkmate_result(self, fen: str) -> dict:
-        self.board.set_fen(fen)
+    def get_checkmate_result(self, request: DescriptionRequest) -> dict:
+        self.board.set_fen(request.fen)
         info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=self.TIME_LIMIT))
         pov_score = chess.engine.PovScore(info['score'], True).pov(True)
 
         result = None
-        if pov_score.is_mate() and abs(pov_score.relative.mate()) in range(2, self.MATE_LIMIT):
+        if pov_score.is_mate() and abs(pov_score.relative.mate()) in range(self.MATE_LOWER_BOUND,
+                                                                           self.MATE_UPPER_BOUND):
             result = {}
             relative_mate = pov_score.relative.mate()
-
             # user is checkmating
             if pov_score.turn:
                 result['checkmating'] = Outcome.WHITE
@@ -68,7 +69,6 @@ class StockfishService(object):
             if not pov_score.turn:
                 result['checkmating'] = Outcome.BLACK
                 result['moves'] = abs(relative_mate)
-
         return result
 
 

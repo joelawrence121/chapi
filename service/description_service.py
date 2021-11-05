@@ -20,8 +20,8 @@ class DescriptionService(object):
 
     def get_description(self, request: DescriptionRequest) -> []:
         '''
-        :DescriptionRequest request :
-        :str description:
+        :param request :
+        :return description:
         For a given DescriptionRequest : (user, moveStack, move, fen), generate an human readable description based on:
         opening scenario, winning conditions, mate conditions...
         '''
@@ -34,8 +34,8 @@ class DescriptionService(object):
 
     def get_opening_description(self, request: DescriptionRequest):
         '''
-        :DescriptionRequest request :
-        :[str] description:
+        :param request :
+        :return description:
         Queries the database to determine if the board is in a particular opening scenario. Returns a relevant
         generated description if so.
         '''
@@ -62,8 +62,8 @@ class DescriptionService(object):
 
     def get_end_description(self, request: DescriptionRequest):
         '''
-        :DescriptionRequest request:
-        :[str] description:
+        :param request:
+        :return description:
         Uses Stockfish to analyse the board for end conditions: won, lost, stalemate.
         Generates a natural language description if the conditions are met.
         '''
@@ -83,13 +83,13 @@ class DescriptionService(object):
 
     def get_mate_description(self, request: DescriptionRequest):
         '''
-        :DescriptionRequest request:
-        :[str] description:
+        :param request:
+        :return description:
         Use Stockfish to analyse whether a Checkmate is available or if the user is being checkmated.
         Generates a natural language description if the conditions are met.
         '''
 
-        checkmate_result = self.stockfish_service.get_checkmate_result(request.fen)
+        checkmate_result = self.stockfish_service.get_checkmate_result(request)
         if checkmate_result is None:
             return []
 
