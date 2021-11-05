@@ -8,20 +8,9 @@ from domain.objects import StockfishResult
 from engine.stockfish import Engine
 
 
-def normalise(difficulty: int):
-    if difficulty not in range(1, 10):
-        raise RuntimeError("Expected difficulty value in range 1-10 but was {}.".format(difficulty))
-    return difficulty * 2
-
-
-class Outcome(Enum):
-    WHITE = 'white'
-    BLACK = 'black'
-    STALE = 'stale'
-
-
 class StockfishService(object):
     TIME_LIMIT = 0.5
+    MATE_LIMIT = 5
 
     def __init__(self):
         self.engine = Engine(10)
@@ -48,9 +37,7 @@ class StockfishService(object):
         elif self.is_over(self.board.fen()) == Outcome.BLACK:
             winner = Outcome.BLACK
 
-        stockfish_result = StockfishResult(self.board.fen(), move, winner)
-
-        return stockfish_result
+        return StockfishResult(self.board.fen(), move, winner)
 
     def is_over(self, fen: str):
         self.board.set_fen(fen)
@@ -61,5 +48,37 @@ class StockfishService(object):
                 return Outcome.WHITE
             elif not self.board.outcome().winner:
                 return Outcome.BLACK
-
         return None
+
+    def get_checkmate_result(self, fen: str) -> dict:
+        self.board.set_fen(fen)
+        info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=self.TIME_LIMIT))
+        pov_score = chess.engine.PovScore(info['score'], True).pov(True)
+
+        result = None
+        if pov_score.is_mate() and abs(pov_score.relative.mate()) in range(2, self.MATE_LIMIT):
+            result = {}
+            relative_mate = pov_score.relative.mate()
+
+            # user is checkmating
+            if pov_score.turn:
+                result['checkmating'] = Outcome.WHITE
+                result['moves'] = abs(relative_mate)
+            # pov is always white so this means user is being mated
+            if not pov_score.turn:
+                result['checkmating'] = Outcome.BLACK
+                result['moves'] = abs(relative_mate)
+
+        return result
+
+
+def normalise(difficulty: int):
+    if difficulty not in range(1, 10):
+        raise RuntimeError("Expected difficulty value in range 1-10 but was {}.".format(difficulty))
+    return difficulty * 2
+
+
+class Outcome(Enum):
+    WHITE = 'white'
+    BLACK = 'black'
+    STALE = 'stale'

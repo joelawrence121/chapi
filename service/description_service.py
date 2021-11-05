@@ -5,7 +5,7 @@ from nltk.parse.generate import generate
 
 from client.client_json import DescriptionRequest
 from data.grammars import DEFAULT_OPENING, STOCKFISH_OPENING, USER_OPENING, USER_FIRST_OPENING, USER_WIN_CONDITION, \
-    STOCKFISH_WIN_CONDITION, STALEMATE_ENDING
+    STOCKFISH_WIN_CONDITION, STALEMATE_ENDING, USER_CHECKMATING, STOCKFISH_CHECKMATING
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
 
@@ -37,7 +37,7 @@ class DescriptionService(object):
         :DescriptionRequest request :
         :[str] description:
         Queries the database to determine if the board is in a particular opening scenario. Returns a relevant
-        description if so.
+        generated description if so.
         '''
 
         grammar = CFG.fromstring(DEFAULT_OPENING.format(user=request.user, move=request.move))
@@ -60,11 +60,14 @@ class DescriptionService(object):
 
         return self.get_random_generation(grammar)
 
-    def get_mate_description(self, request: DescriptionRequest):
-        # TODO: Generate mate descriptions: 'You are being checkmated', 'There's a checkmate in 3 available.' ...
-        return []
-
     def get_end_description(self, request: DescriptionRequest):
+        '''
+        :DescriptionRequest request:
+        :[str] description:
+        Uses Stockfish to analyse the board for end conditions: won, lost, stalemate.
+        Generates a natural language description if the conditions are met.
+        '''
+
         end_result = self.stockfish_service.is_over(request.fen)
         if end_result is None:
             return []
@@ -76,6 +79,25 @@ class DescriptionService(object):
             grammar = CFG.fromstring(STOCKFISH_WIN_CONDITION.format(move_count=(len(request.moveStack) // 2)))
         elif self.stockfish_service.is_over(request.fen) == Outcome.STALE:
             grammar = CFG.fromstring(STALEMATE_ENDING.format(move_count=(len(request.moveStack) // 2)))
+        return self.get_random_generation(grammar)
+
+    def get_mate_description(self, request: DescriptionRequest):
+        '''
+        :DescriptionRequest request:
+        :[str] description:
+        Use Stockfish to analyse whether a Checkmate is available or if the user is being checkmated.
+        Generates a natural language description if the conditions are met.
+        '''
+
+        checkmate_result = self.stockfish_service.get_checkmate_result(request.fen)
+        if checkmate_result is None:
+            return []
+
+        grammar = ""
+        if checkmate_result['checkmating'] == Outcome.WHITE:
+            grammar = CFG.fromstring(USER_CHECKMATING.format(move_count=(checkmate_result['moves'])))
+        if checkmate_result['checkmating'] == Outcome.BLACK:
+            grammar = CFG.fromstring(STOCKFISH_CHECKMATING.format(move_count=(checkmate_result['moves'])))
         return self.get_random_generation(grammar)
 
     def get_random_generation(self, grammar):

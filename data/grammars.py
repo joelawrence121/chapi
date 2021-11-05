@@ -35,6 +35,12 @@ USER_WIN_CONDITION = """
     C -> "have won" | "have beaten your opponent"
 """
 
+USER_CHECKMATING = """
+    S -> 'There is a checkmate available' E | 'There is a checkmate on' OP 'available' E | 'You can checkmate' OP E
+    E -> 'in {move_count} moves.'
+    OP -> 'Stockfish' | 'your opponent' | 'black'
+"""
+
 # -------------- STOCKFISH --------------
 
 STOCKFISH_OPENING = """
@@ -49,4 +55,11 @@ STOCKFISH_WIN_CONDITION = """
     S -> P C 'in {move_count} moves.'
     P -> 'Stockfish' | 'Your opponent' | 'Black' 
     C -> "has won" | "wins" | "has beaten you" 
+"""
+
+STOCKFISH_CHECKMATING = """
+    S -> ST | ST E | OP 'thinks they can checkmate you' E 
+    ST -> OP 'is trying to checkmate you'
+    OP -> 'Stockfish' | 'Your opponent' | 'Black'
+    E -> 'in {move_count} moves.'
 """
