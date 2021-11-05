@@ -7,11 +7,9 @@ DEFAULT_OPENING = """
     M -> "{move}"
 """
 
-DRAW_ENDING = """
-    S -> U A M 
-    U -> "{user}"
-    A -> 'plays' | 'moves'
-    M -> "{move}"
+STALEMATE_ENDING = """
+    S -> P 'in {move_count} moves.'
+    P -> 'Stalemate' | 'The game has reached a stalemate' 
 """
 
 # ----------------- USER -----------------

@@ -1,3 +1,5 @@
+from enum import Enum
+
 import chess
 import chess.engine
 
@@ -8,14 +10,18 @@ from engine.stockfish import Engine
 
 def normalise(difficulty: int):
     if difficulty not in range(1, 10):
-        raise RuntimeError("Expecte difficulty value in range 1-10 but was {}.".format(difficulty))
+        raise RuntimeError("Expected difficulty value in range 1-10 but was {}.".format(difficulty))
     return difficulty * 2
+
+
+class Outcome(Enum):
+    WHITE = 'white'
+    BLACK = 'black'
+    STALE = 'stale'
 
 
 class StockfishService(object):
     TIME_LIMIT = 0.5
-    WHITE = 'white'
-    BLACK = 'black'
 
     def __init__(self):
         self.engine = Engine(10)
@@ -37,21 +43,23 @@ class StockfishService(object):
 
         # assign winner if there is one
         winner = None
-        if self.has_won(self.board.fen()) == self.WHITE:
-            winner = self.WHITE
-        elif self.has_won(self.board.fen()) == self.BLACK:
-            winner = self.BLACK
+        if self.is_over(self.board.fen()) == Outcome.WHITE:
+            winner = Outcome.WHITE
+        elif self.is_over(self.board.fen()) == Outcome.BLACK:
+            winner = Outcome.BLACK
 
         stockfish_result = StockfishResult(self.board.fen(), move, winner)
 
         return stockfish_result
 
-    def has_won(self, fen: str):
+    def is_over(self, fen: str):
         self.board.set_fen(fen)
-
         if self.board.is_game_over():
-            if self.board.outcome().winner:
-                return self.WHITE
+            if self.board.is_stalemate():
+                return Outcome.STALE
+            elif self.board.outcome().winner:
+                return Outcome.WHITE
             elif not self.board.outcome().winner:
-                return self.BLACK
+                return Outcome.BLACK
+
         return None

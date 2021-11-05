@@ -5,9 +5,9 @@ from nltk.parse.generate import generate
 
 from client.client_json import DescriptionRequest
 from data.grammars import DEFAULT_OPENING, STOCKFISH_OPENING, USER_OPENING, USER_FIRST_OPENING, USER_WIN_CONDITION, \
-    STOCKFISH_WIN_CONDITION
+    STOCKFISH_WIN_CONDITION, STALEMATE_ENDING
 from domain.repository import Repository
-from service.stockfish_service import StockfishService
+from service.stockfish_service import StockfishService, Outcome
 
 
 class DescriptionService(object):
@@ -65,16 +65,17 @@ class DescriptionService(object):
         return []
 
     def get_end_description(self, request: DescriptionRequest):
-        end_result = self.stockfish_service.has_won(request.fen)
+        end_result = self.stockfish_service.is_over(request.fen)
         if end_result is None:
             return []
 
         grammar = ""
-        if self.stockfish_service.has_won(request.fen) == 'white':
+        if self.stockfish_service.is_over(request.fen) == Outcome.WHITE:
             grammar = CFG.fromstring(USER_WIN_CONDITION.format(move_count=(len(request.moveStack) // 2)))
-        elif self.stockfish_service.has_won(request.fen) == 'black':
+        elif self.stockfish_service.is_over(request.fen) == Outcome.BLACK:
             grammar = CFG.fromstring(STOCKFISH_WIN_CONDITION.format(move_count=(len(request.moveStack) // 2)))
-
+        elif self.stockfish_service.is_over(request.fen) == Outcome.STALE:
+            grammar = CFG.fromstring(STALEMATE_ENDING.format(move_count=(len(request.moveStack) // 2)))
         return self.get_random_generation(grammar)
 
     def get_random_generation(self, grammar):
