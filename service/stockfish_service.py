@@ -57,17 +57,24 @@ class StockfishService(object):
         pov_score = chess.engine.PovScore(info['score'], True).pov(True)
 
         result = None
-        if pov_score.is_mate() and abs(pov_score.relative.mate()) in range(self.MATE_LOWER_BOUND,
-                                                                           self.MATE_UPPER_BOUND):
+        if self.board.is_checkmate():
+            result = {}
+            result['moves'] = 0
+            if pov_score.turn:
+                result['user'] = Outcome.BLACK
+            if not pov_score.turn:
+                result['user'] = Outcome.WHITE
+
+        elif pov_score.is_mate() \
+                and abs(pov_score.relative.mate()) in range(self.MATE_LOWER_BOUND, self.MATE_UPPER_BOUND):
+
             result = {}
             relative_mate = pov_score.relative.mate()
-            # user is checkmating
             if pov_score.turn:
-                result['checkmating'] = Outcome.WHITE
+                result['user'] = Outcome.WHITE
                 result['moves'] = abs(relative_mate)
-            # pov is always white so this means user is being mated
             if not pov_score.turn:
-                result['checkmating'] = Outcome.BLACK
+                result['user'] = Outcome.BLACK
                 result['moves'] = abs(relative_mate)
         return result
 

@@ -5,7 +5,8 @@ from nltk.parse.generate import generate
 
 from client.client_json import DescriptionRequest
 from data.grammars import DEFAULT_OPENING, STOCKFISH_OPENING, USER_OPENING, USER_FIRST_OPENING, USER_WIN_CONDITION, \
-    STOCKFISH_WIN_CONDITION, STALEMATE_ENDING, USER_CHECKMATING, STOCKFISH_CHECKMATING
+    STOCKFISH_WIN_CONDITION, STALEMATE_ENDING, USER_CHECKMATING, STOCKFISH_CHECKMATING, USER_CHECKMATED, \
+    STOCKFISH_CHECKMATED
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
 
@@ -94,10 +95,18 @@ class DescriptionService(object):
             return []
 
         grammar = ""
-        if checkmate_result['checkmating'] == Outcome.WHITE:
-            grammar = CFG.fromstring(USER_CHECKMATING.format(move_count=(checkmate_result['moves'])))
-        if checkmate_result['checkmating'] == Outcome.BLACK:
-            grammar = CFG.fromstring(STOCKFISH_CHECKMATING.format(move_count=(checkmate_result['moves'])))
+        if checkmate_result['user'] == Outcome.WHITE:
+            if checkmate_result['moves'] == 0:
+                grammar = CFG.fromstring(USER_CHECKMATED)
+            else:
+                grammar = CFG.fromstring(USER_CHECKMATING.format(move_count=(checkmate_result['moves'])))
+
+        if checkmate_result['user'] == Outcome.BLACK:
+            if checkmate_result['moves'] == 0:
+                grammar = CFG.fromstring(STOCKFISH_CHECKMATED)
+            else:
+                grammar = CFG.fromstring(STOCKFISH_CHECKMATING.format(move_count=(checkmate_result['moves'])))
+
         return self.get_random_generation(grammar)
 
     def get_random_generation(self, grammar):
