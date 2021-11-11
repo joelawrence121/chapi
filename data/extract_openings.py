@@ -13,7 +13,7 @@ import sqlalchemy as db
 import wikipedia
 from sqlalchemy.orm import Session
 
-from domain.objects import Opening
+from domain.entities import Opening
 
 
 def create_db_session():

@@ -3,8 +3,8 @@ from enum import Enum
 import chess
 import chess.engine
 
-from client.client_json import PlayRequest, DescriptionRequest
-from domain.objects import StockfishResult
+from domain.client_json import PlayRequest, DescriptionRequest
+from domain.entities import StockfishResult
 from engine.stockfish import Engine
 
 

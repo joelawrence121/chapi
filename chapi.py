@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from client.client_json import DescriptionRequest, PlayRequest
+from domain.client_json import DescriptionRequest, PlayRequest
 from service.description_service import DescriptionService
 from service.puzzle_service import PuzzleService
 from service.stockfish_service import StockfishService

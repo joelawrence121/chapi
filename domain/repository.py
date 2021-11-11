@@ -3,7 +3,7 @@ import configparser
 import sqlalchemy as db
 from sqlalchemy.orm import Session
 
-from domain.objects import SingleMove, Opening, MateInN
+from domain.entities import SingleMove, Opening, MateInN
 
 
 class Repository(object):
