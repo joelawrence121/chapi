@@ -3,10 +3,10 @@ import random
 from nltk import CFG
 from nltk.parse.generate import generate
 
-from domain.client_json import DescriptionRequest
 from data.grammars import DEFAULT_OPENING, STOCKFISH_OPENING, USER_OPENING, USER_FIRST_OPENING, USER_WIN_CONDITION, \
     STOCKFISH_WIN_CONDITION, STALEMATE_ENDING, USER_CHECKMATING, STOCKFISH_CHECKMATING, USER_CHECKMATED, \
     STOCKFISH_CHECKMATED
+from domain.client_json import DescriptionRequest
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
 
@@ -25,6 +25,12 @@ def get_move(move: str, opening: list):
     return move
 
 
+def get_link(opening: list):
+    if len(opening) != 0:
+        return opening[0]['wiki_link']
+    return None
+
+
 class DescriptionService(object):
     HUMAN = "human"
     STOCKFISH = "stockfish"
@@ -35,24 +41,24 @@ class DescriptionService(object):
 
     def get_description(self, request: DescriptionRequest) -> []:
         """
-        :param request :
-        :return description:
-        For a given DescriptionRequest : (user, moveStack, move, fen), generate an human readable description based on:
-        opening scenario, winning conditions, mate conditions...
+        For a given DescriptionRequest : (user, moveStack, move, fen), generate an array of English descriptions
+        providing insight on: the opening scenario, winning conditions, mate conditions...
         """
 
-        descriptions = []
-        descriptions.extend(self.get_opening_description(request))
-        descriptions.extend(self.get_mate_description(request))
-        descriptions.extend(self.get_end_description(request))
-        return descriptions
+        response = {'descriptions': [], 'link': None}
+
+        opening_data = self.get_opening_description(request)
+        response['descriptions'].extend(opening_data[0])
+        response['link'] = opening_data[1]
+        response['opening'] = opening_data[2]
+        response['descriptions'].extend(self.get_mate_description(request))
+        response['descriptions'].extend(self.get_end_description(request))
+        return response
 
     def get_opening_description(self, request: DescriptionRequest):
         """
-        :param request :
-        :return description:
         Queries the database to determine if the board is in a particular opening scenario. Returns a relevant
-        generated description with Wikipedia link if it exists.
+        CFG generated description with Wikipedia link if it exists.
         """
 
         grammar = CFG.fromstring(DEFAULT_OPENING.format(user=request.user, move=request.move))
@@ -73,14 +79,13 @@ class DescriptionService(object):
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
             grammar = CFG.fromstring(STOCKFISH_OPENING.format(previous_move=previous_move, move=move))
 
-        return get_random_generation(grammar)
+        # return the description, link and move name for rendering on front end
+        return get_random_generation(grammar), get_link(opening), move
 
     def get_end_description(self, request: DescriptionRequest):
         """
-        :param request:
-        :return description:
         Uses Stockfish to analyse the board for end conditions: won, lost, stalemate.
-        Generates a natural language description if the conditions are met.
+        Generates a POV appropriate description if the conditions are met.
         """
 
         end_result = self.stockfish_service.is_over(request.fen)
@@ -98,8 +103,6 @@ class DescriptionService(object):
 
     def get_mate_description(self, request: DescriptionRequest):
         """
-        :param request:
-        :return description:
         Use Stockfish to analyse whether a Checkmate is available or if the user is being checkmated.
         Generates a natural language description if the conditions are met.
         """
