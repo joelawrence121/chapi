@@ -1,11 +1,8 @@
 import random
 
-from nltk import CFG
 from nltk.parse.generate import generate
 
-from data.grammars import DEFAULT_OPENING, STOCKFISH_OPENING, USER_OPENING, USER_FIRST_OPENING, USER_WIN_CONDITION, \
-    STOCKFISH_WIN_CONDITION, STALEMATE_ENDING, USER_CHECKMATING, STOCKFISH_CHECKMATING, USER_CHECKMATED, \
-    STOCKFISH_CHECKMATED
+import grammar_factory
 from domain.client_json import DescriptionRequest
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
@@ -61,23 +58,23 @@ class DescriptionService(object):
         CFG generated description with Wikipedia link if it exists.
         """
 
-        grammar = CFG.fromstring(DEFAULT_OPENING.format(user=request.user, move=request.move))
+        grammar = grammar_factory.get_default_opening(request.user, request.move)
         opening = self.repository.query_opening_by_move_stack(request.moveStack)
         move = get_move(request.move, opening)
 
         if request.user == self.HUMAN:
             # special case for opening move
             if len(request.moveStack) == 1:
-                grammar = CFG.fromstring(USER_FIRST_OPENING.format(move=move))
+                grammar = grammar_factory.get_user_first_opening(move)
             else:
                 previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-                grammar = CFG.fromstring(USER_OPENING.format(previous_move=previous_move, move=move))
+                grammar = grammar_factory.get_user_opening(move, previous_move)
 
         elif request.user == self.STOCKFISH:
             previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-            grammar = CFG.fromstring(STOCKFISH_OPENING.format(previous_move=previous_move, move=move))
+            grammar = grammar_factory.get_stockfish_opening(move, previous_move)
 
         # return the description, link and move name for rendering on front end
         return get_random_generation(grammar), get_link(opening), move
@@ -93,12 +90,13 @@ class DescriptionService(object):
             return []
 
         grammar = ""
+        move_count = len(request.moveStack) // 2
         if self.stockfish_service.is_over(request.fen) == Outcome.WHITE:
-            grammar = CFG.fromstring(USER_WIN_CONDITION.format(move_count=(len(request.moveStack) // 2)))
+            grammar = grammar_factory.get_user_win_condition(move_count)
         elif self.stockfish_service.is_over(request.fen) == Outcome.BLACK:
-            grammar = CFG.fromstring(STOCKFISH_WIN_CONDITION.format(move_count=(len(request.moveStack) // 2)))
+            grammar = grammar_factory.get_stockfish_win_condition(move_count)
         elif self.stockfish_service.is_over(request.fen) == Outcome.STALE:
-            grammar = CFG.fromstring(STALEMATE_ENDING.format(move_count=(len(request.moveStack) // 2)))
+            grammar = grammar_factory.get_stalemate_ending(move_count)
         return get_random_generation(grammar)
 
     def get_mate_description(self, request: DescriptionRequest):
@@ -114,14 +112,14 @@ class DescriptionService(object):
         grammar = ""
         if checkmate_result['user'] == Outcome.WHITE:
             if checkmate_result['moves'] == 0:
-                grammar = CFG.fromstring(USER_CHECKMATED)
+                grammar = grammar_factory.get_user_checkmated()
             else:
-                grammar = CFG.fromstring(USER_CHECKMATING.format(move_count=(checkmate_result['moves'])))
+                grammar = grammar_factory.get_user_checkmating(checkmate_result['moves'])
 
         if checkmate_result['user'] == Outcome.BLACK:
             if checkmate_result['moves'] == 0:
-                grammar = CFG.fromstring(STOCKFISH_CHECKMATED)
+                grammar = grammar_factory.get_stockfish_checkmated()
             else:
-                grammar = CFG.fromstring(STOCKFISH_CHECKMATING.format(move_count=(checkmate_result['moves'])))
+                grammar = grammar_factory.get_stockfish_checkmating(checkmate_result['moves'])
 
         return get_random_generation(grammar)
