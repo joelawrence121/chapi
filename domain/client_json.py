@@ -11,5 +11,6 @@ class DescriptionRequest(BaseModel):
 
 
 class PlayRequest(BaseModel):
+    id: str
     fen: str
     difficulty: int

@@ -69,7 +69,8 @@ class Opening(Base):
 
 class StockfishResult:
 
-    def __init__(self, fen: str, move: str, winner):
+    def __init__(self, uuid: str, fen: str, move: str, winner):
+        self.id = uuid
         self.fen = fen
         self.move = move
         self.winner = winner

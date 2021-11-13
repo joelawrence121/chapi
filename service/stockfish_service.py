@@ -38,7 +38,7 @@ class StockfishService(object):
         elif self.is_over(self.board.fen()) == Outcome.BLACK:
             winner = Outcome.BLACK
 
-        return StockfishResult(self.board.fen(), move, winner)
+        return StockfishResult(request.id, self.board.fen(), move, winner)
 
     def is_over(self, fen: str):
         self.board.set_fen(fen)
