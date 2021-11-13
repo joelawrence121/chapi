@@ -51,13 +51,17 @@ class Opening(Base):
     eco_classification = Column(String, primary_key=True)
     name = Column(String)
     move_stack = Column(String)
+    explorer_link = Column(String)
+    wiki_link = Column(String)
     epd = Column(String)
 
-    def __init__(self, eco, name, move_stack, epd):
-        self.eco_classification = eco
+    def __init__(self, name, move_stack, explorer_link, wiki_link, epd, eco):
         self.name = name
         self.move_stack = move_stack
+        self.explorer_link = explorer_link
+        self.wiki_link = wiki_link
         self.epd = epd
+        self.eco_classification = eco
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -65,6 +69,8 @@ class Opening(Base):
 
 class StockfishResult:
 
-    def __init__(self, fen: str, move: str):
+    def __init__(self, uuid: str, fen: str, move: str, winner):
+        self.id = uuid
         self.fen = fen
         self.move = move
+        self.winner = winner

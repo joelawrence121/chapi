@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from client.client_json import OpeningRequest, PlayRequest
+from domain.client_json import DescriptionRequest, PlayRequest
 from service.description_service import DescriptionService
 from service.puzzle_service import PuzzleService
 from service.stockfish_service import StockfishService
@@ -40,6 +40,14 @@ async def get_random_single_move_puzzle(type_name):
         logger.warning(e)
 
 
+@app.get("/mate_in/{n}")
+async def get_mate_in_n_puzzle(n):
+    try:
+        return puzzle_service.get_mate_in_n_puzzle(int(n))
+    except RuntimeError as e:
+        logger.warning(e)
+
+
 @app.get("/statistics")
 async def get_statistics():
     try:
@@ -49,7 +57,7 @@ async def get_statistics():
 
 
 @app.post("/description")
-async def get_move_description(request: OpeningRequest):
+async def get_move_description(request: DescriptionRequest):
     try:
         return description_service.get_description(request)
     except RuntimeError as e:
@@ -59,7 +67,7 @@ async def get_move_description(request: OpeningRequest):
 @app.post("/play")
 async def play_stockfish(request: PlayRequest):
     try:
-        return stockfish_service.get_move(request)
+        return stockfish_service.get_stockfish_result(request)
     except RuntimeError as e:
         logger.warning(e)
 

@@ -1,7 +1,7 @@
 """
  Extract data in the opening tsv files from
     https://github.com/niklasf/chess-openings.git
- into chess_db database.
+ into chess_db database with their Wikipedia pages attached.
 """
 
 import configparser
@@ -10,9 +10,10 @@ import logging
 import os
 
 import sqlalchemy as db
+import wikipedia
 from sqlalchemy.orm import Session
 
-from domain.objects import Opening
+from domain.entities import Opening
 
 
 def create_db_session():
@@ -35,11 +36,29 @@ def extract_data(src_path: str, session):
             tsv_read = csv.reader(file, delimiter='\t')
             next(tsv_read)
             for row in tsv_read:
-                opening = Opening(row[0], row[1], row[3], row[4])
+                opening = Opening(name=row[1],
+                                  move_stack=row[3],
+                                  explorer_link=get_explorer_link(row[2]),
+                                  wiki_link=get_wikipedia_link(row[1]),
+                                  epd=row[4],
+                                  eco=row[0])
                 session.add(opening)
                 session.commit()
             file.close()
     session.close()
+
+
+def get_explorer_link(move_list: str):
+    # TODO
+    return None
+
+
+def get_wikipedia_link(opening: str):
+    try:
+        return wikipedia.page(opening, auto_suggest=True).url
+    except Exception as e:
+        print("Exception occurred querying {}: {}".format(opening, str(e)))
+        return None
 
 
 def main():

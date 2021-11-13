@@ -3,7 +3,7 @@ from typing import List
 from pydantic import BaseModel
 
 
-class OpeningRequest(BaseModel):
+class DescriptionRequest(BaseModel):
     user: str
     moveStack: List[str]
     move: str
@@ -11,5 +11,6 @@ class OpeningRequest(BaseModel):
 
 
 class PlayRequest(BaseModel):
+    id: str
     fen: str
     difficulty: int

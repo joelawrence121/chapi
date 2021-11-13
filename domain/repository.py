@@ -3,7 +3,7 @@ import configparser
 import sqlalchemy as db
 from sqlalchemy.orm import Session
 
-from domain.objects import SingleMove, Opening
+from domain.entities import SingleMove, Opening, MateInN
 
 
 class Repository(object):
@@ -22,8 +22,8 @@ class Repository(object):
         self.session = Session(bind=engine)
 
     def query_single_move_by_type(self, type_name: str):
-        single_moves = self.session.query(SingleMove).filter(SingleMove.type == type_name)
-        return [ob.as_dict() for ob in single_moves]
+        single_move_puzzles = self.session.query(SingleMove).filter(SingleMove.type == type_name)
+        return [ob.as_dict() for ob in single_move_puzzles]
 
     def query_opening_by_move_stack(self, move_stack: list):
         openings = self.session.query(Opening).filter(Opening.move_stack == ' '.join(move_stack))
@@ -32,3 +32,7 @@ class Repository(object):
     def get_type_statistics(self):
         statistics = self.session.execute(self.get_statistics_query)
         return [statistic for statistic in statistics]
+
+    def query_mate_in_n_by_n(self, n: int):
+        mate_puzzles = self.session.query(MateInN).filter(MateInN.moves_to_mate == n)
+        return [ob.as_dict() for ob in mate_puzzles]
