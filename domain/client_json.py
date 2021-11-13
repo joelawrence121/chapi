@@ -14,3 +14,4 @@ class PlayRequest(BaseModel):
     id: str
     fen: str
     difficulty: int
+    time_limit: float

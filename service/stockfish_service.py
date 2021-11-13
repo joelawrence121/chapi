@@ -23,7 +23,7 @@ class StockfishService(object):
 
         # load fen into chess board
         self.board.set_fen(request.fen)
-        result = self.engine.play(self.board, time=self.TIME_LIMIT)
+        result = self.engine.play(self.board, time=request.time_limit)
 
         # determine if there was a move made
         move = None
