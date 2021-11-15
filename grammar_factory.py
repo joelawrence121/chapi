@@ -83,6 +83,31 @@ def get_user_checkmated():
     return CFG.fromstring(USER_CHECKMATED)
 
 
+USER_BLUNDER = """
+    S -> I C 'a' ADJ 'blunder,' ES | SS I C 'a blunder.' | "You've blundered." SS I C 'a' ADJ 'blunder.'
+    I -> 'This move' | '{move}' | 'This'
+    ES -> 'you' D
+    SS -> 'You' D 
+    D -> VL 'a {loss} point advantage.'
+    VL -> 'have lost' | 'are down' | 'have dropped' | 'have cost yourself'
+"""
+NORMAL_CS = """    C -> V 'be' VP 
+    V -> 'could' | 'may' | 'might'
+    VP -> 'considered' | 'conceivably thought of as' | 'thought of as'
+    ADJ -> 'fair' | 'considerable'
+"""
+CRITICAL_CS = """    C -> 'is' V 
+     V -> 'definitely' | 'certainly' | 'without doubt' | 'absolutely' | 'decidedly' | 'undeniably'
+     ADJ -> 'critical' | 'huge'
+"""
+
+
+def get_user_blunder(move, loss, critical: bool):
+    if critical:
+        return CFG.fromstring((USER_BLUNDER + CRITICAL_CS).format(move=move, loss=str(loss)))
+    return CFG.fromstring((USER_BLUNDER + NORMAL_CS).format(move=move, loss=str(loss)))
+
+
 # -------------- STOCKFISH --------------
 
 STOCKFISH_OPENING = """
@@ -108,8 +133,11 @@ def get_stockfish_win_condition(move_count):
 
 
 STOCKFISH_CHECKMATING = """
-    S -> ST | ST E | OP 'thinks they can checkmate you' E 
-    ST -> OP 'is trying to checkmate you'
+    S -> OP V_D E | OP V_P they can checkmate you' E 
+    V_P -> 'thinks' | 'believes' | 'predicts' 
+    V_D -> 'is' V_T 'to checkmate you' | 'is' V_S 'a mate'
+    V_S -> 'setting up for' | 'is steering you into' | 'creating a' 
+    V_T -> 'trying' | 'attempting' 
     E -> 'in {move_count} moves.'
 """
 

@@ -10,7 +10,7 @@ from service.stockfish_service import StockfishService, Outcome
 
 def get_random_generation(grammar):
     descriptions = []
-    for description in generate(grammar, n=10):
+    for description in generate(grammar):
         descriptions.append(' '.join(description))
     return [random.choice(descriptions)]
 
@@ -31,6 +31,7 @@ def get_link(opening: list):
 class DescriptionService(object):
     HUMAN = "human"
     STOCKFISH = "stockfish"
+    CRITICAL_BLUNDER_THRESHOLD = -0.6
 
     def __init__(self):
         self.repository = Repository()
@@ -50,6 +51,7 @@ class DescriptionService(object):
         response['opening'] = opening_data[2]
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
+        response['descriptions'].extend(self.get_blunder_description(request))
         return response
 
     def get_opening_description(self, request: DescriptionRequest):
@@ -122,4 +124,17 @@ class DescriptionService(object):
             else:
                 grammar = grammar_factory.get_stockfish_checkmating(checkmate_result['moves'])
 
+        return get_random_generation(grammar)
+
+    def get_blunder_description(self, request: DescriptionRequest):
+        """
+        Use Stockfish to analyse whether the move made was a critical blunder.
+        Generate a natural language description of the blunder and why.
+        """
+        blunder_result = self.stockfish_service.get_blunder_result(request)
+        if blunder_result is None:
+            return []
+
+        grammar = grammar_factory.get_user_blunder(request.move, abs(round(blunder_result * 100)),
+                                                   blunder_result < self.CRITICAL_BLUNDER_THRESHOLD)
         return get_random_generation(grammar)

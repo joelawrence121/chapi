@@ -1,3 +1,4 @@
+import math
 from enum import Enum
 
 import chess
@@ -12,10 +13,17 @@ class StockfishService(object):
     TIME_LIMIT = 0.5
     MATE_LOWER_BOUND = 1
     MATE_UPPER_BOUND = 5
+    BLUNDER_THRESHOLD = -0.3
 
     def __init__(self):
         self.engine = Engine(10)
         self.board = chess.Board()
+
+    def analyse_board(self, fen, user):
+        self.board.set_fen(fen)
+        info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=self.TIME_LIMIT))
+        pov_score = chess.engine.PovScore(info['score'], user == "human").pov(user == "human")
+        return pov_score
 
     def get_stockfish_result(self, request: PlayRequest):
         # reconfigure stockfish engine to normalised difficulty
@@ -52,11 +60,9 @@ class StockfishService(object):
         return None
 
     def get_checkmate_result(self, request: DescriptionRequest) -> dict:
-        self.board.set_fen(request.fen)
-        info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=self.TIME_LIMIT))
-        pov_score = chess.engine.PovScore(info['score'], True).pov(True)
-
         result = None
+        pov_score = self.analyse_board(request.fen, request.user)
+
         if self.board.is_checkmate():
             result = {}
             result['moves'] = 0
@@ -77,6 +83,29 @@ class StockfishService(object):
                 result['user'] = Outcome.BLACK
                 result['moves'] = abs(relative_mate)
         return result
+
+    def get_blunder_result(self, request: DescriptionRequest):
+        if len(request.fenStack) < 5:
+            return None
+
+        current_score = self.analyse_board(request.fen, request.user)
+        previous_score = self.analyse_board(request.fenStack[len(request.fenStack) - 2], request.user)
+        cp_current = get_cp_score(current_score)
+        cp_previous = get_cp_score(previous_score)
+
+        if cp_current is None or cp_previous is None:
+            return None
+
+        if cp_current - cp_previous < self.BLUNDER_THRESHOLD:
+            return cp_current - cp_previous
+
+
+def get_cp_score(pov_score):
+    cp = pov_score.relative.score()
+    raw_score = None
+    if not pov_score.is_mate():
+        raw_score = (2 / (1 + math.exp(-0.004 * cp)) - 1) * -1
+    return raw_score
 
 
 def normalise(difficulty: int):

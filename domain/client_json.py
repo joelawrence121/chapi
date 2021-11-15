@@ -8,6 +8,7 @@ class DescriptionRequest(BaseModel):
     moveStack: List[str]
     move: str
     fen: str
+    fenStack: List[str]
 
 
 class PlayRequest(BaseModel):
