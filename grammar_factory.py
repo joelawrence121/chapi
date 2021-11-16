@@ -40,16 +40,29 @@ def get_user_first_opening(move):
     return CFG.fromstring((USER_FIRST_OPENING + YOU_E).format(move=move))
 
 
-USER_OPENING = """
-    S -> P A M | P AC 'with' M 
-    AC -> "respond to {previous_move}" | "counter {previous_move}"
-    A -> 'respond with' | 'counter with' | 'play'
-    M -> "{move}."
+ATCK_ADJ = """    ADJ -> 'capturing' | 'taking' | 'attacking'
 """
+USER_MOVE = """
+    S -> P A M | P AC M 
+    AC -> "respond to {previous_move}" | "counter {previous_move}"
+    M -> 'with' "{move}." 
+"""
+NORMAL_AM = """    
+    A -> 'respond' | 'counter'
+"""
+CAPTURE_AM = """    A -> W 'by' C | ADJ_P "{piece}"
+    W -> 'respond' | 'counter'
+    ADJ_P -> 'capture' | 'attack' | 'take'
+    C -> ADJ ADJ_OP_C "{piece}"
+    ADJ_OP_C -> 'their' | "Stockfish's" | "black's" | 'the' 
+""" + ATCK_ADJ
 
 
-def get_user_opening(move, previous_move):
-    return CFG.fromstring((USER_OPENING + YOU_E).format(move=move, previous_move=previous_move))
+def get_user_move(move, previous_move, capture):
+    if capture is not None:
+        return CFG.fromstring(
+            (USER_MOVE + CAPTURE_AM + YOU_E).format(move=move, previous_move=previous_move, piece=capture))
+    return CFG.fromstring((USER_MOVE + NORMAL_AM + YOU_E).format(move=move, previous_move=previous_move))
 
 
 USER_WIN_CONDITION = """
@@ -110,16 +123,28 @@ def get_user_blunder(move, loss, critical: bool):
 
 # -------------- STOCKFISH --------------
 
-STOCKFISH_OPENING = """
-    S -> OP A 'with' M | OP AC 'with' M 
+STOCKFISH_MOVE = """
+    S -> OP A M | OP AC M 
     AC -> "responds to  {previous_move}" | "counters {previous_move}"
-    A -> 'responds' | 'counters' | 'answers' | 'comes back'
-    M -> "{move}."
+    M -> 'with' "{move}."
 """
+NORMAL_S_AM = """    
+    A -> 'responds' | 'counters' | 'answers' | 'comes back'
+"""
+CAPTURE_S_AM = """    
+    A -> W 'by' C | ADJ_P "{piece}"
+    ADJ_P -> 'captures' | 'takes' | 'attacks'
+    W -> 'responds' | 'counters' | 'answers' | 'comes back'
+    C -> ADJ ADJ_OP_C "{piece}"
+    ADJ_OP_C -> 'your' | 'the' | "white's" 
+""" + ATCK_ADJ
 
 
-def get_stockfish_opening(move, previous_move):
-    return CFG.fromstring((STOCKFISH_OPENING + STOCK_E).format(previous_move=previous_move, move=move))
+def get_stockfish_move(move, previous_move, capture):
+    if capture is not None:
+        return CFG.fromstring(
+            (STOCKFISH_MOVE + CAPTURE_S_AM + STOCK_E).format(previous_move=previous_move, move=move, piece=capture))
+    return CFG.fromstring((STOCKFISH_MOVE + NORMAL_S_AM + STOCK_E).format(previous_move=previous_move, move=move))
 
 
 STOCKFISH_WIN_CONDITION = """

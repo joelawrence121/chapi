@@ -6,7 +6,7 @@ from pydantic import BaseModel
 class DescriptionRequest(BaseModel):
     user: str
     moveStack: List[str]
-    move: str
+    uci: str
     fen: str
     fenStack: List[str]
 

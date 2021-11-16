@@ -60,9 +60,10 @@ class DescriptionService(object):
         CFG generated description with Wikipedia link if it exists.
         """
 
-        grammar = grammar_factory.get_default_opening(request.user, request.move)
+        grammar = grammar_factory.get_default_opening(request.user, request.uci)
         opening = self.repository.query_opening_by_move_stack(request.moveStack)
-        move = get_move(request.move, opening)
+        capture = self.stockfish_service.get_capture_result(request)
+        move = get_move(request.uci, opening)
 
         if request.user == self.HUMAN:
             # special case for opening move
@@ -71,12 +72,12 @@ class DescriptionService(object):
             else:
                 previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-                grammar = grammar_factory.get_user_opening(move, previous_move)
+                grammar = grammar_factory.get_user_move(move, previous_move, capture)
 
         elif request.user == self.STOCKFISH:
             previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-            grammar = grammar_factory.get_stockfish_opening(move, previous_move)
+            grammar = grammar_factory.get_stockfish_move(move, previous_move, capture)
 
         # return the description, link and move name for rendering on front end
         return get_random_generation(grammar), get_link(opening), move
@@ -107,7 +108,7 @@ class DescriptionService(object):
         Generates a natural language description if the conditions are met.
         """
 
-        checkmate_result = self.stockfish_service.get_checkmate_result(request)
+        checkmate_result = self.stockfish_service.get_mate_result(request)
         if checkmate_result is None:
             return []
 
@@ -135,6 +136,6 @@ class DescriptionService(object):
         if blunder_result is None:
             return []
 
-        grammar = grammar_factory.get_user_blunder(request.move, abs(round(blunder_result * 100)),
+        grammar = grammar_factory.get_user_blunder(request.uci, abs(round(blunder_result * 100)),
                                                    blunder_result < self.CRITICAL_BLUNDER_THRESHOLD)
         return get_random_generation(grammar)

@@ -25,21 +25,21 @@ class StockfishService(object):
         pov_score = chess.engine.PovScore(info['score'], user == "human").pov(user == "human")
         return pov_score
 
-    def get_stockfish_result(self, request: PlayRequest):
-        # reconfigure stockfish engine to normalised difficulty
-        self.engine.reconfigure(normalise(request.difficulty))
+    def get_stockfish_play_result(self, request: PlayRequest):
+        """
+        Reconfigure Stockfish's difficulty, find and return its best move for the current fen,
+        assign winner if there is one.
+        """
 
-        # load fen into chess board
+        self.engine.reconfigure(normalise(request.difficulty))
         self.board.set_fen(request.fen)
         result = self.engine.play(self.board, time=request.time_limit)
 
-        # determine if there was a move made
         move = None
         if result.move is not None:
             self.board.push(result.move)
             move = result.move.uci()
 
-        # assign winner if there is one
         winner = None
         if self.is_over(self.board.fen()) == Outcome.WHITE:
             winner = Outcome.WHITE
@@ -49,6 +49,10 @@ class StockfishService(object):
         return StockfishResult(request.id, self.board.fen(), move, winner)
 
     def is_over(self, fen: str):
+        """
+        Determine the end state of the board.
+        """
+
         self.board.set_fen(fen)
         if self.board.is_game_over():
             if self.board.is_stalemate():
@@ -59,7 +63,12 @@ class StockfishService(object):
                 return Outcome.BLACK
         return None
 
-    def get_checkmate_result(self, request: DescriptionRequest) -> dict:
+    def get_mate_result(self, request: DescriptionRequest) -> dict:
+        """
+        Analyse the board to determine mate results: who has checkmated, who is trying to checkmate and how many moves
+        until they do.
+        """
+
         result = None
         pov_score = self.analyse_board(request.fen, request.user)
 
@@ -85,6 +94,11 @@ class StockfishService(object):
         return result
 
     def get_blunder_result(self, request: DescriptionRequest):
+        """
+        Detect, using the fenStack, whether the given move was a blunder (a move resulting in a substantial loss
+        in advantage).
+        """
+
         if len(request.fenStack) < 5:
             return None
 
@@ -98,6 +112,27 @@ class StockfishService(object):
 
         if cp_current - cp_previous < self.BLUNDER_THRESHOLD:
             return cp_current - cp_previous
+
+    def get_capture_result(self, request: DescriptionRequest):
+        """
+        Analyse the move and determine whether the move was a capture, and if it was what piece was captured.
+        """
+
+        if len(request.fenStack) < 2:
+            return None
+
+        result = None
+        previous_fen = request.fenStack[-2]
+        move = chess.Move.from_uci(request.uci)
+
+        self.board.set_fen(previous_fen)
+        if self.board.is_capture(move):
+            # dealing with unreliable results from is_capture
+            if self.board.piece_type_at(move.to_square) is None:
+                self.board.set_fen(request.fenStack[-1])
+            if self.board.piece_type_at(move.to_square) is not None:
+                result = chess.PIECE_NAMES[self.board.piece_type_at(move.to_square)]
+        return result
 
 
 def get_cp_score(pov_score):
