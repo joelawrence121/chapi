@@ -83,14 +83,11 @@ class StockfishService(object):
         elif pov_score.is_mate() \
                 and abs(pov_score.relative.mate()) in range(self.MATE_LOWER_BOUND, self.MATE_UPPER_BOUND):
 
-            result = {}
             relative_mate = pov_score.relative.mate()
-            if pov_score.turn:
-                result['user'] = Outcome.WHITE
-                result['moves'] = abs(relative_mate)
-            if not pov_score.turn:
-                result['user'] = Outcome.BLACK
-                result['moves'] = abs(relative_mate)
+            if relative_mate > 0 and not pov_score.turn:
+                result = {'user': Outcome.BLACK, 'moves': abs(relative_mate)}
+            if relative_mate > 0 and pov_score.turn:
+                result = {'user': Outcome.WHITE, 'moves': abs(relative_mate)}
         return result
 
     def get_blunder_result(self, request: DescriptionRequest):

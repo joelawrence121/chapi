@@ -158,7 +158,7 @@ def get_stockfish_win_condition(move_count):
 
 
 STOCKFISH_CHECKMATING = """
-    S -> OP V_D E | OP V_P they can checkmate you' E 
+    S -> OP V_D E | OP V_P 'they can checkmate you' E 
     V_P -> 'thinks' | 'believes' | 'predicts' 
     V_D -> 'is' V_T 'to checkmate you' | 'is' V_S 'a mate'
     V_S -> 'setting up for' | 'is steering you into' | 'creating a' 
