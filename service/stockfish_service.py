@@ -131,6 +131,14 @@ class StockfishService(object):
                 result = chess.PIECE_NAMES[self.board.piece_type_at(move.to_square)]
         return result
 
+    def get_is_check(self, request: DescriptionRequest):
+        """
+        Return True or False depending on whether the player has put the other into check.
+        """
+        self.board.set_fen(request.fen)
+        return self.board.is_check()
+
+
 
 def get_cp_score(pov_score):
     cp = pov_score.relative.score()

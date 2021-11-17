@@ -63,6 +63,7 @@ class DescriptionService(object):
         grammar = grammar_factory.get_default_opening(request.user, request.uci)
         opening = self.repository.query_opening_by_move_stack(request.moveStack)
         capture = self.stockfish_service.get_capture_result(request)
+        is_check = self.stockfish_service.get_is_check(request)
         move = get_move(request.uci, opening)
 
         if request.user == self.HUMAN:
@@ -72,12 +73,12 @@ class DescriptionService(object):
             else:
                 previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-                grammar = grammar_factory.get_user_move(move, previous_move, capture)
+                grammar = grammar_factory.get_user_move(move, previous_move, capture, is_check)
 
         elif request.user == self.STOCKFISH:
             previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-            grammar = grammar_factory.get_stockfish_move(move, previous_move, capture)
+            grammar = grammar_factory.get_stockfish_move(move, previous_move, capture, is_check)
 
         # return the description, link and move name for rendering on front end
         return get_random_generation(grammar), get_link(opening), move

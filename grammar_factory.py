@@ -28,6 +28,7 @@ def get_stalemate_ending(move_count):
 
 YOU_E = "    P -> 'You'"
 STOCK_E = "    OP -> 'Stockfish' | 'Your opponent' | 'Black'"
+STOCK_E_LC = "    OP -> 'stockfish' | 'your opponent' | 'black'"
 
 USER_FIRST_OPENING = """
     S -> P A 'with' M
@@ -45,24 +46,40 @@ ATCK_ADJ = """    ADJ -> 'capturing' | 'taking' | 'attacking'
 USER_MOVE = """
     S -> P A M | P AC M 
     AC -> "respond to {previous_move}" | "counter {previous_move}"
-    M -> 'with' "{move}." 
 """
-NORMAL_AM = """    
+NO_CAPTURE_AM = """    
     A -> 'respond' | 'counter'
 """
-CAPTURE_AM = """    A -> W 'by' C | ADJ_P "{piece}"
+CAPTURE_AM = """    
+    A -> W 'by' C | ADJ_P "{piece}"
     W -> 'respond' | 'counter'
     ADJ_P -> 'capture' | 'attack' | 'take'
     C -> ADJ ADJ_OP_C "{piece}"
     ADJ_OP_C -> 'their' | "Stockfish's" | "black's" | 'the' 
 """ + ATCK_ADJ
+NO_CHECK_M = """    M -> 'with' "{move}." 
+"""
+CHECK_M = """   
+    M -> 'with' "{move}," M_D
+    M_D -> 'which is now check.' | 'putting' OP 'into check.' | 'checking' OP 
+"""
 
 
-def get_user_move(move, previous_move, capture):
+def get_user_move(move, previous_move, capture, is_check):
+    grammar = USER_MOVE + YOU_E
+
     if capture is not None:
-        return CFG.fromstring(
-            (USER_MOVE + CAPTURE_AM + YOU_E).format(move=move, previous_move=previous_move, piece=capture))
-    return CFG.fromstring((USER_MOVE + NORMAL_AM + YOU_E).format(move=move, previous_move=previous_move))
+        grammar += CAPTURE_AM.format(piece=capture)
+    else:
+        grammar += NO_CAPTURE_AM
+
+    if is_check:
+        grammar += CHECK_M
+        grammar += STOCK_E_LC
+    else:
+        grammar += NO_CHECK_M
+
+    return CFG.fromstring(grammar.format(move=move, previous_move=previous_move))
 
 
 USER_WIN_CONDITION = """
@@ -126,9 +143,8 @@ def get_user_blunder(move, loss, critical: bool):
 STOCKFISH_MOVE = """
     S -> OP A M | OP AC M 
     AC -> "responds to  {previous_move}" | "counters {previous_move}"
-    M -> 'with' "{move}."
 """
-NORMAL_S_AM = """    
+NO_CAPTURE_S_AM = """    
     A -> 'responds' | 'counters' | 'answers' | 'comes back'
 """
 CAPTURE_S_AM = """    
@@ -138,13 +154,28 @@ CAPTURE_S_AM = """
     C -> ADJ ADJ_OP_C "{piece}"
     ADJ_OP_C -> 'your' | 'the' | "white's" 
 """ + ATCK_ADJ
+NO_CHECK_S_M = """    M -> 'with' "{move}." 
+"""
+CHECK_S_M = """   
+    M -> 'with' "{move}," M_D
+    M_D -> 'which is now check.' | 'putting you into check.' | 'checking you.'  
+"""
 
 
-def get_stockfish_move(move, previous_move, capture):
+def get_stockfish_move(move, previous_move, capture, is_check):
+    grammar = STOCKFISH_MOVE + STOCK_E
+
     if capture is not None:
-        return CFG.fromstring(
-            (STOCKFISH_MOVE + CAPTURE_S_AM + STOCK_E).format(previous_move=previous_move, move=move, piece=capture))
-    return CFG.fromstring((STOCKFISH_MOVE + NORMAL_S_AM + STOCK_E).format(previous_move=previous_move, move=move))
+        grammar += CAPTURE_S_AM.format(piece=capture)
+    else:
+        grammar += NO_CAPTURE_S_AM
+
+    if is_check:
+        grammar += CHECK_S_M
+    else:
+        grammar += NO_CHECK_S_M
+
+    return CFG.fromstring(grammar.format(move=move, previous_move=previous_move))
 
 
 STOCKFISH_WIN_CONDITION = """
