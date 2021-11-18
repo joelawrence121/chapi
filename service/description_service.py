@@ -49,6 +49,7 @@ class DescriptionService(object):
         response['descriptions'].extend(opening_data[0])
         response['link'] = opening_data[1]
         response['opening'] = opening_data[2]
+        response['descriptions'].extend(self.get_move_suggestions(request))
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
         response['descriptions'].extend(self.get_blunder_description(request))
@@ -139,4 +140,24 @@ class DescriptionService(object):
 
         grammar = grammar_factory.get_user_blunder(request.uci, abs(round(blunder_result * 100)),
                                                    blunder_result < self.CRITICAL_BLUNDER_THRESHOLD)
+        return get_random_generation(grammar)
+
+    def get_move_suggestions(self, request):
+        """
+        On Stockfish's move, return suggestion moves to the player based on common openings in the database.
+        """
+
+        if request.user == self.HUMAN:
+            return []
+
+        move_stack_string = ' '.join(request.moveStack)
+        openings = self.repository.query_opening_by_move_stack_subset(move_stack_string)
+        if len(openings) > 3:
+            openings = random.sample(openings, 3)
+        moves = [opening['move_stack'].replace(move_stack_string, '') for opening in openings]
+
+        if len(moves) == 0:
+            return []
+
+        grammar = grammar_factory.get_move_suggestion(moves)
         return get_random_generation(grammar)

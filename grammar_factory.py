@@ -138,6 +138,34 @@ def get_user_blunder(move, loss, critical: bool):
     return CFG.fromstring((USER_BLUNDER + NORMAL_CS).format(move=move, loss=str(loss)))
 
 
+MOVE_SUGGESTION = """
+    S -> S_S | S_2 | S_3 
+    ADJ_O -> 'common' | 'known' | 'typical'
+    O_M -> 'You could respond with' | 'You may want to try'
+    E_M -> 'are' ADJ_O 'responses.'
+"""
+M_MOVE_1 = """
+    S_S -> O '{move1}.' | '{move1}' E
+    E -> 'is a' ADJ_O 'response.' | 'can be played.'
+    O -> 'A' ADJ_O 'response is' | 'You may want to try' 
+"""
+M_MOVE_2 = """
+    S_2 -> O_M '{move1} or {move2}.'| '{move1} and {move2}' E_M 
+"""
+M_MOVE_3 = """
+    S_3 -> O_M '{move1}, {move2} or {move3}.' | '{move1}, {move2} and {move3}' E_M 
+"""
+
+
+def get_move_suggestion(moves: list):
+    if len(moves) == 1:
+        return CFG.fromstring(MOVE_SUGGESTION + M_MOVE_1.format(move1=moves[0]))
+    elif len(moves) == 2:
+        return CFG.fromstring(MOVE_SUGGESTION + M_MOVE_2.format(move1=moves[0], move2=moves[1]))
+    else:
+        return CFG.fromstring(MOVE_SUGGESTION + M_MOVE_3.format(move1=moves[0], move2=moves[1], move3=moves[2]))
+
+
 # -------------- STOCKFISH --------------
 
 STOCKFISH_MOVE = """
