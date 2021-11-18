@@ -10,7 +10,8 @@ from engine.stockfish import Engine
 
 
 class StockfishService(object):
-    TIME_LIMIT = 0.5
+    HUMAN = "human"
+    TIME_LIMIT = 0.3
     MATE_LOWER_BOUND = 1
     MATE_UPPER_BOUND = 5
     BLUNDER_THRESHOLD = -0.3
@@ -19,10 +20,10 @@ class StockfishService(object):
         self.engine = Engine(10)
         self.board = chess.Board()
 
-    def analyse_board(self, fen, user):
+    def analyse_board(self, fen, user, time_limit):
         self.board.set_fen(fen)
-        info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=self.TIME_LIMIT))
-        pov_score = chess.engine.PovScore(info['score'], user == "human").pov(user == "human")
+        info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=time_limit))
+        pov_score = chess.engine.PovScore(info['score'], user == self.HUMAN).pov(user == self.HUMAN)
         return pov_score
 
     def get_stockfish_play_result(self, request: PlayRequest):
@@ -70,7 +71,7 @@ class StockfishService(object):
         """
 
         result = None
-        pov_score = self.analyse_board(request.fen, request.user)
+        pov_score = self.analyse_board(request.fen, request.user, self.TIME_LIMIT)
 
         if self.board.is_checkmate():
             result = {}
@@ -99,8 +100,8 @@ class StockfishService(object):
         if len(request.fenStack) < 5:
             return None
 
-        current_score = self.analyse_board(request.fen, request.user)
-        previous_score = self.analyse_board(request.fenStack[len(request.fenStack) - 2], request.user)
+        current_score = self.analyse_board(request.fen, request.user, self.TIME_LIMIT)
+        previous_score = self.analyse_board(request.fenStack[len(request.fenStack) - 2], request.user, self.TIME_LIMIT)
         cp_current = get_cp_score(current_score)
         cp_previous = get_cp_score(previous_score)
 
@@ -138,6 +139,11 @@ class StockfishService(object):
         self.board.set_fen(request.fen)
         return self.board.is_check()
 
+    def get_relative_score(self, request: DescriptionRequest):
+        """
+        Return a quick cp value giving an indication of the winning probability from White's perspective.
+        """
+        return get_cp_score(self.analyse_board(request.fen, self.HUMAN, time_limit=0.1))
 
 
 def get_cp_score(pov_score):
