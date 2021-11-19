@@ -28,6 +28,12 @@ def get_link(opening: list):
     return None
 
 
+def format_name(original_opening: list, opening: str):
+    if len(original_opening) != 0:
+        return opening.replace(original_opening[0]['name'] + ": ", '')
+    return opening
+
+
 class DescriptionService(object):
     HUMAN = "human"
     STOCKFISH = "stockfish"
@@ -152,12 +158,14 @@ class DescriptionService(object):
 
         move_stack_string = ' '.join(request.moveStack)
         openings = self.repository.query_opening_by_move_stack_subset(move_stack_string)
+        original_opening = self.repository.query_opening_by_move_stack(request.moveStack)
         if len(openings) > 3:
             openings = random.sample(openings, 3)
-        moves = [opening['move_stack'].replace(move_stack_string, '') for opening in openings]
+        moves = [opening['move_stack'].replace(move_stack_string, '').replace(' ', '') for opening in openings]
+        names = [format_name(original_opening, opening['name']) for opening in openings]
 
         if len(moves) == 0:
             return []
 
-        grammar = grammar_factory.get_move_suggestion(moves)
+        grammar = grammar_factory.get_move_suggestion(moves, names)
         return get_random_generation(grammar)

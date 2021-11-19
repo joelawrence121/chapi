@@ -41,11 +41,16 @@ def get_user_first_opening(move):
     return CFG.fromstring((USER_FIRST_OPENING + YOU_E).format(move=move))
 
 
-ATCK_ADJ = """    ADJ -> 'capturing' | 'taking' | 'attacking'
+S_CAP = """
+    S -> P A M
+"""
+S_NO_CAP = """
+    S -> P A M | P AC M 
 """
 USER_MOVE = """
-    S -> P A M | P AC M 
     AC -> "respond to {previous_move}" | "counter {previous_move}"
+"""
+ATCK_ADJ = """    ADJ -> 'capturing' | 'taking' | 'attacking'
 """
 NO_CAPTURE_AM = """    
     A -> 'respond' | 'counter'
@@ -66,16 +71,14 @@ CHECK_M = """
 
 
 def get_user_move(move, previous_move, capture, is_check):
-    grammar = USER_MOVE + YOU_E
-
+    grammar = ""
     if capture is not None:
-        grammar += CAPTURE_AM.format(piece=capture)
+        grammar += S_CAP + USER_MOVE + YOU_E + CAPTURE_AM.format(piece=capture)
     else:
-        grammar += NO_CAPTURE_AM
+        grammar += S_NO_CAP + USER_MOVE + YOU_E + NO_CAPTURE_AM
 
     if is_check:
-        grammar += CHECK_M
-        grammar += STOCK_E_LC
+        grammar += CHECK_M + STOCK_E_LC
     else:
         grammar += NO_CHECK_M
 
@@ -139,10 +142,11 @@ def get_user_blunder(move, loss, critical: bool):
 
 
 MOVE_SUGGESTION = """
-    S -> S_S | S_2 | S_3 
+    S -> S_S O_1 | S_2 O_1 O_2 | S_3 O_1 O_2 O_3
     ADJ_O -> 'common' | 'known' | 'typical'
     O_M -> 'You could respond with' | 'You may want to try'
     E_M -> 'are' ADJ_O 'responses.'
+    O_1 -> 'Playing {move1} leads to the {opening_name_1}.'
 """
 M_MOVE_1 = """
     S_S -> O '{move1}.' | '{move1}' E
@@ -151,19 +155,27 @@ M_MOVE_1 = """
 """
 M_MOVE_2 = """
     S_2 -> O_M '{move1} or {move2}.'| '{move1} and {move2}' E_M 
+    O_2 -> 'Playing {move2} leads to the {opening_name_2}.'
 """
 M_MOVE_3 = """
     S_3 -> O_M '{move1}, {move2} or {move3}.' | '{move1}, {move2} and {move3}' E_M 
+    O_2 -> 'Playing {move2} leads to the {opening_name_2}.'
+    O_3 -> 'Playing {move3} leads to the {opening_name_3}.'
 """
 
 
-def get_move_suggestion(moves: list):
+def get_move_suggestion(moves: list, names: list):
     if len(moves) == 1:
-        return CFG.fromstring(MOVE_SUGGESTION + M_MOVE_1.format(move1=moves[0]))
+        return CFG.fromstring((MOVE_SUGGESTION + M_MOVE_1).format(move1=moves[0], opening_name_1=names[0]))
     elif len(moves) == 2:
-        return CFG.fromstring(MOVE_SUGGESTION + M_MOVE_2.format(move1=moves[0], move2=moves[1]))
+        return CFG.fromstring(
+            (MOVE_SUGGESTION + M_MOVE_2).format(move1=moves[0], opening_name_1=names[0], move2=moves[1],
+                                                opening_name_2=names[1]))
     else:
-        return CFG.fromstring(MOVE_SUGGESTION + M_MOVE_3.format(move1=moves[0], move2=moves[1], move3=moves[2]))
+        return CFG.fromstring(
+            (MOVE_SUGGESTION + M_MOVE_3).format(move1=moves[0], opening_name_1=names[0], move2=moves[1],
+                                                opening_name_2=names[1], move3=moves[2],
+                                                opening_name_3=names[2]))
 
 
 # -------------- STOCKFISH --------------
