@@ -1,37 +1,12 @@
 import random
 
-from nltk.parse.generate import generate
+import chess
 
 import grammar_factory
 from domain.client_json import DescriptionRequest
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
-
-
-def get_random_generation(grammar):
-    descriptions = []
-    for description in generate(grammar):
-        descriptions.append(' '.join(description))
-    return [random.choice(descriptions)]
-
-
-def get_move(move: str, opening: list):
-    if len(opening) != 0:
-        opening_name = 'the ' + opening[0]['name']
-        return opening_name
-    return move
-
-
-def get_link(opening: list):
-    if len(opening) != 0:
-        return opening[0]['wiki_link']
-    return None
-
-
-def format_name(original_opening: list, opening: str):
-    if len(original_opening) != 0:
-        return opening.replace(original_opening[0]['name'] + ": ", '')
-    return opening
+from util.utils import get_move, get_random_generation, get_link, format_name, get_piece_name
 
 
 class DescriptionService(object):
@@ -59,6 +34,7 @@ class DescriptionService(object):
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
         response['descriptions'].extend(self.get_blunder_description(request))
+        response['descriptions'].extend(self.get_positional_description(request))
         return response
 
     def get_opening_description(self, request: DescriptionRequest):
@@ -169,4 +145,39 @@ class DescriptionService(object):
             return []
 
         grammar = grammar_factory.get_move_suggestion(moves, names)
+        return get_random_generation(grammar)
+
+    def get_positional_description(self, request):
+        """
+        Describes the move's relative positional information.
+        """
+
+        grammar = None
+        move = chess.Move.from_uci(request.uci)
+        piece = get_piece_name(request.uci, request.fen)
+        from_square = chess.SQUARE_NAMES[move.from_square if request.user == self.HUMAN else move.to_square]
+        to_square = chess.SQUARE_NAMES[move.to_square if request.user == self.HUMAN else move.from_square]
+
+        # piece moves forward / backward
+        if from_square[1] != to_square[1] and int(from_square[1]) < int(to_square[1]) - 1:
+            grammar = grammar_factory.get_positional_description(request.user, piece, None, None, 1)
+        if from_square[1] != to_square[1] and int(from_square[1]) + 1 > int(to_square[1]):
+            grammar = grammar_factory.get_positional_description(request.user, piece, None, None, -1)
+
+        # piece moves within same column
+        if from_square[0] == to_square[0]:
+            if int(from_square[1]) < int(to_square[1]):
+                grammar = grammar_factory.get_positional_description(request.user, piece, None, 1)
+            else:
+                grammar = grammar_factory.get_positional_description(request.user, piece, None, -1)
+
+        # moving from starting row
+        if request.user == self.STOCKFISH and to_square[1] == '8':
+            grammar = grammar_factory.get_positional_description(request.user, piece, True)
+        if request.user == self.HUMAN and from_square[1] == '1':
+            grammar = grammar_factory.get_positional_description(request.user, piece, True)
+
+        if grammar is None:
+            return []
+
         return get_random_generation(grammar)

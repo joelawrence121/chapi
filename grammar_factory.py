@@ -2,6 +2,10 @@ from nltk import CFG
 
 # --------------- DEFAULT ---------------
 
+YOU_E = "    P -> 'You'"
+STOCK_E = "    OP -> 'Stockfish' | 'Your opponent' | 'Black'"
+STOCK_E_LC = "    OP -> 'stockfish' | 'your opponent' | 'black'"
+
 DEFAULT_OPENING = """
     S -> U A M 
     U -> "{user}"
@@ -24,11 +28,46 @@ def get_stalemate_ending(move_count):
     return CFG.fromstring(STALEMATE_ENDING.format(move_count=move_count))
 
 
+POSITIONAL_DESC = """
+    S -> U M
+"""
+U_U = "U -> P \n" + YOU_E
+S_U = "U -> OP \n" + STOCK_E
+U_PIECE_BROUGHT_OUT = "\n    M -> 'bring the {piece} out.'"
+S_PIECE_BROUGHT_OUT = "\n    M -> 'brings the {piece} out.'"
+U_PIECE_FORWARD = "\n    M -> 'move the {piece} forward.' | 'move the {piece} up.'"
+S_PIECE_FORWARD = "\n    M -> 'moves the {piece} forward.' | 'moves the {piece} up.'"
+U_PIECE_BACKWARD = "\n    M -> 'move the {piece} backward.' | 'move the {piece} back.'"
+S_PIECE_BACKWARD = "\n    M -> 'moves the {piece} backward.' | 'moves the {piece} back.'"
+U_PIECE_ADVANCE = "\n    M -> 'advance the {piece}.' | 'move the {piece} out.'"
+S_PIECE_ADVANCE = "\n    M -> 'advances the {piece}.' | 'moves the {piece} out.'"
+U_PIECE_RETREAT = "\n    M -> 'retreat the {piece}.'"
+S_PIECE_RETREAT = "\n    M -> 'retreats the {piece}.'"
+
+
+def get_positional_description(user, piece, is_bring_out=None, column_move=None, outward_move=None):
+    grammar = POSITIONAL_DESC
+    grammar += (U_U if user == "human" else S_U)
+    if is_bring_out is not None and is_bring_out:
+        grammar += (U_PIECE_BROUGHT_OUT if user == "human" else S_PIECE_BROUGHT_OUT)
+        return CFG.fromstring(grammar.format(piece=piece))
+    if column_move is not None:
+        if column_move > 0:
+            grammar += (U_PIECE_FORWARD if user == "human" else S_PIECE_FORWARD)
+        else:
+            grammar += (U_PIECE_BACKWARD if user == "human" else S_PIECE_BACKWARD)
+        return CFG.fromstring(grammar.format(piece=piece))
+    if outward_move is not None:
+        if outward_move > 0:
+            grammar += (U_PIECE_ADVANCE if user == "human" else S_PIECE_ADVANCE)
+        else:
+            grammar += (U_PIECE_RETREAT if user == "human" else S_PIECE_RETREAT)
+        return CFG.fromstring(grammar.format(piece=piece))
+    return None
+
+
 # ----------------- USER -----------------
 
-YOU_E = "    P -> 'You'"
-STOCK_E = "    OP -> 'Stockfish' | 'Your opponent' | 'Black'"
-STOCK_E_LC = "    OP -> 'stockfish' | 'your opponent' | 'black'"
 
 USER_FIRST_OPENING = """
     S -> P A 'with' M
