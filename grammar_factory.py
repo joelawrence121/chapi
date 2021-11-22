@@ -155,12 +155,12 @@ M_MOVE_1 = """
 """
 M_MOVE_2 = """
     S_2 -> O_M '{move1} or {move2}.'| '{move1} and {move2}' E_M 
-    O_2 -> 'Playing {move2} leads to the {opening_name_2}.'
+    O_2 -> 'Playing {move2} leads to the {opening_name_2}."
 """
 M_MOVE_3 = """
-    S_3 -> O_M '{move1}, {move2} or {move3}.' | '{move1}, {move2} and {move3}' E_M 
-    O_2 -> 'Playing {move2} leads to the {opening_name_2}.'
-    O_3 -> 'Playing {move3} leads to the {opening_name_3}.'
+    S_3 -> O_M "{move1}, {move2} or {move3}." | "{move1}, {move2} and {move3}" E_M 
+    O_2 -> "Playing {move2} leads to the {opening_name_2}."
+    O_3 -> "Playing {move3} leads to the {opening_name_3}."
 """
 
 
@@ -179,9 +179,13 @@ def get_move_suggestion(moves: list, names: list):
 
 
 # -------------- STOCKFISH --------------
-
+S_S_CAP = """
+    S -> B OP A M | OP A M
+"""
+S_S_NO_CAP = """
+    S -> B OP A M | B OP AC M  | OP A M | OP AC M 
+"""
 STOCKFISH_MOVE = """
-    S -> OP A M | OP AC M 
     AC -> "responds to  {previous_move}" | "counters {previous_move}"
 """
 NO_CAPTURE_S_AM = """    
@@ -200,26 +204,32 @@ CHECK_S_M = """
     M -> 'with' "{move}," M_D
     M_D -> 'which is now check.' | 'putting you into check.' | 'checking you.'  
 """
+BLUND_CAP = """
+    B -> OP ADJ_B 'blunder.'
+    ADJ_B -> 'capitalises on your' | 'takes advantage of your' 
+"""
 
 
-def get_stockfish_move(move, previous_move, capture, is_check):
-    grammar = STOCKFISH_MOVE + STOCK_E
-
+def get_stockfish_move(move, previous_move, capture, is_check, is_following_blunder):
+    grammar = ""
     if capture is not None:
-        grammar += CAPTURE_S_AM.format(piece=capture)
+        grammar += S_S_CAP + STOCKFISH_MOVE + STOCK_E + CAPTURE_S_AM.format(piece=capture)
     else:
-        grammar += NO_CAPTURE_S_AM
+        grammar += S_S_NO_CAP + STOCKFISH_MOVE + STOCK_E + NO_CAPTURE_S_AM
 
     if is_check:
         grammar += CHECK_S_M
     else:
         grammar += NO_CHECK_S_M
 
+    if is_following_blunder:
+        grammar += BLUND_CAP
+
     return CFG.fromstring(grammar.format(move=move, previous_move=previous_move))
 
 
 STOCKFISH_WIN_CONDITION = """
-    S -> OP C 'in {move_count} moves.'
+    S -> OP C "in {move_count} moves."
     C -> "has won" | "wins" | "has beaten you" 
 """
 

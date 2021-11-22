@@ -83,9 +83,10 @@ class DescriptionService(object):
                 grammar = grammar_factory.get_user_move(move, previous_move, capture, is_check)
 
         elif request.user == self.STOCKFISH:
+            is_following_blunder = self.stockfish_service.is_following_blunder(request)
             previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-            grammar = grammar_factory.get_stockfish_move(move, previous_move, capture, is_check)
+            grammar = grammar_factory.get_stockfish_move(move, previous_move, capture, is_check, is_following_blunder)
 
         # return the description, link and move name for rendering on front end
         return get_random_generation(grammar), get_link(opening), move
@@ -140,7 +141,7 @@ class DescriptionService(object):
         Use Stockfish to analyse whether the move made was a critical blunder.
         Generate a natural language description of the blunder and why.
         """
-        blunder_result = self.stockfish_service.get_blunder_result(request)
+        blunder_result = self.stockfish_service.get_blunder_result(request.fenStack, request.fen, request.user)
         if blunder_result is None:
             return []
 

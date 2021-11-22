@@ -7,11 +7,12 @@ import chess.engine
 from domain.client_json import PlayRequest, DescriptionRequest
 from domain.entities import StockfishResult
 from engine.stockfish import Engine
+from util.utils import get_other_user
 
 
 class StockfishService(object):
     HUMAN = "human"
-    TIME_LIMIT = 0.3
+    TIME_LIMIT = 0.1
     MATE_LOWER_BOUND = 1
     MATE_UPPER_BOUND = 5
     BLUNDER_THRESHOLD = -0.3
@@ -91,17 +92,17 @@ class StockfishService(object):
                 result = {'user': Outcome.WHITE, 'moves': abs(relative_mate)}
         return result
 
-    def get_blunder_result(self, request: DescriptionRequest):
+    def get_blunder_result(self, fen_stack, fen, user):
         """
         Detect, using the fenStack, whether the given move was a blunder (a move resulting in a substantial loss
         in advantage).
         """
 
-        if len(request.fenStack) < 5:
+        if len(fen_stack) < 5:
             return None
 
-        current_score = self.analyse_board(request.fen, request.user, self.TIME_LIMIT)
-        previous_score = self.analyse_board(request.fenStack[len(request.fenStack) - 2], request.user, self.TIME_LIMIT)
+        current_score = self.analyse_board(fen, user, self.TIME_LIMIT)
+        previous_score = self.analyse_board(fen_stack[len(fen_stack) - 2], user, self.TIME_LIMIT)
         cp_current = get_cp_score(current_score)
         cp_previous = get_cp_score(previous_score)
 
@@ -110,6 +111,17 @@ class StockfishService(object):
 
         if cp_current - cp_previous < self.BLUNDER_THRESHOLD:
             return cp_current - cp_previous
+
+    def is_following_blunder(self, request: DescriptionRequest):
+        """
+        Return whether the move follows a blunder from the other player.
+        """
+        fen_stack = request.fenStack[:len(request.fenStack) - 1]
+        fen = request.fenStack[len(request.fenStack) - 1]
+        blunder_result = self.get_blunder_result(fen_stack, fen, get_other_user(request.user))
+        if blunder_result is not None:
+            return True
+        return False
 
     def get_capture_result(self, request: DescriptionRequest):
         """
