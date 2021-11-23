@@ -13,6 +13,10 @@ def get_piece_name(uci, fen):
     return chess.PIECE_NAMES[board.piece_type_at(move.to_square)]
 
 
+def get_to_square(move: chess.Move):
+    return chess.SQUARE_NAMES[move.to_square]
+
+
 def get_other_user(user):
     if user == HUMAN:
         return STOCKFISH

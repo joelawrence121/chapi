@@ -6,7 +6,7 @@ import grammar_factory
 from domain.client_json import DescriptionRequest
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
-from util.utils import get_move, get_random_generation, get_link, format_name, get_piece_name
+from util.utils import get_move, get_random_generation, get_link, format_name, get_piece_name, get_to_square
 
 
 class DescriptionService(object):
@@ -30,11 +30,11 @@ class DescriptionService(object):
         response['descriptions'].extend(opening_data[0])
         response['link'] = opening_data[1]
         response['opening'] = opening_data[2]
+        response['descriptions'].extend(self.get_positional_description(request))
         response['descriptions'].extend(self.get_move_suggestions(request))
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
         response['descriptions'].extend(self.get_blunder_description(request))
-        response['descriptions'].extend(self.get_positional_description(request))
         return response
 
     def get_opening_description(self, request: DescriptionRequest):
@@ -149,33 +149,36 @@ class DescriptionService(object):
 
     def get_positional_description(self, request):
         """
-        Describes the move's relative positional information.
+        Describes the move's relative positional information. Moving forward/backwards, moving from an original
+        position, advancing/retreating.
         """
 
         grammar = None
         move = chess.Move.from_uci(request.uci)
         piece = get_piece_name(request.uci, request.fen)
-        from_square = chess.SQUARE_NAMES[move.from_square if request.user == self.HUMAN else move.to_square]
-        to_square = chess.SQUARE_NAMES[move.to_square if request.user == self.HUMAN else move.from_square]
+        rel_from_square = chess.SQUARE_NAMES[move.from_square if request.user == self.HUMAN else move.to_square]
+        rel_to_square = chess.SQUARE_NAMES[move.to_square if request.user == self.HUMAN else move.from_square]
 
         # piece moves forward / backward
-        if from_square[1] != to_square[1] and int(from_square[1]) < int(to_square[1]) - 1:
-            grammar = grammar_factory.get_positional_description(request.user, piece, None, None, 1)
-        if from_square[1] != to_square[1] and int(from_square[1]) + 1 > int(to_square[1]):
-            grammar = grammar_factory.get_positional_description(request.user, piece, None, None, -1)
+        if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) < int(rel_to_square[1]) - 1:
+            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, None,
+                                                                 1)
+        if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) + 1 > int(rel_to_square[1]):
+            grammar = grammar_factory.get_positional_description(request.user, get_to_square(move), piece, None, None,
+                                                                 -1)
 
         # piece moves within same column
-        if from_square[0] == to_square[0]:
-            if int(from_square[1]) < int(to_square[1]):
-                grammar = grammar_factory.get_positional_description(request.user, piece, None, 1)
+        if rel_from_square[0] == rel_to_square[0]:
+            if int(rel_from_square[1]) < int(rel_to_square[1]):
+                grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, 1)
             else:
-                grammar = grammar_factory.get_positional_description(request.user, piece, None, -1)
+                grammar = grammar_factory.get_positional_description(request.user, get_to_square(move), piece, None, -1)
 
         # moving from starting row
-        if request.user == self.STOCKFISH and to_square[1] == '8':
-            grammar = grammar_factory.get_positional_description(request.user, piece, True)
-        if request.user == self.HUMAN and from_square[1] == '1':
-            grammar = grammar_factory.get_positional_description(request.user, piece, True)
+        if request.user == self.STOCKFISH and rel_to_square[1] == '8':
+            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), True)
+        if request.user == self.HUMAN and rel_from_square[1] == '1':
+            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), True)
 
         if grammar is None:
             return []

@@ -33,36 +33,36 @@ POSITIONAL_DESC = """
 """
 U_U = "U -> P \n" + YOU_E
 S_U = "U -> OP \n" + STOCK_E
-U_PIECE_BROUGHT_OUT = "\n    M -> 'bring the {piece} out.'"
-S_PIECE_BROUGHT_OUT = "\n    M -> 'brings the {piece} out.'"
-U_PIECE_FORWARD = "\n    M -> 'move the {piece} forward.' | 'move the {piece} up.'"
-S_PIECE_FORWARD = "\n    M -> 'moves the {piece} forward.' | 'moves the {piece} up.'"
-U_PIECE_BACKWARD = "\n    M -> 'move the {piece} backward.' | 'move the {piece} back.'"
-S_PIECE_BACKWARD = "\n    M -> 'moves the {piece} backward.' | 'moves the {piece} back.'"
-U_PIECE_ADVANCE = "\n    M -> 'advance the {piece}.' | 'move the {piece} out.'"
-S_PIECE_ADVANCE = "\n    M -> 'advances the {piece}.' | 'moves the {piece} out.'"
-U_PIECE_RETREAT = "\n    M -> 'retreat the {piece}.'"
-S_PIECE_RETREAT = "\n    M -> 'retreats the {piece}.'"
+U_PIECE_BROUGHT_OUT = "\n    M -> 'bring the {piece} out.' | 'bring the {piece} out to {to_square}.'"
+S_PIECE_BROUGHT_OUT = "\n    M -> 'brings the {piece} out.' | 'brings the {piece} out to {to_square}.'"
+U_PIECE_FORWARD = "\n    M -> 'move the {piece} forward to {to_square}.' | 'move the {piece} up to {to_square}.'"
+S_PIECE_FORWARD = "\n    M -> 'moves the {piece} forward to {to_square}.' | 'moves the {piece} up to {to_square}.'"
+U_PIECE_BACKWARD = "\n    M -> 'move the {piece} backwards to {to_square}.' | 'move the {piece} back to {to_square}.'"
+S_PIECE_BACKWARD = "\n    M -> 'moves the {piece} backward to {to_square}.' | 'moves the {piece} back to {to_square}.'"
+U_PIECE_ADVANCE = "\n    M -> 'advance the {piece} to {to_square}.' | 'move the {piece} out to {to_square}.'"
+S_PIECE_ADVANCE = "\n    M -> 'advances the {piece} to {to_square}.' | 'moves the {piece} out to {to_square}.'"
+U_PIECE_RETREAT = "\n    M -> 'retreat the {piece}.' | 'retreat the {piece} back to {to_square}.'"
+S_PIECE_RETREAT = "\n    M -> 'retreats the {piece}.' | 'retreats the {piece} back to {to_square}.'"
 
 
-def get_positional_description(user, piece, is_bring_out=None, column_move=None, outward_move=None):
+def get_positional_description(user, piece, to_square, is_bring_out=None, column_move=None, outward_move=None):
     grammar = POSITIONAL_DESC
     grammar += (U_U if user == "human" else S_U)
     if is_bring_out is not None and is_bring_out:
         grammar += (U_PIECE_BROUGHT_OUT if user == "human" else S_PIECE_BROUGHT_OUT)
-        return CFG.fromstring(grammar.format(piece=piece))
+        return CFG.fromstring(grammar.format(piece=piece, to_square=to_square))
     if column_move is not None:
         if column_move > 0:
             grammar += (U_PIECE_FORWARD if user == "human" else S_PIECE_FORWARD)
         else:
             grammar += (U_PIECE_BACKWARD if user == "human" else S_PIECE_BACKWARD)
-        return CFG.fromstring(grammar.format(piece=piece))
+        return CFG.fromstring(grammar.format(piece=piece, to_square=to_square))
     if outward_move is not None:
         if outward_move > 0:
             grammar += (U_PIECE_ADVANCE if user == "human" else S_PIECE_ADVANCE)
         else:
             grammar += (U_PIECE_RETREAT if user == "human" else S_PIECE_RETREAT)
-        return CFG.fromstring(grammar.format(piece=piece))
+        return CFG.fromstring(grammar.format(piece=piece, to_square=to_square))
     return None
 
 
