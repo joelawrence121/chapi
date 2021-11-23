@@ -34,6 +34,7 @@ class DescriptionService(object):
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
         response['descriptions'].extend(self.get_blunder_description(request))
+        response['descriptions'].extend(self.get_blunder_description(request))
         return response
 
     def get_opening_description(self, request: DescriptionRequest):
@@ -113,15 +114,14 @@ class DescriptionService(object):
 
     def get_blunder_description(self, request: DescriptionRequest):
         """
-        Use Stockfish to analyse whether the move made was a critical blunder.
-        Generate a natural language description of the blunder and why.
+        Use Stockfish to detect whether a move made was a fair or critical blunder and return a description if it is.
         """
-        blunder_result = self.stockfish_service.get_blunder_result(request.fenStack, request.fen, request.user)
-        if blunder_result is None:
+        advantage_change = self.stockfish_service.get_advantage_change(request.fenStack, request.fen, request.user)
+        if request.user == BLACK or advantage_change is None or advantage_change > self.stockfish_service.BLUNDER_THRESHOLD:
             return []
 
-        grammar = grammar_factory.get_user_blunder(request.uci, abs(round(blunder_result * 100)),
-                                                   blunder_result < self.CRITICAL_BLUNDER_THRESHOLD)
+        grammar = grammar_factory.get_user_blunder(request.uci, abs(round(advantage_change * 100)),
+                                                   advantage_change < self.CRITICAL_BLUNDER_THRESHOLD)
         return get_random_generation(grammar)
 
     def get_move_suggestions(self, request):
@@ -181,5 +181,25 @@ class DescriptionService(object):
 
         if grammar is None:
             return []
+
+        return get_random_generation(grammar)
+
+    def get_gain_description(self, request: DescriptionRequest):
+        """
+        Use Stockfish to detect whether the move made was a good, great or fantastic move. Return an explanation back
+        to the user depending on the outcome.
+        """
+
+        advantage_change = self.stockfish_service.get_advantage_change(request.fenStack, request.fen, request.user)
+        if advantage_change is None or advantage_change < self.stockfish_service.GOOD_MOVE_LOWER_BOUND:
+            return []
+
+        rounded_advantage_change = abs(round(advantage_change * 100))
+        grammar = grammar_factory.get_good_move(request.uci, rounded_advantage_change)
+        if advantage_change > self.stockfish_service.GOOD_MOVE_UPPER_BOUND:
+            play_result = self.stockfish_service.get_best_move(request.fen)
+            grammar = grammar_factory.get_fantastic_move(request.uci, rounded_advantage_change)
+            if request.uci == play_result.move.uci() or request.uci == play_result.ponder.uci():
+                grammar = grammar_factory.get_fantastic_move(request.uci, rounded_advantage_change)
 
         return get_random_generation(grammar)

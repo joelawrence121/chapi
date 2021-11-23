@@ -218,6 +218,42 @@ def get_move_suggestion(moves: list, names: list):
                                                 opening_name_3=names[2]))
 
 
+MOVE_PRAISE = """
+    S -> P S | S P | B
+    V -> "given" | "gained" 
+"""
+GOOD_AND_GREAT = """
+    P -> "This was a" ADJ "move." | {move} "was a" ADJ "move."
+    S -> "This move has" V "you a significant {advantage} point advantage." 
+    B -> "Playing" {move} "was a" ADJ "move, this has" V "you a significant {advantage} point advantage."
+"""
+GOOD_MOVE_ADJ = """
+    ADJ -> "good" | "big"
+"""
+GREAT_MOVE_ADJ = """
+    ADJ -> "great" | "huge" | "deciding"
+"""
+FANTASTIC_MOVE = """
+    ADJ -> "perfect" | "excellent" 
+    P -> "This was a" ADJ "move." | {move} "was a" ADJ "move."
+    S -> "Stockfish would have done the same and it has" V "you a significant {advantage} point advantage." 
+    B -> "Playing" {move} "was a" ADJ "move, this has" V "you a significant {advantage} point advantage and Stockfish would have done the same."
+"""
+
+
+def get_good_move(move, advantage):
+    return CFG.fromstring(
+        (MOVE_PRAISE + GOOD_AND_GREAT + GOOD_MOVE_ADJ).format(move=move, advantage=advantage))
+
+
+def get_great_move(move, advantage):
+    return CFG.fromstring((MOVE_PRAISE + GOOD_AND_GREAT + GREAT_MOVE_ADJ).format(move=move, advantage=advantage))
+
+
+def get_fantastic_move(move, advantage):
+    return CFG.fromstring((MOVE_PRAISE + FANTASTIC_MOVE).format(move=move, advantage=advantage))
+
+
 # -------------- STOCKFISH --------------
 S_S_CAP = """
     S -> B OP A M | OP A M

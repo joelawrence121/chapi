@@ -7,14 +7,17 @@ import chess.engine
 from domain.client_json import PlayRequest, DescriptionRequest
 from domain.entities import StockfishResult
 from engine.stockfish import Engine
-from util.utils import get_other_user, WHITE
+from util.utils import get_other_user, WHITE, BLACK
 
 
 class StockfishService(object):
-    TIME_LIMIT = 0.1
+    DEFAULT_DIFFICULTY = 10
+    DEFAULT_TIME_LIMIT = 0.1
     MATE_LOWER_BOUND = 1
     MATE_UPPER_BOUND = 5
     BLUNDER_THRESHOLD = -0.3
+    GOOD_MOVE_LOWER_BOUND = 0.1
+    GOOD_MOVE_UPPER_BOUND = 0.2
 
     def __init__(self):
         self.engine = Engine(10)
@@ -26,15 +29,17 @@ class StockfishService(object):
         pov_score = chess.engine.PovScore(info['score'], user == WHITE).pov(user == WHITE)
         return pov_score
 
+    def get_best_move(self, fen, difficulty=DEFAULT_DIFFICULTY, time_limit=DEFAULT_TIME_LIMIT):
+        self.engine.reconfigure(normalise(difficulty))
+        self.board.set_fen(fen)
+        return self.engine.play(self.board, time=time_limit)
+
     def get_stockfish_play_result(self, request: PlayRequest):
         """
         Reconfigure Stockfish's difficulty, find and return its best move for the current fen,
         assign winner if there is one.
         """
-
-        self.engine.reconfigure(normalise(request.difficulty))
-        self.board.set_fen(request.fen)
-        result = self.engine.play(self.board, time=request.time_limit)
+        result = self.get_best_move(request.fen, request.difficulty, request.time_limit)
 
         move = None
         if result.move is not None:
@@ -71,7 +76,7 @@ class StockfishService(object):
         """
 
         result = None
-        pov_score = self.analyse_board(request.fen, request.user, self.TIME_LIMIT)
+        pov_score = self.analyse_board(request.fen, request.user, self.DEFAULT_TIME_LIMIT)
 
         if self.board.is_checkmate():
             result = {}
@@ -91,25 +96,23 @@ class StockfishService(object):
                 result = {'user': Outcome.WHITE, 'moves': abs(relative_mate)}
         return result
 
-    def get_blunder_result(self, fen_stack, fen, user):
+    def get_advantage_change(self, fen_stack, fen, user):
         """
-        Detect, using the fenStack, whether the given move was a blunder (a move resulting in a substantial loss
-        in advantage).
+        Detect, using the fenStack, return the user's relative change in score.
         """
 
         if len(fen_stack) < 5:
             return None
 
-        current_score = self.analyse_board(fen, user, self.TIME_LIMIT)
-        previous_score = self.analyse_board(fen_stack[len(fen_stack) - 2], user, self.TIME_LIMIT)
+        current_score = self.analyse_board(fen, user, self.DEFAULT_TIME_LIMIT)
+        previous_score = self.analyse_board(fen_stack[len(fen_stack) - 2], user, self.DEFAULT_TIME_LIMIT)
         cp_current = get_cp_score(current_score)
         cp_previous = get_cp_score(previous_score)
 
         if cp_current is None or cp_previous is None:
             return None
 
-        if cp_current - cp_previous < self.BLUNDER_THRESHOLD:
-            return cp_current - cp_previous
+        return cp_current - cp_previous
 
     def is_following_blunder(self, request: DescriptionRequest):
         """
@@ -117,10 +120,8 @@ class StockfishService(object):
         """
         fen_stack = request.fenStack[:len(request.fenStack) - 1]
         fen = request.fenStack[len(request.fenStack) - 1]
-        blunder_result = self.get_blunder_result(fen_stack, fen, get_other_user(request.user))
-        if blunder_result is not None:
-            return True
-        return False
+        advantage_change = self.get_advantage_change(fen_stack, fen, get_other_user(request.user))
+        return advantage_change is not None and advantage_change < self.BLUNDER_THRESHOLD
 
     def get_capture_result(self, request: DescriptionRequest):
         """
@@ -154,7 +155,10 @@ class StockfishService(object):
         """
         Return a quick cp value giving an indication of the winning probability from White's perspective.
         """
-        return get_cp_score(self.analyse_board(request.fen, WHITE, time_limit=0.1))
+        cp_score = get_cp_score(self.analyse_board(request.fen, WHITE, time_limit=0.1))
+        if request.user == BLACK:
+            cp_score *= -1
+        return cp_score
 
 
 def get_cp_score(pov_score):
