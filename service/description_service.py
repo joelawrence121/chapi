@@ -6,12 +6,11 @@ import grammar_factory
 from domain.client_json import DescriptionRequest
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
-from util.utils import get_move, get_random_generation, get_link, format_name, get_piece_name, get_to_square
+from util.utils import get_move, get_random_generation, get_link, format_name, get_piece_name, get_to_square, WHITE, \
+    BLACK
 
 
 class DescriptionService(object):
-    HUMAN = "human"
-    STOCKFISH = "stockfish"
     CRITICAL_BLUNDER_THRESHOLD = -0.6
 
     def __init__(self):
@@ -49,7 +48,7 @@ class DescriptionService(object):
         is_check = self.stockfish_service.get_is_check(request)
         move = get_move(request.uci, opening)
 
-        if request.user == self.HUMAN:
+        if request.user == WHITE:
             # special case for opening move
             if len(request.moveStack) == 1:
                 grammar = grammar_factory.get_user_first_opening(move)
@@ -58,7 +57,7 @@ class DescriptionService(object):
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
                 grammar = grammar_factory.get_user_move(move, previous_move, capture, is_check)
 
-        elif request.user == self.STOCKFISH:
+        elif request.user == BLACK:
             is_following_blunder = self.stockfish_service.is_following_blunder(request)
             previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
@@ -130,7 +129,7 @@ class DescriptionService(object):
         On Stockfish's move, return suggestion moves to the player based on common openings in the database.
         """
 
-        if request.user == self.HUMAN:
+        if request.user == WHITE:
             return []
 
         move_stack_string = ' '.join(request.moveStack)
@@ -156,15 +155,15 @@ class DescriptionService(object):
         grammar = None
         move = chess.Move.from_uci(request.uci)
         piece = get_piece_name(request.uci, request.fen)
-        rel_from_square = chess.SQUARE_NAMES[move.from_square if request.user == self.HUMAN else move.to_square]
-        rel_to_square = chess.SQUARE_NAMES[move.to_square if request.user == self.HUMAN else move.from_square]
+        rel_from_square = chess.SQUARE_NAMES[move.from_square if request.user == WHITE else move.to_square]
+        rel_to_square = chess.SQUARE_NAMES[move.to_square if request.user == WHITE else move.from_square]
 
         # piece moves forward / backward
         if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) < int(rel_to_square[1]) - 1:
             grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, None,
                                                                  1)
         if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) + 1 > int(rel_to_square[1]):
-            grammar = grammar_factory.get_positional_description(request.user, get_to_square(move), piece, None, None,
+            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, None,
                                                                  -1)
 
         # piece moves within same column
@@ -172,12 +171,12 @@ class DescriptionService(object):
             if int(rel_from_square[1]) < int(rel_to_square[1]):
                 grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, 1)
             else:
-                grammar = grammar_factory.get_positional_description(request.user, get_to_square(move), piece, None, -1)
+                grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, -1)
 
         # moving from starting row
-        if request.user == self.STOCKFISH and rel_to_square[1] == '8':
+        if request.user == BLACK and rel_to_square[1] == '8':
             grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), True)
-        if request.user == self.HUMAN and rel_from_square[1] == '1':
+        if request.user == WHITE and rel_from_square[1] == '1':
             grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), True)
 
         if grammar is None:

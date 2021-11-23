@@ -7,11 +7,10 @@ import chess.engine
 from domain.client_json import PlayRequest, DescriptionRequest
 from domain.entities import StockfishResult
 from engine.stockfish import Engine
-from util.utils import get_other_user
+from util.utils import get_other_user, WHITE
 
 
 class StockfishService(object):
-    HUMAN = "human"
     TIME_LIMIT = 0.1
     MATE_LOWER_BOUND = 1
     MATE_UPPER_BOUND = 5
@@ -24,7 +23,7 @@ class StockfishService(object):
     def analyse_board(self, fen, user, time_limit):
         self.board.set_fen(fen)
         info = self.engine.engine.analyse(self.board, chess.engine.Limit(time=time_limit))
-        pov_score = chess.engine.PovScore(info['score'], user == self.HUMAN).pov(user == self.HUMAN)
+        pov_score = chess.engine.PovScore(info['score'], user == WHITE).pov(user == WHITE)
         return pov_score
 
     def get_stockfish_play_result(self, request: PlayRequest):
@@ -155,7 +154,7 @@ class StockfishService(object):
         """
         Return a quick cp value giving an indication of the winning probability from White's perspective.
         """
-        return get_cp_score(self.analyse_board(request.fen, self.HUMAN, time_limit=0.1))
+        return get_cp_score(self.analyse_board(request.fen, WHITE, time_limit=0.1))
 
 
 def get_cp_score(pov_score):

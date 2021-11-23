@@ -1,6 +1,7 @@
 from nltk import CFG
 
 # --------------- DEFAULT ---------------
+from util.utils import WHITE
 
 YOU_E = "    P -> 'You'"
 STOCK_E = "    OP -> 'Stockfish' | 'Your opponent' | 'Black'"
@@ -47,21 +48,21 @@ S_PIECE_RETREAT = "\n    M -> 'retreats the {piece}.' | 'retreats the {piece} ba
 
 def get_positional_description(user, piece, to_square, is_bring_out=None, column_move=None, outward_move=None):
     grammar = POSITIONAL_DESC
-    grammar += (U_U if user == "human" else S_U)
+    grammar += (U_U if user == WHITE else S_U)
     if is_bring_out is not None and is_bring_out:
-        grammar += (U_PIECE_BROUGHT_OUT if user == "human" else S_PIECE_BROUGHT_OUT)
+        grammar += (U_PIECE_BROUGHT_OUT if user == WHITE else S_PIECE_BROUGHT_OUT)
         return CFG.fromstring(grammar.format(piece=piece, to_square=to_square))
     if column_move is not None:
         if column_move > 0:
-            grammar += (U_PIECE_FORWARD if user == "human" else S_PIECE_FORWARD)
+            grammar += (U_PIECE_FORWARD if user == WHITE else S_PIECE_FORWARD)
         else:
-            grammar += (U_PIECE_BACKWARD if user == "human" else S_PIECE_BACKWARD)
+            grammar += (U_PIECE_BACKWARD if user == WHITE else S_PIECE_BACKWARD)
         return CFG.fromstring(grammar.format(piece=piece, to_square=to_square))
     if outward_move is not None:
         if outward_move > 0:
-            grammar += (U_PIECE_ADVANCE if user == "human" else S_PIECE_ADVANCE)
+            grammar += (U_PIECE_ADVANCE if user == WHITE else S_PIECE_ADVANCE)
         else:
-            grammar += (U_PIECE_RETREAT if user == "human" else S_PIECE_RETREAT)
+            grammar += (U_PIECE_RETREAT if user == WHITE else S_PIECE_RETREAT)
         return CFG.fromstring(grammar.format(piece=piece, to_square=to_square))
     return None
 
@@ -185,16 +186,16 @@ MOVE_SUGGESTION = """
     ADJ_O -> 'common' | 'known' | 'typical'
     O_M -> 'You could respond with' | 'You may want to try'
     E_M -> 'are' ADJ_O 'responses.'
-    O_1 -> 'Playing {move1} leads to the {opening_name_1}.'
+    O_1 -> "Playing {move1} leads to the {opening_name_1}."
 """
 M_MOVE_1 = """
-    S_S -> O '{move1}.' | '{move1}' E
+    S_S -> O "{move1}." | "{move1}" E
     E -> 'is a' ADJ_O 'response.' | 'can be played.'
     O -> 'A' ADJ_O 'response is' | 'You may want to try' 
 """
 M_MOVE_2 = """
-    S_2 -> O_M '{move1} or {move2}.'| '{move1} and {move2}' E_M 
-    O_2 -> 'Playing {move2} leads to the {opening_name_2}."
+    S_2 -> O_M "{move1} or {move2}."| "{move1} and {move2}" E_M 
+    O_2 -> "Playing {move2} leads to the {opening_name_2}."
 """
 M_MOVE_3 = """
     S_3 -> O_M "{move1}, {move2} or {move3}." | "{move1}, {move2} and {move3}" E_M 

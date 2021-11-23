@@ -3,8 +3,8 @@ import random
 import chess
 from nltk.parse.generate import generate
 
-HUMAN = "human"
-STOCKFISH = "stockfish"
+BLACK = "black"
+WHITE = "white"
 
 
 def get_piece_name(uci, fen):
@@ -18,10 +18,10 @@ def get_to_square(move: chess.Move):
 
 
 def get_other_user(user):
-    if user == HUMAN:
-        return STOCKFISH
+    if user == BLACK:
+        return WHITE
     else:
-        return HUMAN
+        return BLACK
 
 
 def get_link(opening: list):
