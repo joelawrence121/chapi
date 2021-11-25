@@ -9,6 +9,9 @@ from domain.entities import SingleMove, Opening, MateInN
 class Repository(object):
     connection_string = "mysql://{user}:{password}@{host}/chess_db"
     get_statistics_query = "select type, count(*) as count from Single_Move group by type order by count asc;"
+    get_openings_by_move_stack_subset_query = "select * from Opening where move_stack like '{move_stack}%' " \
+                                              "and LENGTH(move_stack) between LENGTH('{move_stack}') + 1 " \
+                                              "and LENGTH('{move_stack}') + 6;"
 
     def __init__(self):
         config = configparser.ConfigParser()
@@ -28,6 +31,11 @@ class Repository(object):
     def query_opening_by_move_stack(self, move_stack: list):
         openings = self.session.query(Opening).filter(Opening.move_stack == ' '.join(move_stack))
         return [opening.as_dict() for opening in openings]
+
+    def query_opening_by_move_stack_subset(self, move_stack):
+        openings = self.session.execute(
+            self.get_openings_by_move_stack_subset_query.format(move_stack=move_stack))
+        return [dict(opening) for opening in openings]
 
     def get_type_statistics(self):
         statistics = self.session.execute(self.get_statistics_query)
