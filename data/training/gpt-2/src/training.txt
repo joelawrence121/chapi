@@ -1,0 +1,72 @@
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: You bring the knight out, opening with the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: You open with the Amar opening by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: By bringing the knight out you open with the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: By playing the knight you start off with the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: You bring the knight out, playing the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: You open with the Nimzo-Larsen Attack by moving the pawn forward to b3.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: The Nimzo-Larsen Attack is your first move. You advance the pawn to position b3.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: By advancing the pawn to b3, you open with The Nimzo-Larsen Attack.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: You play pawn to b3, opening with the Nimzo-Larsen Attack.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: You advance the pawn to b3, playing the Nimzo-Larsen Attack.
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: You bring the knight out, opening with the Zukertort Opening
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: The Zukertort Opening is how you begin, by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: By bringing the knight out, you open with the Zukertort Opening.
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: You play the Zukertort Opening by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You start off with the Clemenz Opening. You move the pawn forward to h3.
+PARAPHRASED: By moving the pawn forward to h3, you start with the Clemenz Opening.
+<|endoftext|>
+ORIGINAL: You begin with the Grob Opening. You move the pawn up to g4.
+PARAPHRASED: By moving the pawn up to g4, you begin with the Grob Opening.
+<|endoftext|>
+ORIGINAL: You open with the Queen's Pawn Game. You move the pawn up to d4.
+PARAPHRASED: You start off with the Queen's Pawn Game by moving the pawn up to d4.
+<|endoftext|>
+ORIGINAL: You begin with the Mieses Opening. You move the pawn up to d3.
+PARAPHRASED: By moving the pawn up to d3, you begin with the Mieses Opening.
+<|endoftext|>
+ORIGINAL: You open with the Ware Opening. You move the pawn up to a4.
+PARAPHRASED: You start off with the Ware Opening by moving the pawn up to a4.
+<|endoftext|>
+ORIGINAL: You begin with the English Opening. You move the pawn up to c4.
+PARAPHRASED: You begin with the English Opening by moving the pawn up to c4.
+<|endoftext|>
+ORIGINAL: You begin with the Gedult's Opening. You move the pawn up to f3.
+PARAPHRASED: You begin with the Gedult's Opening by moving the pawn up to f3.
+<|endoftext|>
+ORIGINAL: You start off with the Van Geet Opening. You bring the knight out.
+PARAPHRASED: The Van Geet Opening is how you begin, by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You start off with the Bird Opening. You move the pawn forward to f4.
+PARAPHRASED: You begin with the Bird Opening, by bringing the pawn forward to f4.
+<|endoftext|>
+ORIGINAL: You respond to the King's Pawn Game with the King's Knight Opening. You bring the knight out.
+PARAPHRASED: In response to the King's Pawn Game you bring the knight out, countering with the King's Knight Opening.
+<|endoftext|>

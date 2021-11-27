@@ -262,7 +262,7 @@ S_S_NO_CAP = """
     S -> B OP A M | B OP AC M  | OP A M | OP AC M 
 """
 STOCKFISH_MOVE = """
-    AC -> "responds to  {previous_move}" | "counters {previous_move}"
+    AC -> "responds to {previous_move}" | "counters {previous_move}"
 """
 NO_CAPTURE_S_AM = """    
     A -> 'responds' | 'counters' | 'answers' | 'comes back'

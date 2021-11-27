@@ -1,7 +1,10 @@
+import os
 import random
 
 import chess
 from nltk.parse.generate import generate
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__)).replace('util', '')
 
 BLACK = "black"
 WHITE = "white"
