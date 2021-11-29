@@ -1,3 +1,4 @@
+import logging
 import random
 
 import chess
@@ -44,7 +45,12 @@ def format_name(original_opening: list, opening: str):
 
 
 def get_random_generation(grammar):
-    descriptions = []
-    for description in generate(grammar):
-        descriptions.append(' '.join(description))
-    return [random.choice(descriptions)]
+    logger = logging.getLogger('chapi')
+    try:
+        descriptions = []
+        for description in generate(grammar):
+            descriptions.append(' '.join(description))
+        return [random.choice(descriptions)]
+    except RecursionError as e:
+        logger.warning(e)
+        return []

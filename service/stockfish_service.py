@@ -52,7 +52,13 @@ class StockfishService(object):
         elif self.is_over(self.board.fen()) == Outcome.BLACK:
             winner = Outcome.BLACK
 
-        return StockfishResult(request.id, self.board.fen(), move, winner)
+        return StockfishResult(
+            request.id,
+            self.board.fen(),
+            move,
+            winner,
+            self.get_relative_score(self.board.fen(), BLACK if self.board.turn else WHITE)
+        )
 
     def is_over(self, fen: str):
         """
@@ -151,12 +157,12 @@ class StockfishService(object):
         self.board.set_fen(request.fen)
         return self.board.is_check()
 
-    def get_relative_score(self, request: DescriptionRequest):
+    def get_relative_score(self, fen, user):
         """
         Return a quick cp value giving an indication of the winning probability from White's perspective.
         """
-        cp_score = get_cp_score(self.analyse_board(request.fen, WHITE, time_limit=0.1))
-        if request.user == BLACK:
+        cp_score = get_cp_score(self.analyse_board(fen, WHITE, time_limit=0.1))
+        if user == BLACK:
             cp_score *= -1
         return cp_score
 

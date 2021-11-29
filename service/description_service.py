@@ -23,7 +23,8 @@ class DescriptionService(object):
         providing insight on: the opening scenario, winning conditions, mate conditions...
         """
 
-        response = {'descriptions': [], 'link': None, 'score': self.stockfish_service.get_relative_score(request)}
+        response = {'descriptions': [], 'link': None,
+                    'score': self.stockfish_service.get_relative_score(request.fen, request.user)}
 
         opening_data = self.get_opening_description(request)
         response['descriptions'].extend(opening_data[0])
@@ -34,7 +35,7 @@ class DescriptionService(object):
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
         response['descriptions'].extend(self.get_blunder_description(request))
-        response['descriptions'].extend(self.get_blunder_description(request))
+        response['descriptions'].extend(self.get_gain_description(request))
         return response
 
     def get_opening_description(self, request: DescriptionRequest):
