@@ -1,0 +1,660 @@
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: You bring the knight out, opening with the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: You open with the Amar opening by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: By bringing the knight out you open with the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: By playing the knight you start off with the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Amar Opening. You bring the knight out.
+PARAPHRASED: You bring the knight out, playing the Amar Opening.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: You open with the Nimzo-Larsen Attack by moving the pawn forward to b3.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: The Nimzo-Larsen Attack is your first move. You advance the pawn to position b3.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: By advancing the pawn to b3, you open with The Nimzo-Larsen Attack.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: You play pawn to b3, opening with the Nimzo-Larsen Attack.
+<|endoftext|>
+ORIGINAL: You open with the Nimzo-Larsen Attack. You move the pawn forward to b3.
+PARAPHRASED: You advance the pawn to b3, playing the Nimzo-Larsen Attack.
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: You bring the knight out, opening with the Zukertort Opening
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: The Zukertort Opening is how you begin, by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: By bringing the knight out, you open with the Zukertort Opening.
+<|endoftext|>
+ORIGINAL: You open with the Zukertort Opening. You bring the knight out.
+PARAPHRASED: You play the Zukertort Opening by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You start off with the Clemenz Opening. You move the pawn forward to h3.
+PARAPHRASED: By moving the pawn forward to h3, you start with the Clemenz Opening.
+<|endoftext|>
+ORIGINAL: You begin with the Grob Opening. You move the pawn up to g4.
+PARAPHRASED: By moving the pawn up to g4, you begin with the Grob Opening.
+<|endoftext|>
+ORIGINAL: You open with the Queen's Pawn Game. You move the pawn up to d4.
+PARAPHRASED: You start off with the Queen's Pawn Game by moving the pawn up to d4.
+<|endoftext|>
+ORIGINAL: You begin with the Mieses Opening. You move the pawn up to d3.
+PARAPHRASED: By moving the pawn up to d3, you begin with the Mieses Opening.
+<|endoftext|>
+ORIGINAL: You open with the Ware Opening. You move the pawn up to a4.
+PARAPHRASED: You start off with the Ware Opening by moving the pawn up to a4.
+<|endoftext|>
+ORIGINAL: You begin with the English Opening. You move the pawn up to c4.
+PARAPHRASED: You begin with the English Opening by moving the pawn up to c4.
+<|endoftext|>
+ORIGINAL: You begin with the Gedult's Opening. You move the pawn up to f3.
+PARAPHRASED: You begin with the Gedult's Opening by moving the pawn up to f3.
+<|endoftext|>
+ORIGINAL: You start off with the Van Geet Opening. You bring the knight out.
+PARAPHRASED: The Van Geet Opening is how you begin, by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You start off with the Bird Opening. You move the pawn forward to f4.
+PARAPHRASED: You begin with the Bird Opening, by bringing the pawn forward to f4.
+<|endoftext|>
+ORIGINAL: Your opponent counters with the French Defense. Black moves the pawn forward to e6. b1c3, g2g3 and f1b5 are common responses. Playing b1c3 leads to the Queen's Knight. Playing g2g3 leads to the Réti-Spielmann Attack. Playing f1b5 leads to the Bird Invitation.
+PARAPHRASED: The French Defense is employed by your opponent. The pawn is advanced to e6 by Black. Common replies include b1c3, g2g3, and f1b5. The Queen's Knight is achieved by playing b1c3. The Réti-Spielmann Attack occurs when playing g2g3. The Bird Invitation appears when you play f1b5.
+<|endoftext|> 
+ORIGINAL: Black responds to the Kadas Opening with d7d5. Stockfish moves the pawn forward to d5. A common response is h1h3. Playing h1h3 leads to the Kadas Opening: Beginner's Trap.
+PARAPHRASED: Black plays d7d5 in response to the Kadas Opening. Stockfish advances the pawn to d5. h1h3 is a typical reaction. When you play h1h3, you'll encounter the Kadas Opening: Beginner's Trap.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with e7e5. Stockfish moves the pawn forward to e5.
+PARAPHRASED: Your opponent comes back with e7e5. Stockfish moves the pawn forward to e5.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with e7e5. Stockfish moves the pawn forward to e5.
+PARAPHRASED: e7e5 is your opponent's response. Stockfish advances the pawn to e5.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with e7e5. Stockfish moves the pawn forward to e5.
+PARAPHRASED: Stockfish responds by moving the pawn at e7 to e5.
+<|endoftext|>
+ORIGINAL: Your opponent responds with b7b2. Stockfish moves the pawn forward to b2.
+PARAPHRASED: Stockfish responds by moving the pawn at b7 to b2.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with h5h7. Stockfish moves the pawn forward to h7.
+PARAPHRASED: Stockfish responds by moving the pawn at h5 to h7.
+<|endoftext|>
+ORIGINAL: Your opponent responds with a5a6. Stockfish moves the pawn forward to a6.
+PARAPHRASED: Stockfish responds by moving the pawn at a5 to e6.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with b5b7. Stockfish moves the pawn forward to b7.
+PARAPHRASED: Stockfish responds by moving the pawn at b5 to b7.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with c7c5. Stockfish moves the rook forward to c5.
+PARAPHRASED: Stockfish responds by moving the rook at c7 to c5.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with e7e5. Stockfish moves the rook forward to e5.
+PARAPHRASED: e7e5 is your opponent's response. Stockfish advances the rook to e5.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with e7e5. Stockfish moves the rook forward to e5.
+PARAPHRASED: Stockfish responds by moving the rook at e7 to e5.
+<|endoftext|>
+ORIGINAL: Your opponent responds with b7b2. Stockfish moves the rook forward to b2.
+PARAPHRASED: Stockfish responds by moving the rook at b7 to b2.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with h5h7. Stockfish moves the rook forward to h7.
+PARAPHRASED: Stockfish responds by moving the rook at h5 to h7.
+<|endoftext|>
+ORIGINAL: Your opponent responds with a5a6. Stockfish moves the rook forward to a6.
+PARAPHRASED: Stockfish responds by moving the rook at a5 to e6.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with e7e5. Stockfish moves the pawn forward to e5.
+PARAPHRASED: Stockfish responds by moving the pawn at e7 to e5.
+<|endoftext|>
+ORIGINAL: Stockfish responds with b7b2. Stockfish moves the pawn forward to b2.
+PARAPHRASED: Stockfish responds by moving the pawn at b7 to b2.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with h5h7. Stockfish moves the pawn forward to h7.
+PARAPHRASED: Stockfish responds by moving the pawn at h5 to h7.
+<|endoftext|>
+ORIGINAL: Stockfish responds with a5a6. Stockfish moves the pawn forward to a6.
+PARAPHRASED: Stockfish responds by moving the pawn at a5 to e6.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with b5b7. Stockfish moves the pawn forward to b7.
+PARAPHRASED: Stockfish responds by moving the pawn at b5 to b7.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with c7c5. Stockfish moves the rook forward to c5.
+PARAPHRASED: Stockfish responds by moving the rook at c7 to c5.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with e7e5. Stockfish moves the rook forward to e5.
+PARAPHRASED: e7e5 is your opponent's response. Stockfish advances the rook to e5.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with e7e5. Stockfish moves the rook forward to e5.
+PARAPHRASED: Stockfish responds by moving the rook at e7 to e5.
+<|endoftext|>
+ORIGINAL: Stockfish counters with b7b2. Stockfish moves the rook forward to b2.
+PARAPHRASED: Stockfish counters by moving the rook at b7 to b2.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with h5h7. Stockfish moves the rook forward to h7.
+PARAPHRASED: Stockfish responds by moving the rook at h5 to h7.
+<|endoftext|>
+ORIGINAL: Stockfish counters with a5a6. Stockfish moves the rook forward to a6.
+PARAPHRASED: Stockfish counters by moving the rook at a5 to e6.
+<|endoftext|>
+ORIGINAL: Black answers with the King's Pawn Game. Black moves the pawn up to e5. You could respond with c2c4, f2f4 or g1f3. Playing c2c4 leads to the English Opening: The Whale. Playing f2f4 leads to the King's Gambit. Playing g1f3 leads to the King's Knight Opening.
+PARAPHRASED: The King's Pawn Game is Black's response. The pawn is moved up to e5 by black. You may use c2c4, f2f4, or g1f3 as a response. When you play c2c4, you get the English Opening: The Whale. The King's Gambit is the result of playing f2f4. The King's Knight Opening is reached by playing g1f3.
+<|endoftext|>
+ORIGINAL: Stockfish counters the Queen's Pawn Game with the Queen's Pawn Game. Your opponent moves the pawn up to d5. You could respond with e2e4, d1d3 or c1g5. Playing e2e4 leads to the Blackmar Gambit. Playing d1d3 leads to the Amazon Attack. Playing c1g5 leads to the Levitsky Attack.
+PARAPHRASED: The Queen's Pawn Game is countered by Stockfish with the Queen's Pawn Game. The pawn is moved up to d5 by your opponent. You might use e2e4, d1d3, or c1g5 as a response. The Blackmar Gambit is a variant of the e2e4 game. The Amazon Attack occurs when you play d1d3. The Levitsky Attack occurs when you play c1g5.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with the Horwitz Defense. Black moves the pawn up to e6.
+PARAPHRASED: The Horwitz Defense is used by your opponent. The pawn is moved up to e6 by black.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with the English Opening: Anglo-Indian Defense. Your opponent brings the knight out to f6. b2b4 and b1c3 are typical responses. Playing b2b4 leads to the English Orangutan. Playing b1c3 leads to the English Opening: Anglo-Indian Defense, Queen's Knight Variation.
+PARAPHRASED: The English Opening: Anglo-Indian Defense is used by your opponent. The knight is brought out to f6 by your opponent. Typical replies are b2b4 and b1c3. The English Orangutan is obtained by playing b2b4. The English Opening: Anglo-Indian Defense, Queen's Knight Variation is obtained by playing b1c3.
+<|endoftext|>
+ORIGINAL: Your opponent counters the Van't Kruijs Opening with d7d5. Black moves the pawn up to d5.
+PARAPHRASED: With d7d5, your opponent counters the Van't Kruijs Opening. The pawn is moved to d5 by Black.
+<|endoftext|>
+ORIGINAL: Stockfish counters with c7c5. Your opponent moves the pawn forward to c5.
+PARAPHRASED: Stockfish counters by moving the pawn at c7 to c5.
+<|endoftext|>
+ORIGINAL: Black answers with the Indian Defense. Your opponent brings the knight out. You may want to try f2f3, g2g4 or c1g5. Playing f2f3 leads to the Paleface Attack. Playing g2g4 leads to the Bronstein Gambit. Playing c1g5 leads to the Trompowsky Attack.
+PARAPHRASED: The Indian Defense is Black's response by bringing the knight out. You may try f2f3, g2g4, or c1g5. The Paleface Attack is triggered when you play f2f3. The Bronstein Gambit occurs when you play g2g4. The Trompowsky Attack is triggered when you play c1g5.
+<|endoftext|>
+ORIGINAL: Your opponent responds to the English Opening with the English Opening: Caro-Kann Defensive System. Your opponent moves the pawn forward to c6.
+PARAPHRASED: The English Opening: Caro-Kann Defensive System is your opponent's response to the English Opening. Your opponent advances the pawn to c6.
+<|endoftext|>
+ORIGINAL: Black counters the Queen's Pawn Game with the Indian Defense. Stockfish brings the knight out. g1f3, f2f4 and e2e4 are common responses. Playing g1f3 leads to the Knights Variation. Playing f2f4 leads to the Canard Opening. Playing e2e4 leads to the Omega Gambit.
+PARAPHRASED: The Indian Defense is used by Black to fight the Queen's Pawn Game. The knight is brought out by Stockfish. Common responses include g1f3, f2f4, and e2e4. When you play g1f3, you get the Knights Variation. The Canard Opening is reached by playing f2f4. When you play e2e4, you'll encounter the Omega Gambit.
+<|endoftext|>
+ORIGINAL: Stockfish counters the Polish Opening with e7e5. Your opponent moves the pawn forward to e5. A common response is a2a3. Playing a2a3 leads to the Polish Opening: Bugayev Attack.
+PARAPHRASED: Stockfish counters the Polish Opening with e7e5. Your opponent moves the pawn forward to e5. A common response is a2a3. Playing a2a3 leads to the Polish Opening: Bugayev Attack.
+<|endoftext|>
+ORIGINAL: Black counters the Queen's Pawn Game with the Queen's Pawn Game. Stockfish moves the pawn up to d5. b1c3, g1f3 and f2f4 are common responses. Playing b1c3 leads to the Chigorin Variation. Playing g1f3 leads to the Zukertort Variation. Playing f2f4 leads to the Mason Attack.
+PARAPHRASED: The Queen's Pawn Game is countered by the Queen's Pawn Game. The pawn is moved to d5 by Stockfish. Common replies include b1c3, g1f3, and f2f4. When you play b1c3, you get the Chigorin Variation. When you play g1f3, you get the Zukertort Variation. The Mason Attack is triggered when you play f2f4.
+<|endoftext|>
+ORIGINAL: Your opponent responds to the King's Pawn with the King's Pawn Game. Stockfish moves the pawn forward to e5. You may want to try b2b3, f1b5 or a2a3. Playing b2b3 leads to the King's Pawn Opening. Playing f1b5 leads to the Portuguese Opening. Playing a2a3 leads to the Mengarini's Opening.
+PARAPHRASED: The King's Pawn Game is your opponent's response to the King's Pawn. Stockfish advances the pawn to e5. You may try b2b3, f1b5, or a2a3. When you play b2b3, you get the King's Pawn Opening. The Portuguese Opening is reached by playing f1b5. The Mengarini's Opening is reached by playing a2a3.
+<|endoftext|>
+ORIGINAL: Black comes back with b8c6. Black brings the knight out to c6.
+PARAPHRASED: Black retaliates with b8c6. The knight is brought out to c6 by black.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with the Mieses Opening: Reversed Rat. Your opponent moves the pawn forward to e5. b1d2 is a typical response. Playing b1d2 leads to the Valencia Opening.
+PARAPHRASED: With the Mieses Opening: Reversed Rat, Stockfish returns. Your opponent advances the piece to e5. A typical reaction is b1d2. The Valencia Opening is reached by playing b1d2.
+<|endoftext|>
+ORIGINAL: Black counters with the English Opening: Agincourt Defense. Black moves the pawn forward to e6. g1f3 is a typical response. Playing g1f3 leads to the English Opening: Agincourt Defense.
+PARAPHRASED: Black responds with the Agincourt Defense, an English opening. Black advances the pawn to e6. A typical response is g1f3. The English Opening: Agincourt Defense is reached by playing g1f3.
+<|endoftext|>
+ORIGINAL: Your opponent answers with the Zukertort Opening. Your opponent brings the knight out to f6. b2b4, e2e3 and b2b3 are common responses. Playing b2b4 leads to the Polish Opening: Zukertort System. Playing e2e3 leads to the Quiet System. Playing b2b3 leads to the Nimzo-Larsen Variation.
+PARAPHRASED: The Zukertort Opening is your opponent's response. The knight is brought out to f6 by your opponent. Common responses are b2b4, e2e3, and b2b3. The Polish Opening: Zukertort System is reached by playing b2b4. When you play e2e3, the Quiet System appears. When you play b2b3, you get the Nimzo-Larsen Variation.
+<|endoftext|>
+ORIGINAL: Your opponent answers with d7d5. Black moves the pawn up to d5. A common response is g1f3. Playing g1f3 leads to the Zukertort Opening: Reversed Mexican Defense.
+PARAPHRASED: d7d5 is your opponent's response. The pawn is moved to d5 by Black. G1f3 is a typical answer. The Zukertort Opening: Reversed Mexican Defense is obtained by playing g1f3.
+<|endoftext|>
+ORIGINAL: Stockfish responds with the King's Pawn Game. Black moves the pawn up to e5. You may want to try d1f3, f1c4 or f2f4. Playing d1f3 leads to the Napoleon Attack. Playing f1c4 leads to the Bishop's Opening. Playing f2f4 leads to the King's Gambit.
+PARAPHRASED: The King's Pawn Game is Stockfish's response. The pawn is moved up to e5 by black. You may try d1f3, f1c4, or f2f4. The Napoleon Attack is triggered when you play d1f3. The Bishop's Opening is reached by playing f1c4. The King's Gambit is the result of playing f2f4.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with the Pirc Defense. Black moves the pawn forward to d6. You may want to try h2h4, f2f4 or d2d4. Playing h2h4 leads to the Rat Defense: Petruccioli Attack. Playing f2f4 leads to the Rat Defense: Harmonist. Playing d2d4 leads to the Pirc Defense.
+PARAPHRASED: The Pirc Defense is used by your opponent. Black advances the pawn to d6. You may try h2h4, f2f4, or d2d4. When you play h2h4, you'll encounter the Rat Defense: Petruccioli Attack. When you play f2f4, you get the Rat Defense: Harmonist. When you play d2d4, you'll encounter the Pirc Defense.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with the English Opening: Symmetrical Variation. Your opponent moves the pawn forward to c5. b2b4 and b1c3 are known responses. Playing b2b4 leads to the English Opening: Wing Gambit. Playing b1c3 leads to the English Opening: Symmetrical Variation, Normal Variation.
+PARAPHRASED: The English Opening: Symmetrical Variation is used by your opponent. Your opponent advances the pawn to c5. The replies b2b4 and b1c3 are well-known. When you play b2b4, you'll get the English Opening: Wing Gambit. The English Opening: Symmetrical Variation, Normal Variation is reached by playing b1c3.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with d7d5. Stockfish moves the pawn up to d5. f1g2 is a common response. Playing f1g2 leads to the Grob Opening: Grob Gambit.
+PARAPHRASED: Stockfish's response is d7d5. The pawn is moved to d5 by Stockfish. A popular response is f1g2. When you play f1g2, you get the Grob Opening: Grob Gambit.
+<|endoftext|>
+ORIGINAL: Black responds with the Sicilian Defense. Stockfish moves the pawn forward to c5. You may want to try b1c3, b2b4 or h2h4. Playing b1c3 leads to the Closed. Playing b2b4 leads to the Wing Gambit. Playing h2h4 leads to the Myers Attack.
+PARAPHRASED: The Sicilian Defense is Black's response. Stockfish advances the pawn to c5. You may try b1c3, b2b4, or h2h4. When you play b1c3, you get the Closed. The Wing Gambit is a variant of the b2b4 game. The Myers Attack occurs when playing h2h4.
+<|endoftext|>
+ORIGINAL: Stockfish counters the King's Pawn with the French Defense. Stockfish moves the pawn up to e6. You could respond with b1c3, c2c4 or b2b3. Playing b1c3 leads to the Queen's Knight. Playing c2c4 leads to the Steiner Variation. Playing b2b3 leads to the Horwitz Attack.
+PARAPHRASED: Stockfish uses the French Defense to fight the King's Pawn. The pawn is moved to e6 by Stockfish. B1c3, c2c4, or b2b3 are all possible responses. The Queen's Knight is obtained by playing b1c3. When you play c2c4, you get the Steiner Variation. The Horwitz Attack occurs when you play b2b3.
+<|endoftext|>
+ORIGINAL: Stockfish counters the English Opening with the English Opening: Agincourt Defense. Your opponent moves the pawn up to e6. g1f3 is a known response. Playing g1f3 leads to the English Opening: Agincourt Defense.
+PARAPHRASED: Stockfish uses the English Opening: Agincourt Defense to fight the English Opening. The pawn is moved up to e6 by your opponent, and the reaction g1f3 is well-known. The English Opening: Agincourt Defense is reached by playing g1f3.
+<|endoftext|>
+ORIGINAL: Stockfish counters with the Sicilian Defense. Your opponent moves the pawn up to c5. g1h3, f1c4 and b1c3 are common responses. Playing g1h3 leads to the Brick Variation. Playing f1c4 leads to the Bowdler Attack. Playing b1c3 leads to the Closed.
+PARAPHRASED: The Sicilian Defense is used by Stockfish as a reply. The pawn is moved up to c5 by your opponent. Common replies are g1h3, f1c4, and b1c3. The Brick Variation is triggered when you play g1h3. The Bowdler Attack is triggered by playing f1c4. When you play b1c3, you get the Closed.
+<|endoftext|>
+ORIGINAL: Stockfish counters the King's Pawn with the French Defense. Stockfish moves the pawn forward to e6. f2f4, f1b5 and d2d3 are typical responses. Playing f2f4 leads to the La Bourdonnais Variation. Playing f1b5 leads to the Bird Invitation. Playing d2d3 leads to the King's Indian Attack.
+PARAPHRASED: Stockfish uses the French Defense to fight the King's Pawn. Stockfish advances the pawn to e6. Typical replies are f2f4, f1b5, and d2d3. When you play f2f4, you get the La Bourdonnais Variation. The Bird Invitation is obtained by playing f1b5. The King's Indian Attack is triggered when you play d2d3.
+<|endoftext|>
+ORIGINAL: Your opponent counters the Sicilian Defense with the Sicilian Defense: Old Sicilian. Stockfish brings the knight out. f1b5 and d2d4 are common responses. Playing f1b5 leads to the Sicilian Defense: Nyezhmetdinov-Rossolimo Attack. Playing d2d4 leads to the Sicilian Defense: Open.
+PARAPHRASED: Your opponent uses the Sicilian Defense: Old Sicilian to counter the Sicilian Defense. The knight is brought out by Stockfish. Common responses are f1b5 and d2d4. The Sicilian Defense: Nyezhmetdinov-Rossolimo Attack is triggered by playing f1b5. When you play d2d4, you get the Sicilian Defense: Open.
+<|endoftext|>
+ORIGINAL: Black counters with the Sicilian Defense: Old Sicilian. Black brings the knight out. f1b5 and d2d4 are common responses. Playing f1b5 leads to the Sicilian Defense: Nyezhmetdinov-Rossolimo Attack. Playing d2d4 leads to the Sicilian Defense: Open.
+PARAPHRASED: Black uses the Sicilian Defense: Old Sicilian as a response. The knight is brought out by Black. Common responses are f1b5 and d2d4. The Sicilian Defense: Nyezhmetdinov-Rossolimo Attack is triggered by playing f1b5. When you play d2d4, you get the Sicilian Defense: Open.
+<|endoftext|>
+ORIGINAL: Black answers with the King's Pawn Game. Black moves the pawn forward to e5. You may want to try e1e2, c2c3 or g1e2. Playing e1e2 leads to the Bongcloud Attack. Playing c2c3 leads to the Macleod Attack. Playing g1e2 leads to the Alapin Opening.
+PARAPHRASED: The King's Pawn Game is Black's response. Black advances the pawn to e5. You may try e1e2, c2c3, or g1e2. The Bongcloud Attack is triggered when you play e1e2. The Macleod Attack occurs when you play c2c3. The Alapin Opening is reached by playing g1e2. 
+<|endoftext|>
+ORIGINAL: You respond with the King's Pawn Game: King's Head Opening. You move the pawn up to f3.
+PARAPHRASED: The King's Pawn Game: King's Head Opening is your response. You raise the pawn to the f3 position.
+<|endoftext|>
+ORIGINAL: You counter the King's Pawn Game with the King's Knight Opening. You bring the knight out.
+PARAPHRASED: The King's Knight Opening is used to oppose the King's Pawn Game by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You respond to the King's Pawn Game with the Vienna Game. You bring the knight out to c3.
+PARAPHRASED: The Vienna Game is your response to the King's Pawn Game. You bring the knight out to c3.
+<|endoftext|>
+ORIGINAL: You respond with the Bishop's Opening. You bring the bishop out.
+PARAPHRASED: The bring the bishop out leading to the Bishop's Opening. 
+<|endoftext|>
+ORIGINAL: You respond to the King's Pawn Game with the King's Pawn Game: Leonardis Variation. You move the pawn forward to d3.
+PARAPHRASED: The King's Pawn Game: Leonardis Variation is your response to the King's Pawn Game. The pawn is moved to d3 by you.
+<|endoftext|>
+ORIGINAL: Your opponent responds with d7d6. Stockfish moves the pawn up to d6.
+PARAPHRASED: d7d6 is your opponent's response. The pawn is moved up to d6 by Stockfish.
+<|endoftext|>
+ORIGINAL: You respond to d7d6 with f2f3. You move the pawn up to f3.
+PARAPHRASED: You respond to d7d6 by moving the pawn at f2 to f3.
+<|endoftext|>
+ORIGINAL: You respond with f2f3. You move the pawn up to f3.
+PARAPHRASED: You respond by moving the pawn at f2 to f3.
+<|endoftext|>
+ORIGINAL: You counter the King's Pawn Game with the King's Pawn Opening. You move the pawn up to b3.
+PARAPHRASED: You counter the King's Pawn Game with the King's Pawn Opening by moving the pawn up to b3.
+<|endoftext|>
+ORIGINAL: You counter with g2g3. You move the pawn forward to g3.
+PARAPHRASED: You counter by moving the pawn at g2 to g3.
+<|endoftext|>
+ORIGINAL: You respond to d7d5 with f1d3. You bring the bishop out.
+PARAPHRASED: You respond to d7d5 by bringing the bishop out to d3.
+<|endoftext|>
+ORIGINAL: You respond to a7a5 with b2c3. You bring the knight out.
+PARAPHRASED: You respond to a7a5 by bringing the knight out to d3.
+<|endoftext|>
+ORIGINAL: You respond to b8c6 with g2g3. You bring the bishop out.
+PARAPHRASED: You respond to b8c6 by bringing the bishop out to g3.
+<|endoftext|>
+ORIGINAL: You respond to c6c4 with c2c3. You bring the knight out.
+PARAPHRASED: You respond to c6c4 by bringing the knight out to c3.
+<|endoftext|>
+ORIGINAL: You respond with c2c3. You move the pawn up to c3.
+PARAPHRASED: You respond by moving the pawn at c2 to c3.
+<|endoftext|>
+ORIGINAL: You respond with a2a4. You move the pawn up to a4.
+PARAPHRASED: You respond by moving the pawn at a2 to a4.
+<|endoftext|>
+ORIGINAL: You respond with b2b3. You move the pawn up to b3.
+PARAPHRASED: You respond by moving the pawn at b2 to b3.
+<|endoftext|>
+ORIGINAL: You respond to g8f6 with h2h4. You move the pawn up to h4. You've blundered. You have cost yourself a 34 point advantage. This could be considered a fair blunder. h2h4 might be thought of as a fair blunder, you have dropped a 30 point advantage.
+PARAPHRASED: h2h4 is your response to g8f6. You raise the pawn to h4 position. You've made a mistake. You've just squandered a 34-point lead. This could be regarded as a reasonable blunder. 
+<|endoftext|>
+ORIGINAL: Your opponent counters by attacking white's queen with f6h5.
+PARAPHRASED: Your opponent counters by attacking white's queen with f6h5.
+<|endoftext|>
+ORIGINAL: Your opponent counters by attacking white's queen with f6h5 which is now check.
+PARAPHRASED: Your opponent counters by attacking white's queen with f6h5 which is now check.
+<|endoftext|>
+ORIGINAL: Black comes back with d7d5. Black moves the pawn forward to d5.
+PARAPHRASED: Black responds by moving the pawn at d7 to d5.
+<|endoftext|>
+ORIGINAL: You counter d7d5 with f1b5, which is now check. You bring the bishop out.
+PARAPHRASED: You counter d7d5 by checking Black with your bishop.
+<|endoftext|>
+ORIGINAL: You counter d7d5 with f1b5, which is now check. You bring the bishop out.
+PARAPHRASED: You counter d7d5 by bringing the bishop out, placing Stockfish in check.
+<|endoftext|>
+ORIGINAL: You counter d7d5 with f1b5, which is now check. You bring the bishop out.
+PARAPHRASED: You counter d7d5 by bringing the bishop out, checking Stockfish.
+<|endoftext|>
+ORIGINAL: Black responds to f1b5 with c8d7. Your opponent brings the bishop out to d7.
+PARAPHRASED: Black responds to f1b5 by bringing the bishop out to d7.
+<|endoftext|>
+ORIGINAL: You respond with d1d3. You bring the queen out.
+PARAPHRASED: You respond with d1d3, bringing the queen out.
+<|endoftext|>
+ORIGINAL: Stockfish responds to d1d3 with c7c6. Your opponent moves the pawn forward to c6.
+PARAPHRASED: Stockfish responds to d1d3 by moving the pawn at c7 to c6.
+<|endoftext|>
+ORIGINAL: You counter with c2c4. You move the pawn forward to c4. This move may be thought of as a fair blunder, you have lost a 53 point advantage. This move might be thought of as a fair blunder, you have lost a 54 point advantage.
+PARAPHRASED: You respond by moving the pawn at c2 to c4. This move could be considered a reasonable blunder; you've given up a 53-point lead. 
+<|endoftext|>
+ORIGINAL: Black takes advantage of your blunder. Your opponent comes back by taking the bishop with c6b5.
+PARAPHRASED: Black takes advantage of your blunder. Your opponent comes back by taking the bishop with c6b5.
+<|endoftext|>
+ORIGINAL: You respond to the King's Pawn Game with the King's Knight Opening. You bring the knight out.
+PARAPHRASED: In response to the King's Pawn Game you bring the knight out, countering with the King's Knight Opening.
+<|endoftext|>
+ORIGINAL: You respond to the King's Pawn Game with the King's Knight Opening. You bring the knight out.
+PARAPHRASED: The King's Knight Opening is your response to the King's Pawn Game. You did this by bringing the knight out.
+<|endoftext|>
+ORIGINAL: You counter with a2a4. You move the pawn up to a4.
+PARAPHRASED: You counter by moving the pawn at a2 to a4.
+<|endoftext|>
+ORIGINAL: Black comes back by taking your pawn with b5c4.
+PARAPHRASED: Black comes back by taking your pawn with b5c4.
+<|endoftext|>
+ORIGINAL: You counter with b2b3. You move the pawn up to b3.
+PARAPHRASED: You counter by moving the pawn at b2 to b3.
+<|endoftext|>
+ORIGINAL: Black captures queen with c4d3.
+PARAPHRASED: Black captures queen with c4d3.
+<|endoftext|>
+ORIGINAL: You respond to c8f5 with f1g2. You bring the bishop out to g2.
+PARAPHRASED: You respond to c8f5 by bringing the bishop out to g2.
+<|endoftext|>
+ORIGINAL: Stockfish responds with e7e6. Stockfish moves the pawn forward to e6.
+PARAPHRASED: Stockfish responds to e7e6 by moving the pawn at e7 to e6.
+<|endoftext|>
+ORIGINAL: You counter with d2d4. You move the pawn forward to d4.
+PARAPHRASED: You counter d2d4 by moving the pawn at d2 to d4.
+<|endoftext|>
+ORIGINAL: Black counters d2d4 with g8f6. Black brings the knight out.
+PARAPHRASED: Black counters d2d4 by bringing the knight out with g8f6.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with b8c6. Black brings the knight out to c6.
+PARAPHRASED: Stockfish comes back by bringing the knight out to c6.
+<|endoftext|>
+ORIGINAL: You respond with c2c4. You move the pawn forward to c4.
+PARAPHRASED: You respond by moving the pawn at c2 to c4.
+<|endoftext|>
+ORIGINAL: Your opponent responds to c2c4 with h7h6. Stockfish moves the pawn forward to h6.
+PARAPHRASED: Your opponent responds to c2c4 by moving the pawn at h7 to h6.
+<|endoftext|>
+ORIGINAL: You counter with d1a4. You bring the queen out to a4.
+PARAPHRASED: You counter by bringing the queen out to a4.
+<|endoftext|>
+ORIGINAL: Black responds to d1a4 with f8e7. Your opponent brings the bishop out.
+PARAPHRASED: Black responds by bringing the bishop with f8e7.
+<|endoftext|>
+ORIGINAL: You respond to f8e7 with f3e5. You move the knight out to e5.
+PARAPHRASED: You respond to f8e7 by moving the knight at f3 to e5.
+<|endoftext|>
+ORIGINAL: Your opponent counters f3e5 with a8b8. Stockfish brings the rook out.
+PARAPHRASED: Your opponent counters f3e5 by bringing the rook at a8 out to b8. 
+<|endoftext|>
+ORIGINAL: Black responds to b2b3 with e8g8. Black brings the king out to g8.
+PARAPHRASED: Black responds to b2b3 by bringing the king out to g8.
+<|endoftext|>
+ORIGINAL: You counter by taking the knight with e5c6.
+PARAPHRASED: You counter by taking the knight with e5c6.
+<|endoftext|>
+ORIGINAL: Black comes back by taking white's knight with b7c6.
+PARAPHRASED: Black comes back by taking white's knight with b7c6.
+<|endoftext|>
+ORIGINAL: You respond with c1a3. You bring the bishop out.
+PARAPHRASED: You respond by bringing the bishop out with c1a3.
+<|endoftext|>
+ORIGINAL: Black answers by capturing the pawn with d5c4.
+PARAPHRASED: Black answers by capturing the pawn with d5c4.
+<|endoftext|>
+ORIGINAL: You respond by attacking the pawn with d2c4. You advance the knight to c4.
+PARAPHRASED: You advance the knight to c4, attacking the pawn.
+<|endoftext|>
+ORIGINAL: Stockfish responds by capturing your bishop with e7a3. Your opponent moves the bishop out to a3.
+PARAPHRASED: Stockfish responds by moving the bishop out to a3, capturing your bishop.
+<|endoftext|>
+ORIGINAL: You respond by taking Stockfish's bishop with c4a3. You retreat the knight back to a3.
+PARAPHRASED: You respond by retreating the knight back to a3, taking Stockfish's bishop.
+<|endoftext|>
+ORIGINAL: Stockfish counters c4a3 with f5e4.
+PARAPHRASED: Stockfish counters c4a3 with f5e4.
+<|endoftext|>
+ORIGINAL: Your opponent counters f2f3 with e4f5. Stockfish retreats the bishop back to f5.
+PARAPHRASED: Your opponent counters f2f3 by retreating the bishop back to f5.
+<|endoftext|>
+ORIGINAL: You counter with e1g1. You bring the king out to g1.
+PARAPHRASED: You counter by bringing the king out to g1.
+<|endoftext|>
+ORIGINAL: Your opponent responds with f5h7. Black retreats the bishop.
+PARAPHRASED: Your opponent responds by retreating the bishop with f5h7.
+<|endoftext|>
+ORIGINAL: You counter f5h7 with a4c4.
+PARAPHRASED: You counter f5h7 with a4c4.
+<|endoftext|>
+ORIGINAL: Black answers with f6d5.
+PARAPHRASED: Black answers with f6d5.
+<|endoftext|>
+ORIGINAL: You respond to f6d5 with c4c5. You move the queen up to c5.
+PARAPHRASED: You respond to f6d5 by moving the queen up to c5.
+<|endoftext|>
+ORIGINAL: Black responds with d5e3. Your opponent moves the knight out to e3.
+PARAPHRASED: Black responds by moving the knight out to e3.
+<|endoftext|>
+ORIGINAL: You counter with f1e1. You bring the rook out to e1.
+PARAPHRASED: You counter by bringing the rook out to e1.
+<|endoftext|>
+ORIGINAL: Black responds to f1e1 with d8d6. Stockfish brings the queen out to d6.
+PARAPHRASED: Black responds to f1e1 by bringing the queen out to d6.
+<|endoftext|>
+ORIGINAL: You counter by capturing the queen with c5d6.
+PARAPHRASED: You counter by capturing the queen with c5d6.
+<|endoftext|>
+ORIGINAL: Black comes back by attacking the queen with c7d6.
+PARAPHRASED: Black comes back by attacking the queen with c7d6.
+<|endoftext|>
+ORIGINAL: Your opponent responds with e3f5. Your opponent retreats the knight back to f5.
+PARAPHRASED: Your opponent retreats the knight back to f5.
+<|endoftext|>
+ORIGINAL: You respond by attacking their knight with h3f5. You advance the bishop to f5.
+PARAPHRASED: You respond by advancing the bishop to f5, attacking their knight.
+<|endoftext|>
+ORIGINAL: Your opponent counters by attacking the knight with e6f5.
+PARAPHRASED: Your opponent counters by attacking the knight with e6f5.
+<|endoftext|>
+ORIGINAL: You respond with b3b4. You move the pawn up to b4.
+PARAPHRASED: You respond by moving the pawn up to b4.
+<|endoftext|>
+ORIGINAL: You counter with a3c2. You retreat the knight.
+PARAPHRASED: You counter by retreating the knight to c2.
+<|endoftext|>
+ORIGINAL: You respond to e8e7 with c2e3.
+PARAPHRASED: You respond to e8e7 with c2e3.
+<|endoftext|>
+ORIGINAL: Stockfish responds with e7e6. Your opponent moves the rook up to e6.
+PARAPHRASED: Stockfish responds by moving the rook at e7 up to e6.
+<|endoftext|>
+ORIGINAL: Your opponent counters with d6d5. Your opponent moves the pawn up to d5.
+PARAPHRASED: Your opponent counters by moving the pawn at d6 up to d5.
+<|endoftext|>
+ORIGINAL: You counter f7f6 with e3g2. You retreat the knight.
+PARAPHRASED: You counter f7f6 by retreating the knight at e3 to g2.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with g6f7. Stockfish retreats the bishop back to f7.
+PARAPHRASED: Stockfish responds by retreating the bishop at g6 to f7.
+<|endoftext|>
+ORIGINAL: You counter with g2f4. You move the knight out to f4.
+PARAPHRASED: You counter by moving the knight at g2 to f4.
+<|endoftext|>
+ORIGINAL: Black responds to g2f4 with e6d6.
+PARAPHRASED: Black responds to g2f4 with e6d6.
+<|endoftext|>
+ORIGINAL: Stockfish counters h4h5 with e8b8. Your opponent brings the rook out.
+PARAPHRASED: Stockfish counters h4h5 by bringing the rook at e8 out to b8.
+<|endoftext|>
+ORIGINAL: You respond to e8b8 with f2f1. You move the king back to f1.
+PARAPHRASED: You respond to e8b8 by moving the king back to f1.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with g8h7. Your opponent brings the king out.
+PARAPHRASED: Stockfish comes back by bringing the king out with g8h7. 
+<|endoftext|>
+ORIGINAL: Your opponent counters with h7g8. Black retreats the king back to g8.
+PARAPHRASED: Your opponent counters by retreating the king back to g8.
+<|endoftext|>
+ORIGINAL: You respond to h7g8 with f4g6. You advance the knight to g6.
+PARAPHRASED: You respond to h7g8 by advancing the knight at f4 to g6.
+<|endoftext|>
+ORIGINAL: Black answers by taking white's knight with f7g6.
+PARAPHRASED: Black answers by taking white's knight with f7g6.
+<|endoftext|>
+ORIGINAL: You capture knight with h5g6.
+PARAPHRASED: You capture the knight with h5g6.
+<|endoftext|>
+ORIGINAL: Stockfish responds with d6e6.
+PARAPHRASED: Stockfish responds with d6e6.
+<|endoftext|>
+ORIGINAL: You respond with e2e4. You move the pawn forward to e4.
+PARAPHRASED: You respond by moving the pawn at e2 forward to e4.
+<|endoftext|>
+ORIGINAL: Stockfish responds with f4e3, putting you into check.
+PARAPHRASED: Stockfish responds with f4e3, putting you into check.
+<|endoftext|>
+ORIGINAL: You respond by taking black's pawn with c3e3.
+PARAPHRASED: You respond by taking black's pawn with c3e3.
+<|endoftext|>
+ORIGINAL: Stockfish comes back by taking the pawn with e6e3. Your opponent moves the rook up to e3.
+PARAPHRASED: Stockfish responds by taking the pawn at e3 with their rook.
+<|endoftext|>
+ORIGINAL: You counter by taking black's rook with f2e3.
+PARAPHRASED: You counter by taking black's rook with f2e3.
+<|endoftext|>
+ORIGINAL: You respond by taking black's pawn with b4a5.
+PARAPHRASED: You respond by taking black's pawn with b4a5.
+<|endoftext|>
+ORIGINAL: Stockfish counters with a6a8. Stockfish moves the rook back to a8.
+PARAPHRASED: Stockfish counters by moving the rook at a6 back to a8.
+<|endoftext|>
+ORIGINAL: Stockfish answers by capturing the pawn with c5d4.
+PARAPHRASED: Stockfish answers by capturing the pawn with c5d4.
+<|endoftext|>
+ORIGINAL: You counter by capturing black's rook with b8e8, putting black into check.
+PARAPHRASED: You counter by capturing black's rook with b8e8, putting black into check.
+<|endoftext|>
+ORIGINAL: You counter by capturing black's rook with b8e8, putting black into check.
+PARAPHRASED: You counter by capturing Stockfish’s rook with b8e8, putting black into check.
+<|endoftext|>
+ORIGINAL: You counter by capturing black's rook with b8e8, putting black into check.
+PARAPHRASED: You counter by capturing Stockfish’s rook with b8e8, putting Stockfish into check.
+<|endoftext|>
+ORIGINAL: You respond with a7a8q, checking stockfish. You move the queen forward to a8. You have checkmated your opponent. You have beaten your opponent
+PARAPHRASED: You checkmate your opponent with a7a8q.
+<|endoftext|> 
+ORIGINAL: You attack queen with a7a8q, which is now check. You move the queen up to a8. You have checkmated your opponent. You have won.
+PARAPHRASED: You checkmate your opponent with a7a8q.
+<|endoftext|>
+ORIGINAL: Your opponent responds with e7e5. Black moves the pawn forward to e5. A known response is g1f3. Playing g1f3 leads to the Hungarian Opening: Reversed Alekhine.
+PARAPHRASED: Your opponent responds by moving the pawn at e7 to e5. Playing g1f3 leads to the Hungarian Opening: Reversed Alekhine.
+<|endoftext|>
+ORIGINAL: Black counters the King's Pawn with the King's Pawn Game. Stockfish moves the pawn forward to e5. d1f3, e1e2 and f2f4 are typical responses. Playing d1f3 leads to the Napoleon Attack. Playing e1e2 leads to the Bongcloud Attack. Playing f2f4 leads to the King's Gambit.
+PARAPHRASED: Black uses the King's Pawn Game to counter the King's Pawn. Stockfish advances the pawn to e5. Typical replies include d1f3, e1e2, and f2f4. The Napoleon Attack is triggered when you play d1f3. The Bongcloud Attack is triggered when you play e1e2. The King's Gambit is the result of playing f2f4.
+<|endoftext|>
+ORIGINAL: Black answers with the Queen's Pawn Game. Stockfish moves the pawn up to d5. d1d3, b1c3 and c1f4 are known responses. Playing d1d3 leads to the Amazon Attack. Playing b1c3 leads to the Chigorin Variation. Playing c1f4 leads to the Mason Variation.
+PARAPHRASED: The Queen's Pawn Game is Black's response. The pawn is moved to d5 by Stockfish. The replies d1d3, b1c3, and c1f4 are well-known. The Amazon Attack occurs when you play d1d3. When you play b1c3, you get the Chigorin Variation. When you play c1f4, you get the Mason Variation.
+<|endoftext|>
+ORIGINAL:Stockfish comes back with the English Opening: King's English Variation. Stockfish moves the pawn up to e5. You may want to try g1f3 or b1c3. Playing g1f3 leads to the English Opening: King's English Variation, Nimzowitsch Variation. Playing b1c3 leads to the English Opening: King's English Variation, Reversed Sicilian.
+PARAPHRASED: Stockfish comes back with the English Opening: King's English Variation. The pawn is moved to e5 by Stockfish. You might want to look at g1f3 or b1c3. The English Opening: King's English Variation, Nimzowitsch Variation is obtained by playing g1f3. The English Opening: King's English Variation, Reversed Sicilian, is reached by playing b1c3.
+<|endoftext|>
+ORIGINAL: Black responds to the Kadas Opening with d7d5. Your opponent moves the pawn up to d5. h1h3 is a common response. Playing h1h3 leads to the Kadas Opening: Beginner's Trap.
+PARAPHRASED: Black plays d7d5 in response to the Kadas Opening. The pawn is moved up to d5 by your opponent. A common answer is h1h3. When you play h1h3, you'll encounter the Kadas Opening: Beginner's Trap.
+<|endoftext|>
+ORIGINAL: Your opponent responds with e7e5. Stockfish moves the pawn up to e5. A common response is d2d4. Playing d2d4 leads to the Englund Gambit Declined: Reversed French.
+PARAPHRASED: e7e5 is your opponent's response. The pawn is moved to e5 by Stockfish. Playing d2d4 leads to the Englund Gambit Declined: Reversed French.
+<|endoftext|>
+ORIGINAL: Your opponent responds with the French Defense. Your opponent moves the pawn up to e6. d2d4, g1f3 and e4e5 are known responses. Playing d2d4 leads to the Normal Variation. Playing g1f3 leads to the Knight Variation. Playing e4e5 leads to the Steinitz Attack.
+PARAPHRASED: The French Defense is used by your opponent. The pawn is moved up to e6 by your opponent. The replies d2d4, g1f3, and e4e5 are well-known. When you play d2d4, you get the Normal Variation. When you play g1f3, you get the Knight Variation. When you play e4e5, you'll get the Steinitz Attack.
+<|endoftext|>
+ORIGINAL: Your opponent responds with the King's Pawn Game. Stockfish moves the pawn forward to e5. f2f3, d2d3 and g1f3 are known responses. Playing f2f3 leads to the King's Head Opening. Playing d2d3 leads to the Leonardis Variation. Playing g1f3 leads to the King's Knight Opening.
+PARAPHRASED: The King's Pawn Game is your opponent's response. Stockfish moves the piece to e5. The answers f2f3, d2d3, and g1f3 are all well-known. The King's Head Opening is reached by playing f2f3. When you play d2d3, you get the Leonardis Variation. The King's Knight Opening is reached by playing g1f3.
+<|endoftext|>
+ORIGINAL: Stockfish responds to the King's Pawn with the French Defense. Stockfish moves the pawn up to e6. You could respond with b2b4, d2d3 or d1e2. Playing b2b4 leads to the Banzai-Leong Gambit. Playing d2d3 leads to the King's Indian Attack. Playing d1e2 leads to the Chigorin Variation.
+PARAPHRASED: The French Defense is Stockfish's response to the King's Pawn. The pawn is moved to e6 by Stockfish. You may use b2b4, d2d3, or d1e2 as a response. The Banzai-Leong Gambit is a variant of the b2b4 game. The King's Indian Attack is triggered when you play d2d3. When you play d1e2, you get the Chigorin Variation.
+<|endoftext|>
+ORIGINAL: Black answers with the Queen's Pawn Game. Black moves the pawn up to d5. You may want to try d1d3, g1f3 or e2e4. Playing d1d3 leads to the Amazon Attack. Playing g1f3 leads to the Zukertort Variation. Playing e2e4 leads to the Blackmar Gambit.
+PARAPHRASED: The Queen's Pawn Game is Black's response. The pawn is moved to to d5 by Black. You may try d1d3, g1f3, or e2e4. The Amazon Attack occurs when you play d1d3. When you play g1f3, you get the Zukertort Variation. The Blackmar Gambit is a variant of the e2e4 game.
+<|endoftext|>
+ORIGINAL:Black responds with the English Opening: Symmetrical Variation. Your opponent moves the pawn up to c5. b2b4 and b1c3 are known responses. Playing b2b4 leads to the English Opening: Wing Gambit. Playing b1c3 leads to the English Opening: Symmetrical Variation, Normal Variation.
+PARAPHRASED: The English Opening: Symmetrical Variation is Black's response. The pawn is moved up to c5 by your opponent. The replies b2b4 and b1c3 are well-known. When you play b2b4, you'll get the English Opening: Wing Gambit. The English Opening: Symmetrical Variation, Normal Variation is reached by playing b1c3.
+<|endoftext|>
+ORIGINAL: Black counters the King's Pawn with the Nimzowitsch Defense. Your opponent brings the knight out to c6. You may want to try b2b4, f1b5 or d2d4. Playing b2b4 leads to the Wheeler Gambit. Playing f1b5 leads to the Pseudo-Spanish Variation. Playing d2d4 leads to the King's Pawn Game: Nimzowitsch Defense.
+PARAPHRASED: The Nimzowitsch Defense is used by Black to fight the King's Pawn. The knight is brought out to c6 by your opponent. You may try b2b4, f1b5, or d2d4. The Wheeler Gambit is a variant of the b2b4 game. When you play f1b5, you get the Pseudo-Spanish Variation. The King's Pawn Game: Nimzowitsch Defense is a variant of the d2d4 game.
+<|endoftext|>
+ORIGINAL: Stockfish counters the Queen's Pawn Game with the Horwitz Defense. Stockfish moves the pawn forward to e6.
+PARAPHRASED: The Horwitz Defense is used by Stockfish to resist the Queen's Pawn Game. Stockfish advances the pawn to e6.
+<|endoftext|>
+ORIGINAL: Stockfish counters the Gedult's Opening with e7e5. Your opponent moves the pawn up to e5. e1f2 can be played. Playing e1f2 leads to the Barnes Opening: Hammerschlag.
+PARAPHRASED: With e7e5, Stockfish counters the Gedult's Opening. The pawn is moved up to e5 by your opponent. When you play e1f2, you'll get the Barnes Opening: Hammerschlag.
+<|endoftext|>
+ORIGINAL: Your opponent answers with the English Opening: Agincourt Defense. Stockfish moves the pawn up to e6. A known response is g1f3. Playing g1f3 leads to the English Opening: Agincourt Defense.
+PARAPHRASED: Your opponent responds with the English Opening: Agincourt Defense. The pawn is moved to e6 by Stockfish. The English Opening: Agincourt Defense is reached by playing g1f3.
+<|endoftext|>
+ORIGINAL: Black answers with the Sicilian Defense. Black moves the pawn up to c5. g1e2, d2d4 and g1f3 are typical responses. Playing g1e2 leads to the Keres Variation. Playing d2d4 leads to the Smith-Morra Gambit. Playing g1f3 leads to the Sicilian Defense.
+PARAPHRASED: The Sicilian Defense is Black's response. The pawn is moved up to c5 by black. Typical replies are g1e2, d2d4, and g1f3. When you play g1e2, you get the Keres Variation. When you play d2d4, you get the Smith-Morra Gambit. The Sicilian Defense is reached by playing g1f3.
+<|endoftext|>
+ORIGINAL: Stockfish counters the Queen's Pawn Game with the Indian Defense. Stockfish brings the knight out to f6. f2f3, g1f3 and d4d5 are known responses. Playing f2f3 leads to the Paleface Attack. Playing g1f3 leads to the Knights Variation. Playing d4d5 leads to the Pawn Push Variation.
+PARAPHRASED: Stockfish uses the Indian Defense to counter the Queen's Pawn Game. The knight is brought out to f6 by Stockfish, and the answers f2f3, g1f3, and d4d5 are all well-known. The Paleface Attack is triggered when you play f2f3. When you play g1f3, you get the Knights Variation. When you play d4d5, you get the Pawn Push Variation.
+<|endoftext|>
+ORIGINAL: Your opponent responds with the King's Pawn Game. Black moves the pawn up to e5. You could respond with c2c4, c2c3 or d2d4. Playing c2c4 leads to the English Opening: The Whale. Playing c2c3 leads to the Macleod Attack. Playing d2d4 leads to the Center Game.
+PARAPHRASED: The King's Pawn Game is your opponent's response. The pawn is moved up to e5 by black. You may use c2c4, c2c3, or d2d4 as a response. When you play c2c4, you get the English Opening: The Whale. The Macleod Attack occurs when you play c2c3. The Center Game is reached by playing d2d4.
+<|endoftext|>
+ORIGINAL: Black answers with the Sicilian Defense. Black moves the pawn up to c5. You could respond with d1g4, c2c4 or g1h3. Playing d1g4 leads to the Amazon Attack. Playing c2c4 leads to the Staunton-Cochrane Variation. Playing g1h3 leads to the Brick Variation.
+PARAPHRASED: The Sicilian Defense is Black's response. The pawn is moved up to c5 by black. You may use d1g4, c2c4, or g1h3 as a response. The Amazon Attack is triggered when you play d1g4. When you play c2c4, you get the Staunton-Cochrane Variation. The Brick Variation is triggered when you play g1h3.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with the French Defense. Stockfish moves the pawn forward to e6. c2c4, g1f3 and g2g3 are known responses. Playing c2c4 leads to the Steiner Variation. Playing g1f3 leads to the Knight Variation. Playing g2g3 leads to the Réti-Spielmann Attack.
+PARAPHRASED: With the French Defense, Stockfish returns. Stockfish advances the pawn to e6. The replies c2c4, g1f3, and g2g3 are well-known. When you play c2c4, you get the Steiner Variation. When you play g1f3, you get the Knight Variation. The Réti-Spielmann Attack is triggered when you play g2g3.
+<|endoftext|>
+ORIGINAL: Stockfish counters with the Sicilian Defense. Your opponent moves the pawn up to c5. g1e2, e1e2 and b1c3 are common responses. Playing g1e2 leads to the Keres Variation. Playing e1e2 leads to the King David's Opening. Playing b1c3 leads to the Closed.
+PARAPHRASED: The Sicilian Defense is used by Stockfish as a reply. The pawn is moved up to c5 by your opponent. Common replies are g1e2, e1e2, and b1c3. When you play g1e2, you get the Keres Variation. The King David's Opening is reached by playing e1e2. When you play b1c3, you get the Closed.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with the King's Pawn Game. Your opponent moves the pawn forward to e5. c2c3, f2f3 and f1b5 are typical responses. Playing c2c3 leads to the Macleod Attack. Playing f2f3 leads to the King's Head Opening. Playing f1b5 leads to the Portuguese Opening.
+PARAPHRASED: The King's Pawn Game is used by your opponent. Your opponent advances the piece to e5. Typical answers are c2c3, f2f3, and f1b5. The Macleod Attack occurs when you play c2c3. The King's Head Opening is reached by playing f2f3. The Portuguese Opening is reached by playing f1b5.
+<|endoftext|>
+ORIGINAL: Your opponent comes back with the French Defense. Your opponent moves the pawn forward to e6. e4e5, b1c3 and f2f4 are common responses. Playing e4e5 leads to the Steinitz Attack. Playing b1c3 leads to the Queen's Knight. Playing f2f4 leads to the La Bourdonnais Variation.
+PARAPHRASED: The French Defense is used by your opponent. Your opponent advances the piece to e6. Common responses are e4e5, b1c3, and f2f4. When you play e4e5, you'll get the Steinitz Attack. The Queen's Knight is obtained by playing b1c3. When you play f2f4, you get the La Bourdonnais Variation.
+<|endoftext|>
+ORIGINAL: Stockfish comes back with the King's Pawn Game. Your opponent moves the pawn forward to e5. You may want to try f1d3, f2f3 or c2c3. Playing f1d3 leads to the Tortoise Opening. Playing f2f3 leads to the King's Head Opening. Playing c2c3 leads to the Macleod Attack.
+PARAPHRASED: Stockfish comes back with the King's Pawn Game. Your opponent advances the piece to e5. You may try f1d3, f2f3, or c2c3. The Tortoise Opening is reached by playing f1d3. The King's Head Opening is reached by playing f2f3. The Macleod Attack occurs when you play c2c3.
+<|endoftext|>
+ORIGINAL: Black counters with the King's Pawn Game. Black moves the pawn forward to e5. You could respond with f1d3, d2d3 or f2f4. Playing f1d3 leads to the Tortoise Opening. Playing d2d3 leads to the Leonardis Variation. Playing f2f4 leads to the King's Gambit.
+PARAPHRASED: Black uses the King's Pawn Game as a counter. Black advances the pawn to e5. You may use f1d3, d2d3, or f2f4 as a response. The Tortoise Opening is reached by playing f1d3. When you play d2d3, you get the Leonardis Variation. The King's Gambit is the result of playing f2f4.
+<|endoftext|>
+ORIGINAL: Black moves the pawn forward to e6. You could respond with b2b3, d1e2 or b1c3. Playing b2b3 leads to the Horwitz Attack. Playing d1e2 leads to the Chigorin Variation. Playing b1c3 leads to the Queen's Knight.
+PARAPHRASED: Black advances the pawn to e6. B2b3, d1e2, or b1c3 are all possible responses. The Horwitz Attack occurs when you play b2b3. When you play d1e2, you get the Chigorin Variation. The Queen's Knight is obtained by playing b1c3.
+<|endoftext|>
+ORIGINAL: Your opponent responds to the King's Pawn with the King's Pawn Game. Your opponent moves the pawn up to e5. f1c4, c2c3 and e1e2 are common responses. Playing f1c4 leads to the Bishop's Opening. Playing c2c3 leads to the Macleod Attack. Playing e1e2 leads to the Bongcloud Attack.
+PARAPHRASED: The King's Pawn Game is your opponent's response to the King's Pawn. The pawn is moved up to e5 by your opponent. Common replies are f1c4, c2c3, and e1e2. The Bishop's Opening is reached by playing f1c4. The Macleod Attack occurs when you play c2c3. The Bongcloud Attack is triggered when you play e1e2.
+<|endoftext|>
+ORIGINAL: Black counters with the French Defense. Stockfish moves the pawn up to e6. g1f3, b1c3 and d2d4 are common responses. Playing g1f3 leads to the Knight Variation. Playing b1c3 leads to the Queen's Knight. Playing d2d4 leads to the Normal Variation.
+PARAPHRASED: The French Defense is used by Black as a counter. The pawn is moved to e6 by Stockfish. Common responses include g1f3, b1c3, and d2d4. When you play g1f3, you get the Knight Variation. The Queen's Knight is obtained by playing b1c3. When you play d2d4, you get the Normal Variation.
+<|endoftext|>
+ORIGINAL: Your opponent counters with the French Defense. Black moves the pawn forward to e6. You could respond with f1b5, b2b3 or e4e5. Playing f1b5 leads to the Bird Invitation. Playing b2b3 leads to the Horwitz Attack. Playing e4e5 leads to the Steinitz Attack.
+PARAPHRASED: The French Defense is used by your opponent. Black advances the pawn to e6. You may use f1b5, b2b3, or e4e5 as a response. The Bird Invitation is obtained by playing f1b5. The Horwitz Attack occurs when you play b2b3. When you play e4e5, you'll get the Steinitz Attack.
+<|endoftext|>
+ORIGINAL: Your opponent responds with the Indian Defense. Black brings the knight out to f6. g2g3, c1g5 and d4d5 are typical responses. Playing g2g3 leads to the Tartakower Attack. Playing c1g5 leads to the Trompowsky Attack. Playing d4d5 leads to the Pawn Push Variation.
+PARAPHRASED: The Indian Defense is used by your opponent. The knight is brought out to f6 by black. Typical answers are g2g3, c1g5, and d4d5. The Tartakower Attack is triggered by playing g2g3. The Trompowsky Attack is triggered when you play c1g5. When you play d4d5, you get the Pawn Push Variation.
+<|endoftext|>
+ORIGINAL: Your opponent responds with the Queen's Pawn Game. Your opponent moves the pawn up to d5. You could respond with g2g4, c1g5 or b1c3. Playing g2g4 leads to the Zurich Gambit. Playing c1g5 leads to the Levitsky Attack. Playing b1c3 leads to the Chigorin Variation.
+PARAPHRASED: The Queen's Pawn Game is your opponent's response. The pawn is moved up to d5 by your opponent. G2g4, c1g5, or b1c3 are all possible responses. The Zurich Gambit is the result of playing g2g4. The Levitsky Attack occurs when you play c1g5. When you play b1c3, you get the Chigorin Variation.
+<|endoftext|>
+ORIGINAL: Black counters with the French Defense. Black moves the pawn up to e6. You could respond with d2d4, g2g3 or g1f3. Playing d2d4 leads to the Normal Variation. Playing g2g3 leads to the Réti-Spielmann Attack. Playing g1f3 leads to the Knight Variation.
+PARAPHRASED: The French Defense is used by Black as a counter. The pawn is moved up to e6 by black. You may use d2d4, g2g3, or g1f3 as a response. When you play d2d4, you get the Normal Variation. The Réti-Spielmann Attack is triggered when you play g2g3. When you play g1f3, you get the Knight Variation.
+<|endoftext|>
+ORIGINAL: Your opponent responds to the King's Pawn with the French Defense. Stockfish moves the pawn up to e6. c2c4, g1f3 and f1b5 are common responses. Playing c2c4 leads to the Steiner Variation. Playing g1f3 leads to the Knight Variation. Playing f1b5 leads to the Bird Invitation.
+PARAPHRASED: The French Defense is your opponent's response to the King's Pawn. The pawn is moved to e6 by Stockfish. Common responses are c2c4, g1f3, and f1b5. When you play c2c4, you get the Steiner Variation. When you play g1f3, you get the Knight Variation. The Bird Invitation is obtained by playing f1b5.
+<|endoftext|>
+ORIGINAL: Stockfish answers with the Zukertort Opening. Your opponent brings the knight out to f6. You may want to try c2c4, b2b3 or e2e3. Playing c2c4 leads to the English Opening: Anglo-Indian Defense, King's Knight Variation. Playing b2b3 leads to the Nimzo-Larsen Variation. Playing e2e3 leads to the Quiet System.
+PARAPHRASED: The Zukertort Opening is Stockfish's response. The knight is brought out to f6 by your opponent. You may try c2c4, b2b3, or e2e3. The English Opening: Anglo-Indian Defense, King's Knight Variation is obtained by playing c2c4. When you play b2b3, you get the Nimzo-Larsen Variation. When you play e2e3, the Quiet System appears.
+<|endoftext|>
+ORIGINAL: Stockfish counters with the Zukertort Opening: Queen's Gambit Invitation. Black moves the pawn forward to e6.
+PARAPHRASED: Stockfish counters with the Zukertort Opening: Queen's Gambit Invitation. Black moves the pawn forward to e6.
+<|endoftext|>
+ORIGINAL: Black counters the Zukertort Opening with the Zukertort Opening: Sicilian Invitation. Black moves the pawn forward to c5.
+PARAPHRASED: Black counters the Zukertort Opening with the Zukertort Opening: Sicilian Invitation. Black moves the pawn forward to c5.
+<|endoftext|>
+ORIGINAL: Your opponent responds with the Zukertort Opening: Sicilian Invitation. Stockfish moves the pawn up to c5.
+PARAPHRASED: Your opponent responds with the Zukertort Opening: Sicilian Invitation. Stockfish moves the pawn up to c5.
+<|endoftext|>
+ORIGINAL: Black counters with the Zukertort Opening: Sicilian Invitation. Your opponent moves the pawn forward to c5.
+PARAPHRASED: Black counters with the Zukertort Opening: Sicilian Invitation. Your opponent moves the pawn forward to c5.
+<|endoftext|>
+ORIGINAL: Stockfish answers with d7d5. Black moves the pawn up to d5. g1f3 is a known response. Playing g1f3 leads to the Zukertort Opening: Reversed Mexican Defense.
+PARAPHRASED: Stockfish responds with the number d7d5. The pawn is moved to to d5 by Black. When you play g1f3, you get the Zukertort Opening: Mexican Defense in reverse.
+<|endoftext|>
+ORIGINAL: Stockfish counters the Zukertort Opening with the Zukertort Opening. Black moves the pawn up to d5. h1g1, c2c4 and d2d3 are common responses. Playing h1g1 leads to the Ampel Variation. Playing c2c4 leads to the Réti Opening. Playing d2d3 leads to the Old Indian Attack.
+PARAPHRASED: The Zukertort Opening is countered by Stockfish with the Zukertort Opening. The pawn is moved to to d5 by Black. Common replies include h1g1, c2c4, and d2d3. When you play h1g1, you get the Ampel Variation. The Réti Opening is reached by playing c2c4. When you play d2d3, you'll get the Old Indian Attack.
+<|endoftext|>
+ORIGINAL: Stockfish counters the English Opening with the English Opening: Symmetrical Variation. Stockfish moves the pawn up to c5. b2b4 and b1c3 are known responses. Playing b2b4 leads to the English Opening: Wing Gambit. Playing b1c3 leads to the English Opening: Symmetrical Variation, Normal Variation.
+PARAPHRASED: Stockfish uses the English Opening: Symmetrical Variation to oppose the English Opening. The pawn is moved to c5 by Stockfish. The replies b2b4 and b1c3 are well-known. When you play b2b4, you'll get the English Opening: Wing Gambit. The English Opening: Symmetrical Variation, Normal Variation is reached by playing b1c3.
+<|endoftext|>
+ORIGINAL: Black counters with the Sicilian Defense. Stockfish moves the pawn forward to c5. a2a4, d1g4 and d2d4 are typical responses. Playing a2a4 leads to the Myers Attack. Playing d1g4 leads to the Amazon Attack. Playing d2d4 leads to the Smith-Morra Gambit.
+PARAPHRASED: The Sicilian Defense is used by Black as a response. Stockfish advances the pawn to c5. Typical replies include a2a4, d1g4, and d2d4. The Myers Attack is triggered by playing a2a4. The Amazon Attack is triggered when you play d1g4. When you play d2d4, you get the Smith-Morra Gambit.
+<|endoftext|>
+ORIGINAL: Black answers with the Queen's Pawn Game. Your opponent moves the pawn up to d5. c1g5, e2e4 and e2e3 are typical responses. Playing c1g5 leads to the Levitsky Attack. Playing e2e4 leads to the Blackmar Gambit. Playing e2e3 leads to the Queen's Pawn Game.
+PARAPHRASED: The Queen's Pawn Game is Black's response. The pawn is moved up to d5 by your opponent. Typical replies are c1g5, e2e4, and e2e3. The Levitsky Attack occurs when you play c1g5. The Blackmar Gambit is a variant of the e2e4 game. The Queen's Pawn Game is the result of playing e2e3.
+<|endoftext|>
