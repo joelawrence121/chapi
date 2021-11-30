@@ -162,7 +162,7 @@ class StockfishService(object):
         Return a quick cp value giving an indication of the winning probability from White's perspective.
         """
         cp_score = get_cp_score(self.analyse_board(fen, WHITE, time_limit=0.1))
-        if user == BLACK:
+        if cp_score is not None and user == BLACK:
             cp_score *= -1
         return cp_score
 

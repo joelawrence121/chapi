@@ -2,7 +2,7 @@ import random
 
 import chess
 
-import grammar_factory
+from service import grammar_service
 from domain.client_json import DescriptionRequest
 from domain.repository import Repository
 from service.stockfish_service import StockfishService, Outcome
