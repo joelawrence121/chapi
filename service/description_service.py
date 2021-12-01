@@ -36,6 +36,7 @@ class DescriptionService(object):
         response['descriptions'].extend(self.get_end_description(request))
         response['descriptions'].extend(self.get_blunder_description(request))
         response['descriptions'].extend(self.get_gain_description(request))
+        response['descriptions'] = [' '.join(response['descriptions'])]
         return response
 
     def get_opening_description(self, request: DescriptionRequest):
@@ -44,7 +45,7 @@ class DescriptionService(object):
         CFG generated description with Wikipedia link if it exists.
         """
 
-        grammar = grammar_factory.get_default_opening(request.user, request.uci)
+        grammar = grammar_service.get_default_opening(request.user, request.uci)
         opening = self.repository.query_opening_by_move_stack(request.moveStack)
         capture = self.stockfish_service.get_capture_result(request)
         is_check = self.stockfish_service.get_is_check(request)
@@ -53,17 +54,17 @@ class DescriptionService(object):
         if request.user == WHITE:
             # special case for opening move
             if len(request.moveStack) == 1:
-                grammar = grammar_factory.get_user_first_opening(move)
+                grammar = grammar_service.get_user_first_opening(move)
             else:
                 previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                          self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-                grammar = grammar_factory.get_user_move(move, previous_move, capture, is_check)
+                grammar = grammar_service.get_user_move(move, previous_move, capture, is_check)
 
         elif request.user == BLACK:
             is_following_blunder = self.stockfish_service.is_following_blunder(request)
             previous_move = get_move(request.moveStack[len(request.moveStack) - 2],
                                      self.repository.query_opening_by_move_stack(request.moveStack[:-1]))
-            grammar = grammar_factory.get_stockfish_move(move, previous_move, capture, is_check, is_following_blunder)
+            grammar = grammar_service.get_stockfish_move(move, previous_move, capture, is_check, is_following_blunder)
 
         # return the description, link and move name for rendering on front end
         return get_random_generation(grammar), get_link(opening), move
@@ -81,11 +82,11 @@ class DescriptionService(object):
         grammar = ""
         move_count = len(request.moveStack) // 2
         if self.stockfish_service.is_over(request.fen) == Outcome.WHITE:
-            grammar = grammar_factory.get_user_win_condition(move_count)
+            grammar = grammar_service.get_user_win_condition(move_count)
         elif self.stockfish_service.is_over(request.fen) == Outcome.BLACK:
-            grammar = grammar_factory.get_stockfish_win_condition(move_count)
+            grammar = grammar_service.get_stockfish_win_condition(move_count)
         elif self.stockfish_service.is_over(request.fen) == Outcome.STALE:
-            grammar = grammar_factory.get_stalemate_ending(move_count)
+            grammar = grammar_service.get_stalemate_ending(move_count)
         return get_random_generation(grammar)
 
     def get_mate_description(self, request: DescriptionRequest):
@@ -101,15 +102,15 @@ class DescriptionService(object):
         grammar = ""
         if checkmate_result['user'] == Outcome.WHITE:
             if checkmate_result['moves'] == 0:
-                grammar = grammar_factory.get_user_checkmated()
+                grammar = grammar_service.get_user_checkmated()
             else:
-                grammar = grammar_factory.get_user_checkmating(checkmate_result['moves'])
+                grammar = grammar_service.get_user_checkmating(checkmate_result['moves'])
 
         if checkmate_result['user'] == Outcome.BLACK:
             if checkmate_result['moves'] == 0:
-                grammar = grammar_factory.get_stockfish_checkmated()
+                grammar = grammar_service.get_stockfish_checkmated()
             else:
-                grammar = grammar_factory.get_stockfish_checkmating(checkmate_result['moves'])
+                grammar = grammar_service.get_stockfish_checkmating(checkmate_result['moves'])
 
         return get_random_generation(grammar)
 
@@ -121,7 +122,7 @@ class DescriptionService(object):
         if request.user == BLACK or advantage_change is None or advantage_change > self.stockfish_service.BLUNDER_THRESHOLD:
             return []
 
-        grammar = grammar_factory.get_user_blunder(request.uci, abs(round(advantage_change * 100)),
+        grammar = grammar_service.get_user_blunder(request.uci, abs(round(advantage_change * 100)),
                                                    advantage_change < self.CRITICAL_BLUNDER_THRESHOLD)
         return get_random_generation(grammar)
 
@@ -144,7 +145,7 @@ class DescriptionService(object):
         if len(moves) == 0:
             return []
 
-        grammar = grammar_factory.get_move_suggestion(moves, names)
+        grammar = grammar_service.get_move_suggestion(moves, names)
         return get_random_generation(grammar)
 
     def get_positional_description(self, request):
@@ -161,24 +162,24 @@ class DescriptionService(object):
 
         # piece moves forward / backward
         if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) < int(rel_to_square[1]) - 1:
-            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, None,
+            grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), None, None,
                                                                  1)
         if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) + 1 > int(rel_to_square[1]):
-            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, None,
+            grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), None, None,
                                                                  -1)
 
         # piece moves within same column
         if rel_from_square[0] == rel_to_square[0]:
             if int(rel_from_square[1]) < int(rel_to_square[1]):
-                grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, 1)
+                grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), None, 1)
             else:
-                grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), None, -1)
+                grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), None, -1)
 
         # moving from starting row
         if request.user == BLACK and rel_to_square[1] == '8':
-            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), True)
+            grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), True)
         if request.user == WHITE and rel_from_square[1] == '1':
-            grammar = grammar_factory.get_positional_description(request.user, piece, get_to_square(move), True)
+            grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), True)
 
         if grammar is None:
             return []
@@ -196,11 +197,11 @@ class DescriptionService(object):
             return []
 
         rounded_advantage_change = abs(round(advantage_change * 100))
-        grammar = grammar_factory.get_good_move(request.uci, rounded_advantage_change)
+        grammar = grammar_service.get_good_move(request.uci, rounded_advantage_change)
         if advantage_change > self.stockfish_service.GOOD_MOVE_UPPER_BOUND:
             play_result = self.stockfish_service.get_best_move(request.fen)
-            grammar = grammar_factory.get_fantastic_move(request.uci, rounded_advantage_change)
+            grammar = grammar_service.get_fantastic_move(request.uci, rounded_advantage_change)
             if request.uci == play_result.move.uci() or request.uci == play_result.ponder.uci():
-                grammar = grammar_factory.get_fantastic_move(request.uci, rounded_advantage_change)
+                grammar = grammar_service.get_fantastic_move(request.uci, rounded_advantage_change)
 
         return get_random_generation(grammar)

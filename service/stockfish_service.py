@@ -46,17 +46,11 @@ class StockfishService(object):
             self.board.push(result.move)
             move = result.move.uci()
 
-        winner = None
-        if self.is_over(self.board.fen()) == Outcome.WHITE:
-            winner = Outcome.WHITE
-        elif self.is_over(self.board.fen()) == Outcome.BLACK:
-            winner = Outcome.BLACK
-
         return StockfishResult(
             request.id,
             self.board.fen(),
             move,
-            winner,
+            self.is_over(self.board.fen()),
             self.get_relative_score(self.board.fen(), BLACK if self.board.turn else WHITE)
         )
 
