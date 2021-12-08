@@ -10,7 +10,7 @@ from engine.stockfish import Engine
 from util.utils import get_other_user, WHITE, BLACK
 
 
-class StockfishService(object):
+class StockfishService:
     DEFAULT_DIFFICULTY = 10
     DEFAULT_TIME_LIMIT = 0.1
     MATE_LOWER_BOUND = 1

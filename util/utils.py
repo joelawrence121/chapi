@@ -2,10 +2,27 @@ import logging
 import random
 
 import chess
+from fastapi import FastAPI
 from nltk.parse.generate import generate
+from starlette.middleware.cors import CORSMiddleware
 
 BLACK = "black"
 WHITE = "white"
+
+ORIGINS = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+
+def configure_app(app: FastAPI):
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=ORIGINS,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 def get_piece_name(uci, fen):

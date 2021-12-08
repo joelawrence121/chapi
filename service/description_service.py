@@ -2,15 +2,15 @@ import random
 
 import chess
 
-from service import grammar_service
 from domain.client_json import DescriptionRequest
 from domain.repository import Repository
+from service import grammar_service
 from service.stockfish_service import StockfishService, Outcome
 from util.utils import get_move, get_random_generation, get_link, format_name, get_piece_name, get_to_square, WHITE, \
     BLACK
 
 
-class DescriptionService(object):
+class DescriptionService:
     CRITICAL_BLUNDER_THRESHOLD = -0.6
 
     def __init__(self):

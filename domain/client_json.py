@@ -16,3 +16,8 @@ class PlayRequest(BaseModel):
     fen: str
     difficulty: int
     time_limit: float
+
+
+class AggregationRequest(BaseModel):
+    index: int
+    original: str

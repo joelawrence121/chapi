@@ -2,30 +2,18 @@ import logging
 
 import uvicorn
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
 
 from domain.client_json import DescriptionRequest, PlayRequest
 from service.description_service import DescriptionService
 from service.puzzle_service import PuzzleService
 from service.stockfish_service import StockfishService
+from util import utils
 
 app = FastAPI()
+utils.configure_app(app)
 puzzle_service = PuzzleService()
 description_service = DescriptionService()
 stockfish_service = StockfishService()
-
-origins = [
-    "http://localhost",
-    "http://localhost:3000",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)

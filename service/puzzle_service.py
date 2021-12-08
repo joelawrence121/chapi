@@ -3,7 +3,7 @@ import random
 from domain.repository import Repository
 
 
-class PuzzleService(object):
+class PuzzleService:
 
     def __init__(self):
         self.repository = Repository()
