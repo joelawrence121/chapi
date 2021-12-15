@@ -7,6 +7,7 @@ from fastapi import FastAPI
 
 from domain.client_json import DescriptionRequest, PlayRequest
 from service.description_service import DescriptionService
+from service.opening_service import OpeningService
 from service.puzzle_service import PuzzleService
 from service.stockfish_service import StockfishService
 from util import utils
@@ -16,6 +17,7 @@ utils.configure_app(app)
 puzzle_service = PuzzleService()
 description_service = DescriptionService()
 stockfish_service = StockfishService()
+opening_service = OpeningService()
 
 FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -61,6 +63,20 @@ async def play_stockfish(request: PlayRequest):
         if request.wait is not None and request.wait:
             time.sleep(random.randrange(0, 15) // 10)
         return result
+    except RuntimeError as e:
+        logger.warning(e)
+
+@app.get("/random_opening")
+async def get_opening():
+    try:
+        return opening_service.get_random_opening()
+    except RuntimeError as e:
+        logger.warning(e)
+
+@app.get("/opening/{eco}")
+async def get_opening(eco: str):
+    try:
+        return opening_service.get_opening(eco)
     except RuntimeError as e:
         logger.warning(e)
 

@@ -12,6 +12,8 @@ class Repository(object):
     get_openings_by_move_stack_subset_query = "select * from Opening where move_stack like '{move_stack}%' " \
                                               "and LENGTH(move_stack) between LENGTH('{move_stack}') + 1 " \
                                               "and LENGTH('{move_stack}') + 6;"
+    get_random_opening_query = "SELECT * FROM Opening ORDER BY RAND() LIMIT 1;"
+    get_opening_query = "SELECT * FROM Opening WHERE id={id};"
 
     def __init__(self):
         config = configparser.ConfigParser()
@@ -27,6 +29,13 @@ class Repository(object):
     def query_single_move_by_type(self, type_name: str):
         single_move_puzzles = self.session.query(SingleMove).filter(SingleMove.type == type_name)
         return [ob.as_dict() for ob in single_move_puzzles]
+
+    def get_opening(self, id: int):
+        openings = self.session.execute(self.get_opening_query.format(id=id))
+        return [dict(opening) for opening in openings]
+
+    def get_random_opening_id(self):
+        return [id for id in self.session.execute(self.get_random_opening_query)][0][0]
 
     def query_opening_by_move_stack(self, move_stack: list):
         openings = self.session.query(Opening).filter(Opening.move_stack == ' '.join(move_stack))
