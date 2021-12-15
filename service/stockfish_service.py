@@ -10,7 +10,7 @@ from engine.stockfish import Engine
 from util.utils import get_other_user, WHITE, BLACK
 
 
-class StockfishService(object):
+class StockfishService:
     DEFAULT_DIFFICULTY = 10
     DEFAULT_TIME_LIMIT = 0.1
     MATE_LOWER_BOUND = 1
@@ -46,13 +46,13 @@ class StockfishService(object):
             self.board.push(result.move)
             move = result.move.uci()
 
-        winner = None
-        if self.is_over(self.board.fen()) == Outcome.WHITE:
-            winner = Outcome.WHITE
-        elif self.is_over(self.board.fen()) == Outcome.BLACK:
-            winner = Outcome.BLACK
-
-        return StockfishResult(request.id, self.board.fen(), move, winner)
+        return StockfishResult(
+            request.id,
+            self.board.fen(),
+            move,
+            self.is_over(self.board.fen()),
+            self.get_relative_score(self.board.fen(), BLACK if self.board.turn else WHITE)
+        )
 
     def is_over(self, fen: str):
         """
@@ -151,12 +151,12 @@ class StockfishService(object):
         self.board.set_fen(request.fen)
         return self.board.is_check()
 
-    def get_relative_score(self, request: DescriptionRequest):
+    def get_relative_score(self, fen, user):
         """
         Return a quick cp value giving an indication of the winning probability from White's perspective.
         """
-        cp_score = get_cp_score(self.analyse_board(request.fen, WHITE, time_limit=0.1))
-        if request.user == BLACK:
+        cp_score = get_cp_score(self.analyse_board(fen, WHITE, time_limit=0.1))
+        if cp_score is not None and user == BLACK:
             cp_score *= -1
         return cp_score
 
@@ -171,7 +171,7 @@ def get_cp_score(pov_score):
 
 def normalise(difficulty: int):
     if difficulty not in range(1, 10):
-        raise RuntimeError("Expected difficulty value in range 1-10 but was {}.".format(difficulty))
+        return 10
     return difficulty * 2
 
 
