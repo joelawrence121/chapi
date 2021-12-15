@@ -51,14 +51,14 @@ class Opening(Base):
     eco_classification = Column(String, primary_key=True)
     name = Column(String)
     move_stack = Column(String)
-    explorer_link = Column(String)
+    pgn = Column(String)
     wiki_link = Column(String)
     epd = Column(String)
 
-    def __init__(self, name, move_stack, explorer_link, wiki_link, epd, eco):
+    def __init__(self, name, move_stack, pgn, wiki_link, epd, eco):
         self.name = name
         self.move_stack = move_stack
-        self.explorer_link = explorer_link
+        self.pgn = pgn
         self.wiki_link = wiki_link
         self.epd = epd
         self.eco_classification = eco

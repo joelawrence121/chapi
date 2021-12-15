@@ -38,7 +38,7 @@ def extract_data(src_path: str, session):
             for row in tsv_read:
                 opening = Opening(name=row[1],
                                   move_stack=row[3],
-                                  explorer_link=get_explorer_link(row[2]),
+                                  pgn=row[2],
                                   wiki_link=get_wikipedia_link(row[1]),
                                   epd=row[4],
                                   eco=row[0])
@@ -46,11 +46,6 @@ def extract_data(src_path: str, session):
                 session.commit()
             file.close()
     session.close()
-
-
-def get_explorer_link(move_list: str):
-    # TODO
-    return None
 
 
 def get_wikipedia_link(opening: str):
