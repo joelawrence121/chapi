@@ -1,4 +1,6 @@
 import logging
+import random
+import time
 
 import uvicorn
 from fastapi import FastAPI
@@ -55,7 +57,10 @@ async def get_move_description(request: DescriptionRequest):
 @app.post("/play")
 async def play_stockfish(request: PlayRequest):
     try:
-        return stockfish_service.get_stockfish_play_result(request)
+        result = stockfish_service.get_stockfish_play_result(request)
+        if request.wait is not None and request.wait:
+            time.sleep(random.randrange(0, 15) // 10)
+        return result
     except RuntimeError as e:
         logger.warning(e)
 
