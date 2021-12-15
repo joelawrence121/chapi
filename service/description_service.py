@@ -193,7 +193,8 @@ class DescriptionService:
         """
 
         advantage_change = self.stockfish_service.get_advantage_change(request.fenStack, request.fen, request.user)
-        if advantage_change is None or advantage_change < self.stockfish_service.GOOD_MOVE_LOWER_BOUND:
+        if request.user == BLACK or advantage_change is None \
+                or advantage_change < self.stockfish_service.GOOD_MOVE_LOWER_BOUND:
             return []
 
         rounded_advantage_change = abs(round(advantage_change * 100))

@@ -171,7 +171,7 @@ def get_cp_score(pov_score):
 
 def normalise(difficulty: int):
     if difficulty not in range(1, 10):
-        raise RuntimeError("Expected difficulty value in range 1-10 but was {}.".format(difficulty))
+        return 10
     return difficulty * 2
 
 

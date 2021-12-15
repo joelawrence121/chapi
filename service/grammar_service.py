@@ -219,13 +219,13 @@ def get_move_suggestion(moves: list, names: list):
 
 
 MOVE_PRAISE = """
-    S -> P S | S P | B
-    V -> "given" | "gained" 
+    S -> P S_P | S_P P | B
+    V -> "given" | "gained"
 """
 GOOD_AND_GREAT = """
-    P -> "This was a" ADJ "move." | {move} "was a" ADJ "move."
-    S -> "This move has" V "you a significant {advantage} point advantage." 
-    B -> "Playing" {move} "was a" ADJ "move, this has" V "you a significant {advantage} point advantage."
+    P -> "This was a" ADJ "move." | "{move} was a" ADJ "move."
+    S_P -> "This move has" V "you a significant {advantage} point advantage." 
+    B -> "Playing {move} was a" ADJ "move, this has" V "you a significant {advantage} point advantage."
 """
 GOOD_MOVE_ADJ = """
     ADJ -> "good" | "big"
@@ -234,10 +234,10 @@ GREAT_MOVE_ADJ = """
     ADJ -> "great" | "huge" | "deciding"
 """
 FANTASTIC_MOVE = """
+    P -> "This was a" ADJ "move." | "{move} was a" ADJ "move."
+    S_P -> "Stockfish would have done the same and it has" V "you a significant {advantage} point advantage." 
+    B -> "Playing {move} was a" ADJ "move, this has" V "you a significant {advantage} point advantage and Stockfish would have done the same."
     ADJ -> "perfect" | "excellent" 
-    P -> "This was a" ADJ "move." | {move} "was a" ADJ "move."
-    S -> "Stockfish would have done the same and it has" V "you a significant {advantage} point advantage." 
-    B -> "Playing" {move} "was a" ADJ "move, this has" V "you a significant {advantage} point advantage and Stockfish would have done the same."
 """
 
 
