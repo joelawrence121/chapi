@@ -22,3 +22,7 @@ class PlayRequest(BaseModel):
 class AggregationRequest(BaseModel):
     index: int
     original: str
+
+
+class OpeningRequest(BaseModel):
+    move_stack: str

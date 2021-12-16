@@ -11,6 +11,7 @@ import os
 
 import sqlalchemy as db
 import wikipedia
+from chess import Board
 from sqlalchemy.orm import Session
 
 from domain.entities import Opening
@@ -31,16 +32,18 @@ def create_db_session():
 
 
 def extract_data(src_path: str, session):
+    board = Board()
     for file_name in os.listdir(src_path):
         with open(os.path.join(src_path, file_name), 'r') as file:
             tsv_read = csv.reader(file, delimiter='\t')
             next(tsv_read)
             for row in tsv_read:
+                board.set_fen(row[4])
                 opening = Opening(name=row[1],
                                   move_stack=row[3],
                                   pgn=row[2],
                                   wiki_link=get_wikipedia_link(row[1]),
-                                  epd=row[4],
+                                  epd=board.fen(),
                                   eco=row[0])
                 session.add(opening)
                 session.commit()

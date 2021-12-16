@@ -5,7 +5,7 @@ import time
 import uvicorn
 from fastapi import FastAPI
 
-from domain.client_json import DescriptionRequest, PlayRequest
+from domain.client_json import DescriptionRequest, PlayRequest, OpeningRequest
 from service.description_service import DescriptionService
 from service.opening_service import OpeningService
 from service.puzzle_service import PuzzleService
@@ -73,10 +73,17 @@ async def get_opening():
     except RuntimeError as e:
         logger.warning(e)
 
-@app.get("/opening/{eco}")
-async def get_opening(eco: str):
+@app.get("/opening/{id}")
+async def get_opening(id: int):
     try:
-        return opening_service.get_opening(eco)
+        return opening_service.get_opening(id)
+    except RuntimeError as e:
+        logger.warning(e)
+
+@app.post("/opening")
+async def get_opening_by_move_stack(request: OpeningRequest):
+    try:
+        return opening_service.get_opening_by_move_stack(request.move_stack)
     except RuntimeError as e:
         logger.warning(e)
 
