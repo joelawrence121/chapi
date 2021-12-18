@@ -54,14 +54,20 @@ class Opening(Base):
     pgn = Column(String)
     wiki_link = Column(String)
     epd = Column(String)
+    white = Column(Integer)
+    draws = Column(Integer)
+    black = Column(Integer)
 
-    def __init__(self, name, move_stack, pgn, wiki_link, epd, eco):
+    def __init__(self, name, move_stack, pgn, wiki_link, epd, eco, white, draws, black):
         self.name = name
         self.move_stack = move_stack
         self.pgn = pgn
         self.wiki_link = wiki_link
         self.epd = epd
         self.eco_classification = eco
+        self.white = white
+        self.draws = draws
+        self.black = black
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

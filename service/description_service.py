@@ -135,7 +135,7 @@ class DescriptionService:
             return []
 
         move_stack_string = ' '.join(request.moveStack)
-        openings = self.repository.query_opening_by_move_stack_subset(move_stack_string)
+        openings = self.repository.get_one_move_following_openings(move_stack_string)
         original_opening = self.repository.query_opening_by_move_stack(request.moveStack)
         if len(openings) > 3:
             openings = random.sample(openings, 3)
