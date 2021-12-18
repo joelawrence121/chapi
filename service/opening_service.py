@@ -19,6 +19,6 @@ class OpeningService:
     def get_opening(self, id: int):
         opening_data = {'opening': None, 'variations': []}
         opening_data['opening'] = self.repository.get_opening(id)[0]
-        opening_data['variations'] = self.repository.query_opening_by_move_stack_subset(
+        opening_data['variations'] = self.repository.get_opening_variations(
             opening_data['opening']['move_stack'])
         return opening_data
