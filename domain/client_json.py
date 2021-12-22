@@ -26,3 +26,18 @@ class AggregationRequest(BaseModel):
 
 class OpeningRequest(BaseModel):
     move_stack: str
+
+
+class MultiplayerCreateRequest(BaseModel):
+    player_name: str
+
+
+class MultiplayerJoinRequest(BaseModel):
+    player_name: str
+    game_id: str
+
+
+class MultiplayerMessageRequest(BaseModel):
+    game_id: str
+    player_name: str
+    message: str

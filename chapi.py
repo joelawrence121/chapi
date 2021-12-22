@@ -5,8 +5,10 @@ import time
 import uvicorn
 from fastapi import FastAPI
 
-from domain.client_json import DescriptionRequest, PlayRequest, OpeningRequest
+from domain.client_json import DescriptionRequest, PlayRequest, OpeningRequest, MultiplayerCreateRequest, \
+    MultiplayerJoinRequest, MultiplayerMessageRequest
 from service.description_service import DescriptionService
+from service.multiplayer_service import MultiplayerService
 from service.opening_service import OpeningService
 from service.puzzle_service import PuzzleService
 from service.stockfish_service import StockfishService
@@ -18,6 +20,7 @@ puzzle_service = PuzzleService()
 description_service = DescriptionService()
 stockfish_service = StockfishService()
 opening_service = OpeningService()
+multiplayer_service = MultiplayerService()
 
 FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -66,12 +69,14 @@ async def play_stockfish(request: PlayRequest):
     except RuntimeError as e:
         logger.warning(e)
 
+
 @app.get("/random_opening")
 async def get_opening():
     try:
         return opening_service.get_random_opening()
     except RuntimeError as e:
         logger.warning(e)
+
 
 @app.get("/opening/{id}")
 async def get_opening(id: int):
@@ -80,10 +85,35 @@ async def get_opening(id: int):
     except RuntimeError as e:
         logger.warning(e)
 
+
 @app.post("/opening")
 async def get_opening_by_move_stack(request: OpeningRequest):
     try:
         return opening_service.get_opening_by_move_stack(request.move_stack)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/create")
+async def create_new_multiplayer_game(request: MultiplayerCreateRequest):
+    try:
+        return multiplayer_service.create_game(request.player_name)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/join")
+async def create_new_multiplayer_game(request: MultiplayerJoinRequest):
+    try:
+        return multiplayer_service.join_game(request.game_id, request.player_name)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/message")
+async def create_new_multiplayer_game(request: MultiplayerMessageRequest):
+    try:
+        return multiplayer_service.post_message(request.game_id, request.player_name, request.message)
     except RuntimeError as e:
         logger.warning(e)
 
