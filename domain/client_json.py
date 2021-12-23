@@ -32,6 +32,11 @@ class MultiplayerCreateRequest(BaseModel):
     player_name: str
 
 
+class MultiplayerPlayRequest(BaseModel):
+    game_id: str
+    move: str
+
+
 class MultiplayerJoinRequest(BaseModel):
     player_name: str
     game_id: str
