@@ -21,7 +21,7 @@ class Message:
 
 class Game:
     CHEX = "Chexplanations"
-    PLAYER_JOINED_MSG = "Player {} has joined the game!"
+    PLAYER_JOINED_MSG = "Player \"{}\" has joined the game!"
 
     def __init__(self, player_one):
         self.id = uuid.uuid4().__str__()[:4]
