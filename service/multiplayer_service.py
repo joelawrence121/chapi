@@ -29,6 +29,8 @@ class Game:
         self.player_one = player_one
         self.player_two = None
         self.board = Board()
+        self.fen_stack = []
+        self.move_stack = []
         self.messages = [Message(self.CHEX, "Game created with id: " + self.id),
                          Message(self.CHEX, self.PLAYER_JOINED_MSG.format(player_one))]
 
@@ -40,7 +42,9 @@ class Game:
     def add_message(self, player_name, message):
         self.messages.append(Message(player_name, message))
 
-    def play_move(self, uci):
+    def play_move(self, uci: chess.Move):
+        self.fen_stack.append(self.board.fen())
+        self.move_stack.append(uci.uci())
         self.board.push(uci)
 
 
@@ -58,6 +62,9 @@ class MultiplayerService:
             'player_two': game.player_two,
             'fen': game.board.fen(),
             'turn': game.board.turn,
+            'winner': self.stockfish_service.is_over(game.board.fen()),
+            'move_stack': game.move_stack,
+            'fen_stack': game.fen_stack,
             'messages': [{'player': m.player, 'message': m.message} for m in game.messages]
         }
 
