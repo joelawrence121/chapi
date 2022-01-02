@@ -42,6 +42,11 @@ class MultiplayerJoinRequest(BaseModel):
     game_id: str
 
 
+class MultiplayerDrawAnswer(BaseModel):
+    game_id: str
+    draw_accepted: bool
+
+
 class MultiplayerMessageRequest(BaseModel):
     game_id: str
     player_name: str

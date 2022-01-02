@@ -6,7 +6,7 @@ import uvicorn
 from fastapi import FastAPI
 
 from domain.client_json import DescriptionRequest, PlayRequest, OpeningRequest, MultiplayerCreateRequest, \
-    MultiplayerJoinRequest, MultiplayerMessageRequest, MultiplayerPlayRequest
+    MultiplayerJoinRequest, MultiplayerMessageRequest, MultiplayerPlayRequest, MultiplayerDrawAnswer
 from service.description_service import DescriptionService
 from service.multiplayer_service import MultiplayerService
 from service.opening_service import OpeningService
@@ -130,6 +130,30 @@ async def poll_multiplayer_game(request: MultiplayerJoinRequest):
 async def play_multiplayer_move(request: MultiplayerPlayRequest):
     try:
         return multiplayer_service.play(request.game_id, request.move)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/offer_draw")
+async def offer_multiplayer_draw(request: MultiplayerJoinRequest):
+    try:
+        return multiplayer_service.offer_draw(request.game_id)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/answer_draw")
+async def answer_multiplayer_draw(request: MultiplayerDrawAnswer):
+    try:
+        return multiplayer_service.answer_draw(request.game_id, request.draw_accepted)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/retire")
+async def retire_from_multiplayer(request: MultiplayerJoinRequest):
+    try:
+        return multiplayer_service.retire(request.game_id, request.player_name)
     except RuntimeError as e:
         logger.warning(e)
 

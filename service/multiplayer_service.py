@@ -5,6 +5,7 @@ import chess
 from chess import Board
 
 from service.stockfish_service import StockfishService
+from util.utils import WHITE
 
 
 class GameState(Enum):
@@ -24,6 +25,7 @@ class Game:
     PLAYER_JOINED_MSG = "Player \"{}\" has joined the game!"
 
     def __init__(self, player_one):
+        self.stockfish_service = StockfishService()
         self.id = uuid.uuid4().__str__()[:4]
         self.state = GameState.WAITING
         self.player_one = player_one
@@ -31,6 +33,10 @@ class Game:
         self.board = Board()
         self.fen_stack = []
         self.move_stack = []
+        self.score_stack = []
+        self.draw_offered = False
+        self.draw_accepted = False
+        self.retired = False
         self.messages = [Message(self.CHEX, "Game created with id: " + self.id),
                          Message(self.CHEX, self.PLAYER_JOINED_MSG.format(player_one))]
 
@@ -45,7 +51,11 @@ class Game:
     def play_move(self, uci: chess.Move):
         self.fen_stack.append(self.board.fen())
         self.move_stack.append(uci.uci())
+        self.score_stack.append(self.stockfish_service.get_relative_score(self.board.fen(), WHITE))
         self.board.push(uci)
+
+    def offer_player_draw(self):
+        self.draw_offered = True
 
 
 class MultiplayerService:
@@ -65,6 +75,10 @@ class MultiplayerService:
             'winner': self.stockfish_service.is_over(game.board.fen()),
             'move_stack': game.move_stack,
             'fen_stack': game.fen_stack,
+            'score_stack': game.score_stack,
+            'draw_offered': game.draw_offered,
+            'draw_accepted': game.draw_accepted,
+            'retired': game.retired,
             'messages': [{'player': m.player, 'message': m.message} for m in game.messages]
         }
 
@@ -109,4 +123,27 @@ class MultiplayerService:
 
         uci = chess.Move.from_uci(move)
         self.games[game_id].play_move(uci)
+        return self.__get_response_obj(self.games[game_id])
+
+    def offer_draw(self, game_id):
+        if game_id not in self.games.keys():
+            return {'message': 'game_id: ' + game_id + ' does not exist.'}
+
+        self.games[game_id].offer_player_draw()
+        return self.__get_response_obj(self.games[game_id])
+
+    def answer_draw(self, game_id, draw_answer):
+        if game_id not in self.games.keys():
+            return {'message': 'game_id: ' + game_id + ' does not exist.'}
+
+        self.games[game_id].draw_accepted = draw_answer
+        if not draw_answer:
+            self.games[game_id].draw_offered = False
+        return self.__get_response_obj(self.games[game_id])
+
+    def retire(self, game_id, player_name):
+        if game_id not in self.games.keys():
+            return {'message': 'game_id: ' + game_id + ' does not exist.'}
+
+        self.games[game_id].retired = True
         return self.__get_response_obj(self.games[game_id])
