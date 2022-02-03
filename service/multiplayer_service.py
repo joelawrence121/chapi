@@ -12,6 +12,13 @@ class GameState(Enum):
     WAITING = "WAITING"
     IN_PROGRESS = "IN PROGRESS"
     PLAYER_LEFT = "PLAYER LEFT"
+    FINISHED = "FINISHED"
+
+
+class DrawResponse(Enum):
+    UNKNOWN = "UNKNOWN"
+    ACCEPTED = "ACCEPTED"
+    REJECTED = "REJECTED"
 
 
 class Message:
@@ -35,7 +42,7 @@ class Game:
         self.move_stack = []
         self.score_stack = []
         self.draw_offered = False
-        self.draw_accepted = False
+        self.draw_response = DrawResponse.UNKNOWN
         self.retired = False
         self.messages = [Message(self.CHEX, "Game created with id: " + self.id),
                          Message(self.CHEX, self.PLAYER_JOINED_MSG.format(player_one))]
@@ -77,7 +84,7 @@ class MultiplayerService:
             'fen_stack': game.fen_stack,
             'score_stack': game.score_stack,
             'draw_offered': game.draw_offered,
-            'draw_accepted': game.draw_accepted,
+            'draw_response': game.draw_response,
             'retired': game.retired,
             'messages': [{'player': m.player, 'message': m.message} for m in game.messages]
         }
@@ -111,7 +118,7 @@ class MultiplayerService:
         self.games[game_id].add_message(player, message)
         return self.__get_response_obj(self.games[game_id])
 
-    def poll_game(self, game_id, player):
+    def poll_game(self, game_id):
         if game_id not in self.games.keys():
             return {'message': 'game_id: ' + game_id + ' does not exist.'}
 
@@ -136,9 +143,24 @@ class MultiplayerService:
         if game_id not in self.games.keys():
             return {'message': 'game_id: ' + game_id + ' does not exist.'}
 
-        self.games[game_id].draw_accepted = draw_answer
+        # draw rejected
         if not draw_answer:
+            self.games[game_id].draw_response = DrawResponse.REJECTED
             self.games[game_id].draw_offered = False
+        # draw accepted
+        else:
+            self.games[game_id].draw_response = DrawResponse.ACCEPTED
+            self.games[game_id].state = GameState.FINISHED
+
+        return self.__get_response_obj(self.games[game_id])
+
+    def reset_draw(self, game_id):
+        if game_id not in self.games.keys():
+            return {'message': 'game_id: ' + game_id + ' does not exist.'}
+
+        self.games[game_id].draw_response = DrawResponse.UNKNOWN
+        self.games[game_id].draw_offered = False
+
         return self.__get_response_obj(self.games[game_id])
 
     def retire(self, game_id, player_name):

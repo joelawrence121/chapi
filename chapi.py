@@ -79,9 +79,9 @@ async def get_opening():
 
 
 @app.get("/opening/{id}")
-async def get_opening(id: int):
+async def get_opening(opening_id: int):
     try:
-        return opening_service.get_opening(id)
+        return opening_service.get_opening(opening_id)
     except RuntimeError as e:
         logger.warning(e)
 
@@ -121,7 +121,7 @@ async def create_new_multiplayer_message(request: MultiplayerMessageRequest):
 @app.post("/multiplayer/poll")
 async def poll_multiplayer_game(request: MultiplayerJoinRequest):
     try:
-        return multiplayer_service.poll_game(request.game_id, request.player_name)
+        return multiplayer_service.poll_game(request.game_id)
     except RuntimeError as e:
         logger.warning(e)
 
@@ -146,6 +146,14 @@ async def offer_multiplayer_draw(request: MultiplayerJoinRequest):
 async def answer_multiplayer_draw(request: MultiplayerDrawAnswer):
     try:
         return multiplayer_service.answer_draw(request.game_id, request.draw_accepted)
+    except RuntimeError as e:
+        logger.warning(e)
+
+
+@app.post("/multiplayer/reset_draw")
+async def reset_multiplayer_draw(request: MultiplayerDrawAnswer):
+    try:
+        return multiplayer_service.reset_draw(request.game_id)
     except RuntimeError as e:
         logger.warning(e)
 
