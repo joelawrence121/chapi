@@ -12,6 +12,7 @@ class GameState(Enum):
     WAITING = "WAITING"
     IN_PROGRESS = "IN PROGRESS"
     PLAYER_LEFT = "PLAYER LEFT"
+    RETIRED = "RETIRED"
     FINISHED = "FINISHED"
 
 
@@ -44,6 +45,7 @@ class Game:
         self.draw_offered = False
         self.draw_response = DrawResponse.UNKNOWN
         self.retired = False
+        self.player_retired = None
         self.messages = [Message(self.CHEX, "Game created with id: " + self.id),
                          Message(self.CHEX, self.PLAYER_JOINED_MSG.format(player_one))]
 
@@ -86,6 +88,7 @@ class MultiplayerService:
             'draw_offered': game.draw_offered,
             'draw_response': game.draw_response,
             'retired': game.retired,
+            'player_retired': game.player_retired,
             'messages': [{'player': m.player, 'message': m.message} for m in game.messages]
         }
 
@@ -168,4 +171,6 @@ class MultiplayerService:
             return {'message': 'game_id: ' + game_id + ' does not exist.'}
 
         self.games[game_id].retired = True
+        self.games[game_id].player_retired = player_name
+        self.games[game_id].state = GameState.RETIRED
         return self.__get_response_obj(self.games[game_id])
