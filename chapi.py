@@ -64,7 +64,7 @@ async def play_stockfish(request: PlayRequest):
     try:
         result = stockfish_service.get_stockfish_play_result(request)
         if request.wait is not None and request.wait:
-            time.sleep(random.randrange(0, 15) // 10)
+            time.sleep(random.randrange(10, 15) // 10)
         return result
     except RuntimeError as e:
         logger.warning(e)
