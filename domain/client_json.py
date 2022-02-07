@@ -35,6 +35,7 @@ class MultiplayerCreateRequest(BaseModel):
 class MultiplayerPlayRequest(BaseModel):
     game_id: str
     move: str
+    descriptions_on: bool
 
 
 class MultiplayerJoinRequest(BaseModel):

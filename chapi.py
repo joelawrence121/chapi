@@ -129,7 +129,7 @@ async def poll_multiplayer_game(request: MultiplayerJoinRequest):
 @app.post("/multiplayer/play")
 async def play_multiplayer_move(request: MultiplayerPlayRequest):
     try:
-        return multiplayer_service.play(request.game_id, request.move)
+        return multiplayer_service.play(request.game_id, request.move, request.descriptions_on)
     except RuntimeError as e:
         logger.warning(e)
 

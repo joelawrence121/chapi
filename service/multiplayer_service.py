@@ -1,70 +1,9 @@
-import uuid
-from enum import Enum
-
 import chess
-from chess import Board
 
+from domain.client_json import DescriptionRequest
+from domain.objects import Game, DrawResponse, GameState
+from service.description_service import DescriptionService
 from service.stockfish_service import StockfishService
-from util.utils import WHITE
-
-
-class GameState(Enum):
-    WAITING = "WAITING"
-    IN_PROGRESS = "IN PROGRESS"
-    PLAYER_LEFT = "PLAYER LEFT"
-    RETIRED = "RETIRED"
-    FINISHED = "FINISHED"
-
-
-class DrawResponse(Enum):
-    UNKNOWN = "UNKNOWN"
-    ACCEPTED = "ACCEPTED"
-    REJECTED = "REJECTED"
-
-
-class Message:
-    def __init__(self, player, message):
-        self.player = player
-        self.message = message
-
-
-class Game:
-    CHEX = "Chexplanations"
-    PLAYER_JOINED_MSG = "Player \"{}\" has joined the game!"
-
-    def __init__(self, player_one):
-        self.stockfish_service = StockfishService()
-        self.id = uuid.uuid4().__str__()[:4]
-        self.state = GameState.WAITING
-        self.player_one = player_one
-        self.player_two = None
-        self.board = Board()
-        self.fen_stack = []
-        self.move_stack = []
-        self.score_stack = []
-        self.draw_offered = False
-        self.draw_response = DrawResponse.UNKNOWN
-        self.retired = False
-        self.player_retired = None
-        self.messages = [Message(self.CHEX, "Game created with id: " + self.id),
-                         Message(self.CHEX, self.PLAYER_JOINED_MSG.format(player_one))]
-
-    def connect_player_two(self, player_two):
-        self.player_two = player_two
-        self.state = GameState.IN_PROGRESS
-        self.messages.append(Message(self.CHEX, self.PLAYER_JOINED_MSG.format(player_two)))
-
-    def add_message(self, player_name, message):
-        self.messages.append(Message(player_name, message))
-
-    def play_move(self, uci: chess.Move):
-        self.fen_stack.append(self.board.fen())
-        self.move_stack.append(uci.uci())
-        self.score_stack.append(self.stockfish_service.get_relative_score(self.board.fen(), WHITE))
-        self.board.push(uci)
-
-    def offer_player_draw(self):
-        self.draw_offered = True
 
 
 class MultiplayerService:
@@ -72,6 +11,7 @@ class MultiplayerService:
     def __init__(self):
         self.games = {}
         self.stockfish_service = StockfishService()
+        self.description_service = DescriptionService()
 
     def __get_response_obj(self, game: Game):
         return {
@@ -89,7 +29,9 @@ class MultiplayerService:
             'draw_response': game.draw_response,
             'retired': game.retired,
             'player_retired': game.player_retired,
-            'messages': [{'player': m.player, 'message': m.message} for m in game.messages]
+            'messages': [{'player': m.player, 'message': m.message} for m in game.messages],
+            'white_descriptions': game.white_descriptions,
+            'black_descriptions': game.black_descriptions
         }
 
     def create_game(self, player_one):
@@ -127,12 +69,31 @@ class MultiplayerService:
 
         return self.__get_response_obj(self.games[game_id])
 
-    def play(self, game_id, move):
+    def get_perspective(self, turn: bool, white: bool):
+        if (turn and white) or (not turn and not white):
+            return "white"
+        else:
+            return "black"
+
+    def play(self, game_id, move, descriptions_on: bool):
         if game_id not in self.games.keys():
             return {'message': 'game_id: ' + game_id + ' does not exist.'}
 
-        uci = chess.Move.from_uci(move)
-        self.games[game_id].play_move(uci)
+        uci, game = chess.Move.from_uci(move), self.games[game_id]
+        game.play_move(uci)
+
+        if descriptions_on:
+            game.white_descriptions.append(self.description_service.get_description(
+                DescriptionRequest(
+                    user=self.get_perspective(game.board.turn, True), uci=move, fen=game.board.fen(), moveStack=game.move_stack,
+                    fenStack=game.fen_stack)
+            ))
+            game.black_descriptions.append(self.description_service.get_description(
+                DescriptionRequest(
+                    user=self.get_perspective(game.board.turn, False), uci=move, fen=game.board.fen(), moveStack=game.move_stack,
+                    fenStack=game.fen_stack)
+            ))
+
         return self.__get_response_obj(self.games[game_id])
 
     def offer_draw(self, game_id):

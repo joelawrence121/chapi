@@ -3,6 +3,7 @@ import random
 import chess
 
 from domain.client_json import DescriptionRequest
+from domain.objects import Game
 from domain.repository import Repository
 from service import grammar_service
 from service.stockfish_service import StockfishService, Outcome
