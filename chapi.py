@@ -79,9 +79,9 @@ async def get_opening():
 
 
 @app.get("/opening/{id}")
-async def get_opening(opening_id: int):
+async def get_opening(id: int):
     try:
-        return opening_service.get_opening(opening_id)
+        return opening_service.get_opening(id)
     except RuntimeError as e:
         logger.warning(e)
 

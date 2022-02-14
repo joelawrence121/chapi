@@ -13,7 +13,8 @@ class Repository(object):
                                                  "and LENGTH(move_stack) between LENGTH('{move_stack}') + 1 " \
                                                  "and LENGTH('{move_stack}') + 6;"
     get_opening_variations_query = "select * from Opening where move_stack like '{move_stack}%' " \
-                                   "and LENGTH(move_stack) > LENGTH('{move_stack}') + 1;"
+                                   "and LENGTH(move_stack) > LENGTH('{move_stack}') + 1 " \
+                                   "and LENGTH(move_stack) < LENGTH('{move_stack}') + 10;"
     get_random_opening_query = "SELECT * FROM Opening ORDER BY RAND() LIMIT 1;"
     get_opening_by_id_query = "SELECT * FROM Opening WHERE id={id};"
     get_opening_by_move_stack_query = "SELECT * FROM Opening WHERE move_stack='{move_stack}';"
