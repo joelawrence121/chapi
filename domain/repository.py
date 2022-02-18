@@ -1,6 +1,7 @@
 import configparser
 
 import sqlalchemy as db
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from domain.entities import SingleMove, Opening, MateInN
@@ -14,7 +15,7 @@ class Repository(object):
                                                  "and LENGTH('{move_stack}') + 6;"
     get_opening_variations_query = "select * from Opening where move_stack like '{move_stack}%' " \
                                    "and LENGTH(move_stack) > LENGTH('{move_stack}') + 1 " \
-                                   "and LENGTH(move_stack) < LENGTH('{move_stack}') + 10;"
+                                   "and LENGTH(move_stack) < LENGTH('{move_stack}') + 20;"
     get_random_opening_query = "SELECT * FROM Opening ORDER BY RAND() LIMIT 1;"
     get_opening_by_id_query = "SELECT * FROM Opening WHERE id={id};"
     get_opening_by_move_stack_query = "SELECT * FROM Opening WHERE move_stack='{move_stack}';"
@@ -67,5 +68,5 @@ class Repository(object):
         return [statistic for statistic in statistics]
 
     def query_mate_in_n_by_n(self, n: int):
-        mate_puzzles = self.session.query(MateInN).filter(MateInN.moves_to_mate == n)
-        return [ob.as_dict() for ob in mate_puzzles]
+        mate_puzzle = self.session.query(MateInN).filter(MateInN.moves_to_mate == n).order_by(func.random()).first()
+        return mate_puzzle.as_dict()

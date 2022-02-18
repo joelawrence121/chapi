@@ -19,5 +19,4 @@ class PuzzleService:
         return statistics
 
     def get_mate_in_n_puzzle(self, n: int):
-        mate_puzzles = self.repository.query_mate_in_n_by_n(n)
-        return random.choice(mate_puzzles)
+        return self.repository.query_mate_in_n_by_n(n)
