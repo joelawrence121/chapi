@@ -83,14 +83,17 @@ class MultiplayerService:
         game.play_move(uci)
 
         if descriptions_on:
-            game.white_descriptions.append(self.description_service.get_description(
-                DescriptionRequest(
-                    user=self.get_perspective(game.board.turn, True), uci=move, fen=game.board.fen(), moveStack=game.move_stack,
-                    fenStack=game.fen_stack)
-            ))
             game.black_descriptions.append(self.description_service.get_description(
                 DescriptionRequest(
-                    user=self.get_perspective(game.board.turn, False), uci=move, fen=game.board.fen(), moveStack=game.move_stack,
+                    user=self.get_perspective(game.board.turn, True), uci=move, fen=game.board.fen(),
+                    moveStack=game.move_stack,
+                    fenStack=game.fen_stack),
+                rel=self.get_perspective(game.board.turn, True) == 'white'
+            ))
+            game.white_descriptions.append(self.description_service.get_description(
+                DescriptionRequest(
+                    user=self.get_perspective(game.board.turn, False), uci=move, fen=game.board.fen(),
+                    moveStack=game.move_stack,
                     fenStack=game.fen_stack)
             ))
 

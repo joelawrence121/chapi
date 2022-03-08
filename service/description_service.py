@@ -18,7 +18,7 @@ class DescriptionService:
         self.repository = Repository()
         self.stockfish_service = StockfishService()
 
-    def get_description(self, request: DescriptionRequest) -> []:
+    def get_description(self, request: DescriptionRequest, rel=False) -> []:
         """
         For a given DescriptionRequest : (user, moveStack, move, fen), generate an array of English descriptions
         providing insight on: the opening scenario, winning conditions, mate conditions...
@@ -31,7 +31,7 @@ class DescriptionService:
         response['descriptions'].extend(opening_data[0])
         response['link'] = opening_data[1]
         response['opening'] = opening_data[2]
-        response['descriptions'].extend(self.get_positional_description(request))
+        response['descriptions'].extend(self.get_positional_description(request, rel))
         response['descriptions'].extend(self.get_move_suggestions(request))
         response['descriptions'].extend(self.get_mate_description(request))
         response['descriptions'].extend(self.get_end_description(request))
@@ -149,7 +149,7 @@ class DescriptionService:
         grammar = grammar_service.get_move_suggestion(moves, names)
         return get_random_generation(grammar)
 
-    def get_positional_description(self, request):
+    def get_positional_description(self, request, rel=False):
         """
         Describes the move's relative positional information. Moving forward/backwards, moving from an original
         position, advancing/retreating.
@@ -158,8 +158,8 @@ class DescriptionService:
         grammar = None
         move = chess.Move.from_uci(request.uci)
         piece = get_piece_name(request.uci, request.fen)
-        rel_from_square = chess.SQUARE_NAMES[move.from_square if request.user == WHITE else move.to_square]
-        rel_to_square = chess.SQUARE_NAMES[move.to_square if request.user == WHITE else move.from_square]
+        rel_from_square = chess.SQUARE_NAMES[move.from_square if request.user == WHITE and not rel else move.to_square]
+        rel_to_square = chess.SQUARE_NAMES[move.to_square if request.user == WHITE and not rel else move.from_square]
 
         # piece moves forward / backward
         if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) < int(rel_to_square[1]) - 1:
@@ -168,7 +168,6 @@ class DescriptionService:
         if rel_from_square[1] != rel_to_square[1] and int(rel_from_square[1]) + 1 > int(rel_to_square[1]):
             grammar = grammar_service.get_positional_description(request.user, piece, get_to_square(move), None, None,
                                                                  -1)
-
         # piece moves within same column
         if rel_from_square[0] == rel_to_square[0]:
             if int(rel_from_square[1]) < int(rel_to_square[1]):
